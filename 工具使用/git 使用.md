@@ -2,6 +2,8 @@
 
 - git 介绍
 
+  https://gitee.com/help/articles/4104
+
   
 
 ## 新手快速上手 Git
