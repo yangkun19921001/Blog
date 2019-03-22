@@ -1,4 +1,4 @@
-# CommonDevKnowledge
+# Android 知识库
 
 常用的Android开发的一些技能点汇集。
 
@@ -24,11 +24,7 @@
 
 :pencil: :six: **[双击back退出app](https://github.com/yangkun19921001/Schema_Learning_Records/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/InterviewQuestionBank/%E5%8F%8C%E5%87%BBback%E9%80%80%E5%87%BAapp/%E5%8F%8C%E5%87%BBback%E9%80%80%E5%87%BAapp.md)**
 
-:pencil: :seven:  **应用角标的实现（待完善）**
 
-:pencil: :eight:  **利用原生api实现分享等功能（待完善）**
-
-:pencil: :nine: **二维码处理（待完善）**
 
 ----
 
