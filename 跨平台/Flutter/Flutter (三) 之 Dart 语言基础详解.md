@@ -6,7 +6,7 @@
 
 [对于异步不太了解，可以直接看官网介绍](https://webdev.dartlang.org/articles/performance/event-loop); 
 
-Dart 有一些语言特性来支持 异步编程。最常见的特性是 `async` 方法和 `await` 表达式。
+Dart 有一些语言特性来支持异步编程。最常见的特性是 `async` 方法和 `await` 表达式。
 
 Dart 库中有很多返回 Future 或者 Stream 对象的方法。 这些方法是异步的 : 这些函数在设置完基本的操作后就返回了 , 而无需等待操作执行完成。 例如读取一个文件 , 在打开文件后就返回了。
 
@@ -478,7 +478,9 @@ Iterable<int> getSyncRecursiveGenerator(int n) sync* {
 
 ### Isolates
 
+现代的浏览器以及移动浏览器都运行在多核 CPU 系统上。 要充分利用这些 CPU，开发者一般使用共享内存 数据来保证多线程的正确执行。然而， 多线程共享数据通常会导致很多潜在的问题，并导致代码运行出错。
 
+所有的 Dart 代码在 *isolates* 中运行而不是线程。 每个 isolate 都有自己的堆内存，并且确保每个 isolate 的状态都不能被其他 isolate 访问。
 
 ## 元数据
 
