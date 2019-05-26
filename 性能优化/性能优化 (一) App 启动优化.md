@@ -1,0 +1,219 @@
+## 简介
+
+**这里也许会有人问 APP 启动还需要优化吗？启动又不是我们自己写的代码，难道 Google 工程师会犯这么低级的错吗？其实这还真不是 Google 的错，应该说是给我们开发者留了一个坑吧。应该有的同学知道是怎么一回事儿了，当我们在系统桌面任意点击一个 APP 是不是会发现启动的时候有一瞬间有白屏出现(以前老版本是黑屏) 那么我们怎么来优化这个黑白屏的问题勒，现在我们先来了解一下 Android 手机重开机到启动 APP 的过程吧。**
+
+## APP 启动流程
+
+**这里会设计到 Android 系统源码的知识，但并不会深入解析源码，我们只是了解一个过程，因为太深入我自己也懵。**
+
+### 系统的启动
+
+**我在这里大致分为了 6 个步骤，下面以流程图为准**
+
+![](https://ws3.sinaimg.cn/large/005BYqpgly1g2e54qfixsj30qo0k0t9c.jpg)
+
+**启动步骤**
+
+1. 首先拿到一部 Android 系统的手机打开电源，引导芯片代码加载引导程序 BootLoader 到 RAM 中去执行。
+2. BootLoader 把操作系统拉起来。
+3. Linux 内核启动开始系统设置，找到一个 init.rc 文件启动初始化进程。
+4. init 进程初始化和启动属性服务，之后开启 Zygote 进程。
+5. Zygote 开始创建 JVM 并注册 JNI 方法，开启 SystemServer。
+6. 启动 Binder 线程池和 SystemServiceManager,并启动各种服务。
+
+### Launcher 启动
+
+#### App Appcation 启动
+
+1. 手机回到系统桌面, 通过 adb shell dumpsys window w |findstr \/ |findstr name= 来查看当前的进程和 Activity 名。
+
+   ![](https://ws3.sinaimg.cn/large/005BYqpgly1g2e5s63kcrg311o0ntgqm.jpg)
+
+2. 当点击桌面 APP 图标的时候会走 Launcher . java 的 onClick (View view) 方法，详细见下图。
+
+   ![](https://ws3.sinaimg.cn/large/005BYqpggy1g2eyuo0bi1g30us0poqin.jpg)
+
+   **startActivity(intent) 会开启一个 APP 进程**
+
+3. AcitivityThread main() 调用执行流程，见下图。
+
+   ![](https://ws3.sinaimg.cn/large/005BYqpggy1g2ezxlm25ej30xx0q7aai.jpg)
+
+   **最后 ActivityThread main() 是通过反射来进行初始化的**
+
+4. ActivityThread.java 做为入口，详细解说 main() 函数，还是以一个动画来演示一下吧;
+
+   ![](https://ws3.sinaimg.cn/large/005BYqpgly1g2f09r2491g30us0po1bc.jpg)
+
+   
+
+   **根据上面的动画，大家应该已经明白 ActivityThread.java main() 方法中 Appcation onCreate() 的是怎么被调用起来的吧。**
+
+   **注意:**
+
+   不知道大家有没有注意 ActivityThread main() 中 *Looper.prepareMainLooper();* 其实咱们为什么能够在 Main Thread 中创建 Handler 不会报错了吧，是应该 Activity 启动的时候在这里已经默认开启了 Looper。
+
+## APP 启动黑白屏问题
+
+终于到了正题了，下面我们就来说下启动黑白屏的问题，还是先来看一个 GIF 吧。
+
+### 市面上 APP 黑白屏
+
+![](https://ws3.sinaimg.cn/large/005BYqpgly1g2f0wlx2e9g30b80nhx6x.jpg)
+
+​	从上面的一段录屏我们可以发现市面上常见的 APP 启动有的是白屏有的是做了优化。黑屏只有在 Android 4.n 具体是哪个版本我也忘了。那么现在我们就以我现在的真实项目来优化一下启动。
+
+### 真实项目中优化
+
+### 简介
+
+首先为什么会造成白屏勒我们来看一段源码
+
+![](https://ws3.sinaimg.cn/large/005BYqpgly1g2f17isgzwg30vs0nhb29.jpg)
+
+![](https://ws3.sinaimg.cn/large/005BYqpggy1g2f1du13zvg30bd0o34qq.jpg)
+
+最后就是这个 windowBackground 搞的鬼，知道了是这个搞的鬼那么我们就可以来进行优化了。
+
+###  优化方案 一
+
+```java
+在自己的 AppTheme 中加入 windowBackground 
+```
+
+### 优化方案 二
+
+设置 windowbackgroud 为透明的
+
+```java
+<item name="android:windowIsTranslucent">true</item>
+```
+
+但是：
+
+​	这 2 中方法会有一个问题，就是所有的 Activity 启动都会显示。
+
+### 优化方案 三
+
+1. **单独做成一个 AppTheme.Launcher**
+
+```dart
+    <style name="AppTheme.Launcher">
+        <item name="android:windowFullscreen">true</item>
+        <!--<item name="android:windowDisablePreview">true</item>-->
+        <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
+```
+
+2. **在清单文件中 启动 Activity 加入该 主题**
+
+   ```java
+           <activity
+               android:name="com.t01.android.dida_login.mvp.ui.activity.LoginActivity"
+               android:configChanges="keyboardHidden|orientation|screenSize"
+               android:theme="@style/AppTheme.Launcher"
+               android:windowSoftInputMode="adjustUnspecified|stateHidden">
+               <intent-filter>
+                   <action android:name="android.intent.action.MAIN" />
+                   <category android:name="android.intent.category.LAUNCHER" />
+               </intent-filter>
+           </activity>
+   ```
+
+   
+
+3. 在启动 Activity 页面中加入
+
+   ```java
+     setTheme(R.style.AppTheme_Launcher);
+   ```
+
+**最后这样做只有启动的 UI 才能见到自己的样式**
+
+4. 最后效果，因为我这里没有背景图，故弄了一个主题颜色，如果想要设置一张背景图片可以参考下面的示例，不然有可能会引起图片拉伸效果。
+
+   我这里启动时间大概在 500 ms ~ 800 ms 左右。
+
+   ![](https://ws3.sinaimg.cn/large/005BYqpgly1g2f20c1qreg31h30o3qv9.jpg)
+
+   ```java
+   <?xml version="1.0" encoding="utf-8"?>
+   <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+       <item>
+           <bitmap android:src="@mipmap/app_bg"
+               android:gravity="fill"/>
+       </item>
+   </layer-list>
+   ```
+
+   最后在清单 启动 Activity 的 Theme 中修改为
+
+   ```java
+   <item name="android:windowBackground">@drawable/app_theme_bg</item>
+   ```
+
+5. 据说 QQ 的实现方法是(这里只做参考，感兴趣的同学可以自己试试。)
+
+   ```java
+    <item name="android:windowDisablePreview">true</item>
+    <item name="android:windowBackground">@null</item>
+   ```
+
+## 启动时间查看
+
+### 4.4 以前版本查看
+
+```java
+adb shell am start -W packName/activity 全路径
+```
+
+
+
+### 4.4 版本以后查看方式
+
+**通过关键字 Displayed 并筛选为 No Filters**
+
+```java
+2019-04-25 18:35:57.629 508-629/? I/ActivityManager: Displayed com.lingyi.autiovideo.lykj/com.t01.android.dida_login.mvp.ui.activity.LoginActivity: +844ms
+```
+
+
+
+## 工具分析代码执行
+
+### Appcation 中查看耗时通过（如果有的同学还用 Log 打印系统时间来相减来查看 耗时的话，看完我这篇文章就可以换成下面方法了，不然就有点 LOW 了哈）
+
+```java
+//开始计时
+Debug.startMethodTracing(filePath);
+     中间为需要统计执行时间的代码
+//停止计时
+Debug.stopMethodTracing();
+```
+
+**还是通过一组动画来看我怎么操作的吧。（注意这里的时间是 微妙  微妙/10^6 = s 应该是这样，忘了）**
+
+![](https://ws3.sinaimg.cn/large/005BYqpgly1g2f2p9a72tg31he0s04qq.jpg)
+
+**导出 trace 文件命令**
+
+```java
+adb pull /storage/emulated/0/appcation_launcher_time.trace
+```
+
+我这里耗时还不算太大 大概在 0.2 - 0.3 s 左右。
+
+## Appcation 中优化方案(并不绝对，优化思路差不多)
+
+1. 开子线程
+   - 线程中没有创建 Handler、没有操作 UI 、对异步要求不高
+2. 懒加载
+   - 用到的时候在初始化，如网络，数据库，图片库，或一些三方库。
+3. 使用 IntentService onHandleIntent () 方法来进行初始化一些比较耗时的操作 
+
+## 总结
+
+最后启动优化可以配合上面的 3 点优化方案 + Appcation 优化方案 = 你自己最优方案。
+
+
+
