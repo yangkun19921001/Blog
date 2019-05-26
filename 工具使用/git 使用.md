@@ -25,5 +25,19 @@
 - git commit -m "提交需要的备注" // 把添加的文件提交到版本库，并填写提交备注 
 - git push origin master  // 第一次推送后，直接使用该命令即可推送修改 
 
+## 强制更新
+
+在使用Git的过程中，有些时候我们只想要git服务器中的最新版本的项目，对于本地的项目中修改不做任何理会，就需要用到Git pull的强制覆盖，具体代码如下：
+
+```
+$ git fetch --all
+$ git reset --hard origin/master 
+$ git pull123
+```
+
+Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比如用SaltStack部署web项目，强制覆盖可以保持与服务器内容一致。
+
+上面的操作有点复杂，直接用git checkout 就ok了
+
 
 

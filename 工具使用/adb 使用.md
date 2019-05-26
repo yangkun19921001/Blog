@@ -16,3 +16,416 @@
 
    connect to ...... 表示连接成功
 
+1.  将安卓设备usb连接到电脑
+2.  设备链接到wifi
+3.  Ping设备ip，检查是否可通信
+4.  在cmd依次输入以下命令：
+5.  adb usb
+6.  adb kill-server
+7.  adb tcpip 5555
+8.  adb connect youip:5555
+9.  拔掉usb插头即可
+---------------------
+
+
+## 情况出现：
+
+打开androidstudio，一直连接不上电脑，提示：Unable to start adb server: error: protocol fault (couldn't read status): Connection reset by peer
+
+## 问题原因：
+
+大多数情况是5037端口被占用。5037为adb默认端口。
+
+## 解决办法：
+
+查看哪个程序占用了adb端口，结束这个程序，然后重启adb就好了。
+
+### 
+
+1. 
+
+   
+
+    使用命令：netstat -aon|findstr "5037"找到占用5037端口的进程PID。
+
+   
+
+   ![img](https:////upload-images.jianshu.io/upload_images/3144381-116646d6b4e715bf?imageMogr2/auto-orient/strip%7CimageView2/2/w/801/format/webp)
+
+   image
+
+2. 
+
+   
+
+    使用命令：tasklist|findstr "5440"通过PID找出进程。
+
+   
+
+   ![img](https:////upload-images.jianshu.io/upload_images/3144381-c58c00de6779770b?imageMogr2/auto-orient/strip%7CimageView2/2/w/797/format/webp)
+
+   image
+
+3. 调出任务管理器，找到这个进程，结束进程。
+4. 使用命令:adb start-server 启动adb就行了
+
+
+
+ADB很强大，记住一些ADB命令有助于提高工作效率。
+
+1. 获取序列号：
+
+   ```
+    adb get-serialno
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+2. 查看连接计算机的设备：
+
+   ```
+    adb devices
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+3. 重启机器：
+
+   ```
+    adb reboot
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+4. 重启到bootloader，即刷机模式：
+
+   ```
+    adb reboot bootloader
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+5. 重启到recovery，即恢复模式：
+
+   ```
+    adb reboot recovery
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+6. 查看log：
+
+   ```
+    adb logcat
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+7. 终止adb服务进程：
+
+   ```
+    adb kill-server
+   ```
+
+8. 重启adb服务进程：
+
+   ```
+    adb start-server
+   ```
+
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+9. 获取机器MAC地址：
+
+   ```
+    adb shell  cat /sys/class/net/wlan0/address
+   ```
+
+10. 获取CPU序列号：
+
+    ```
+    adb shell cat /proc/cpuinfo
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+11. 安装APK：
+
+    ```
+    adb install <apkfile> //比如：adb install baidu.apk
+    ```
+
+12. 保留数据和缓存文件，重新安装apk：
+
+    ```
+    adb install -r <apkfile> //比如：adb install -r baidu.apk
+    ```
+
+13. 安装apk到sd卡：
+
+    ```
+    adb install -s <apkfile> // 比如：adb install -s baidu.apk
+    ```
+
+14. 卸载APK：
+
+    ```
+    adb uninstall <package> //比如：adb uninstall com.baidu.search
+    ```
+
+15. 卸载app但保留数据和缓存文件：
+
+    ```
+    adb uninstall -k <package> //比如：adb uninstall -k com.baidu.search
+    ```
+
+16. 启动应用：
+
+    ```
+    adb shell am start -n <package_name>/.<activity_class_name>
+    ```
+
+17. 查看设备cpu和内存占用情况：
+
+    ```
+    adb shell top
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+18. 查看占用内存前6的app：
+
+    ```
+    adb shell top -m 6
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+19. 刷新一次内存信息，然后返回：
+
+    ```
+    adb shell top -n 1
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+20. 查询各进程内存使用情况：
+
+    ```
+    adb shell procrank
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+21. 杀死一个进程：
+
+    ```
+    adb shell kill [pid]
+    ```
+
+22. 查看进程列表：
+
+    ```
+    adb shell ps
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+23. 查看指定进程状态：
+
+    ```
+    adb shell ps -x [PID]
+    ```
+
+24. 查看后台services信息：
+
+    ```
+    adb shell service list
+    ```
+
+25. 查看当前内存占用：
+
+    ```
+    adb shell cat /proc/meminfo
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+26. 查看IO内存分区：
+
+    ```
+    adb shell cat /proc/iomem
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+27. 将system分区重新挂载为可读写分区：
+
+    ```
+    adb remount
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+28. 从本地复制文件到设备：
+
+    ```
+    adb push <local> <remote>
+    ```
+
+29. 从设备复制文件到本地：
+
+    ```
+    adb pull <remote>  <local>
+    ```
+
+30. 列出目录下的文件和文件夹，等同于dos中的dir命令：
+
+    ```
+    adb shell ls
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+31. 进入文件夹，等同于dos中的cd 命令：
+
+    ```
+    adb shell cd <folder>
+    ```
+
+32. 重命名文件：
+
+    ```
+    adb shell rename path/oldfilename path/newfilename
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+33. 删除system/avi.apk：
+
+    ```
+    adb shell rm /system/avi.apk
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+34. 删除文件夹及其下面所有文件：
+
+    ```
+    adb shell rm -r <folder>
+    ```
+
+35. 移动文件：
+
+    ```
+    adb shell mv path/file newpath/file
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+36. 设置文件权限：
+
+    ```
+    adb shell chmod 777 /system/fonts/DroidSansFallback.ttf
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+37. 新建文件夹：
+
+    ```
+    adb shell mkdir path/foldelname
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+38. 查看文件内容：
+
+    ```
+    adb shell cat <file>
+    ```
+
+39. 查看wifi密码：
+
+    ```
+    adb shell cat /data/misc/wifi/*.conf
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+40. 清除log缓存：
+
+    ```
+    adb logcat -c
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+41. 查看bug报告：
+
+    ```
+    adb bugreport
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+42. 获取设备名称：
+
+    ```
+    adb shell cat /system/build.prop
+    ```
+
+    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+43. 查看ADB帮助：
+
+    ```
+    adb help
+    ```
+
+44. 跑monkey：
+
+    ```
+    adb shell monkey -v -p your.package.name 500
+    ```
+
+45. 查看当前 APP 当前的 Activity：
+
+```
+adb shell dumpsys window w |findstr \/ |findstr name=
+```
+
+![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
