@@ -369,6 +369,16 @@ gantt
 
 关于目录生成，只要文章是按照markdown语法写作的。在需要生成目录的地方写 [TOC]
 
+## 添加视频
+
+```java
+<video id="video" controls="" preload="none">
+    <source id="mp4" src="/Users/devyk/Data/Android/学习资料/随记/SchemaLearningRecords/文章图片引用/青岛游玩.mp4" type="video/mp4">
+</video>
+```
+
+
+
 
 
 
