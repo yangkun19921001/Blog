@@ -393,9 +393,65 @@ ADB很强大，记住一些ADB命令有助于提高工作效率。
 
 ```
 adb shell dumpsys window w |findstr \/ |findstr name=
+
+//MAC
+adb shell dumpsys window w |grep \\/ |grep name=
 ```
 
-![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+46. dos 设置编码
+
+    ```java
+    1.设置uft-8编码
+    1.运行CMD 
+    2.在命令行中输入 chcp 65001 回车, 控制台会切换到新的代码页. 
+    3.在标题栏点击右键, 打开属性面板, 会看到”选项”标签页下方显示”当前代码页”的编码. 然后选择”字体”标签页, 把字体设置为Lucia Console, 然后确定关闭.
+    ```
+
+47. adb anr 目录
+
+    ```java
+    data/anr/traces.txt
+    ```
+
+48. 获取手机 IP 
+
+    ```java
+    adb shell netcfg
+    ```
+
+49. ping
+
+    ```java
+    adb shell ping -c 4 41.1.234.205
+    ```
+
+50. 查看 Android 版本
+
+    ```java
+    adb shell getprop ro.build.version.release
+    ```
+
+51. 杀进程
+
+    ```java
+    tmusb shell am force-stop com.t01.dida.small
+    
+    adb shell am force-stop com.ykun.keepalive
+    
+    ```
+
+52. 修改 TCP/UDP 缓存区大小
+
+    ```java
+    cat /proc/sys/net/core/wmem_default
+    
+    echo 512000 > /proc/sys/net/core/wmem_default
+    
+    echo 1024000 > /proc/sys/net/core/wmem_max
+    
+    ```
+
+    
 
 
 

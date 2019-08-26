@@ -1,3 +1,31 @@
+## 性能优化系列
+
+[APP 启动优化](<https://juejin.im/post/5cc19374e51d456e781f2036>)
+
+[UI 绘制优化](<https://juejin.im/post/5cc2dfc7e51d456e845b4260>)
+
+[内存优化](<https://juejin.im/post/5cd82a3ee51d456e781f20ce>)
+
+[图片压缩](<https://juejin.im/post/5ce15d0ce51d45106e5e6dac>)
+
+[长图优化](<https://juejin.im/post/5ce96da06fb9a07ee4633f50>)
+
+[电量优化](<https://juejin.im/post/5ce9088f6fb9a07ee4633ef3>)
+
+[Dex 加解密](<https://juejin.im/post/5cf3ee295188256aa76bb1e1>)
+
+[动态替换 Application](<https://juejin.im/post/5cf69d30f265da1b897abd53>)
+
+[APP 稳定性之热修复原理探索](<https://juejin.im/post/5cfce989f265da1b6c5f6991>)
+
+[APP 持续运行之进程保活实现](<https://juejin.im/post/5cffe4d4f265da1b695d55d4>)
+
+[ProGuard 对代码和资源压缩](<https://juejin.im/post/5d05dab06fb9a07ea9446e21>)
+
+[APK 极限压缩](<https://juejin.im/post/5d0627f7f265da1bd4247e76>)
+
+
+
 ## 简介
 
 **这里也许会有人问 APP 启动还需要优化吗？启动又不是我们自己写的代码，难道 Google 工程师会犯这么低级的错吗？其实这还真不是 Google 的错，应该说是给我们开发者留了一个坑吧。应该有的同学知道是怎么一回事儿了，当我们在系统桌面任意点击一个 APP 是不是会发现启动的时候有一瞬间有白屏出现(以前老版本是黑屏) 那么我们怎么来优化这个黑白屏的问题勒，现在我们先来了解一下 Android 手机重开机到启动 APP 的过程吧。**
