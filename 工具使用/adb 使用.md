@@ -451,6 +451,12 @@ adb shell dumpsys window w |grep \\/ |grep name=
     
     ```
 
+53. 查看支持的 CPU 架构列表
+
+    ```shell
+    adb shell getprop ro.product.cpu.abilist
+    ```
+
     
 
 
@@ -459,7 +465,9 @@ adb shell dumpsys window w |grep \\/ |grep name=
 
 
 
+# 参考
 
+https://www.cnblogs.com/zhuminghui/p/10472193.html
 
 
 
