@@ -1,4 +1,34 @@
-[TOC]
+   * [剖析面试最常见问题之Java基础知识]()
+      * [谈谈你对 JVM JDK 和 JRE 的理解(JDK 和 JRE的区别是什么?)。什么是字节码?为什么要采用字节码?]()
+         * [JVM]()
+         * [JDK 和 JRE]()
+      * [Java和C  的区别?]()
+      * [重载和重写的区别?构造器 Constructor 是否可被 override?]()
+      * [谈谈Java 面向对象编程三大特性: 封装 继承 多态]()
+         * [封装]()
+         * [继承]()
+         * [多态]()
+      * [String str="abcd"与 <code>String str1=new String("acbd")</code>一样吗？str和str1相等吗?]()
+      * [String StringBuffer 和 StringBuilder 的区别是什么?String 为什么是不可变的?]()
+      * [接口和抽象类的区别是什么？抽象类必须要有抽象方法吗？抽象类能使用 final 修饰吗？]()
+      * [== 与 equals(重要)]()
+      * [hashCode 与 equals (重要)]()
+         * [hashCode（）介绍]()
+         * [为什么要有 hashCode]()
+         * [hashCode（）与equals（）的相关规定]()
+      * [什么是反射机制？反射机制的应用场景有哪些？]()
+         * [反射机制介绍]()
+         * [静态编译和动态编译]()
+         * [反射机制优缺点]()
+         * [反射的应用场景]()
+      * [为什么 Java 中只有值传递？]()
+         * [example 1]()
+         * [example 2]()
+         * [example 3]()
+         * [总结]()
+      * [Java 中 IO 流分为几种？BIO,NIO,AIO 有什么区别？]()
+         * [java 中 IO 流分为几种？]()
+         * [BIO,NIO,AIO 有什么区别？]()
 
 # 剖析面试最常见问题之Java基础知识
 
@@ -187,7 +217,7 @@ hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返
 
 ### 为什么要有 hashCode
 
-**我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode：** 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用 `equals（）`方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。（摘自我的Java启蒙书《Head first java》第二版）。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。
+**我们先以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode：** 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用 `equals（）`方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作。如果不同的话，就会重新散列到其他位置。（摘自我的Java启蒙书《Head first java》第二版）。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。
 
 通过我们可以看出：`hashCode()` 的作用就是**获取哈希码**，也称为散列码；它实际上是返回一个int整数。这个**哈希码的作用**是确定该对象在哈希表中的索引位置。**hashCode()在散列表中才有用，在其它情况下没用。**在散列表中hashCode() 的作用是获取对象的散列码，进而确定该对象在散列表中的位置。
 
