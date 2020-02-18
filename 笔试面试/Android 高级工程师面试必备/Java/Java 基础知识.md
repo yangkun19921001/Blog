@@ -1,34 +1,6 @@
-   * [剖析面试最常见问题之Java基础知识]()
-      * [谈谈你对 JVM JDK 和 JRE 的理解(JDK 和 JRE的区别是什么?)。什么是字节码?为什么要采用字节码?]()
-         * [JVM]()
-         * [JDK 和 JRE]()
-      * [Java和C  的区别?]()
-      * [重载和重写的区别?构造器 Constructor 是否可被 override?]()
-      * [谈谈Java 面向对象编程三大特性: 封装 继承 多态]()
-         * [封装]()
-         * [继承]()
-         * [多态]()
-      * [String str="abcd"与 <code>String str1=new String("acbd")</code>一样吗？str和str1相等吗?]()
-      * [String StringBuffer 和 StringBuilder 的区别是什么?String 为什么是不可变的?]()
-      * [接口和抽象类的区别是什么？抽象类必须要有抽象方法吗？抽象类能使用 final 修饰吗？]()
-      * [== 与 equals(重要)]()
-      * [hashCode 与 equals (重要)]()
-         * [hashCode（）介绍]()
-         * [为什么要有 hashCode]()
-         * [hashCode（）与equals（）的相关规定]()
-      * [什么是反射机制？反射机制的应用场景有哪些？]()
-         * [反射机制介绍]()
-         * [静态编译和动态编译]()
-         * [反射机制优缺点]()
-         * [反射的应用场景]()
-      * [为什么 Java 中只有值传递？]()
-         * [example 1]()
-         * [example 2]()
-         * [example 3]()
-         * [总结]()
-      * [Java 中 IO 流分为几种？BIO,NIO,AIO 有什么区别？]()
-         * [java 中 IO 流分为几种？]()
-         * [BIO,NIO,AIO 有什么区别？]()
+[TOC]
+
+
 
 # 剖析面试最常见问题之Java基础知识
 
@@ -80,7 +52,7 @@ JRE 是 Java运行时环境。它是运行已编译 Java 程序所需的所有�
 
 在讲继承的时候我们就知道父类的私有属性和构造方法并不能被继承，所以 Constructor 也就不能被 override（重写）,但是可以 overload（重载）,所以你可以看到一个类中有多个构造函数的情况。
 
-## 谈谈Java 面向对象编程三大特性: 封装 继承 多态
+## 谈谈 Java 面向对象编程三大特性: 封装 继承 多态
 
 ### 封装
 
@@ -118,7 +90,7 @@ str和str1不相等，因为一个是堆内存中的String对象一个是常量�
 **可变性**
 　
 
-简单的来说：String 类中使用 final 关键字修饰字符数组来保存字符串，`private　final　char　value[]`，所以 String 对象是不可变的。而StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串`char[]value` 但是没有用 final 关键字修饰，所以这两种对象都是可变的。
+简单的来说：String 类中使用 final 关键字修饰字符数组来保存字符串，`private　final　char　value[]`，所以 String 对象是不可变的。而 StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串`char[]value` 但是没有用 final 关键字修饰，所以这两种对象都是可变的。
 
 StringBuilder 与 StringBuffer 的构造方法都是调用父类构造方法也就是 AbstractStringBuilder 实现的，大家可以自行查阅源码。
 
@@ -408,6 +380,10 @@ Java程序设计语言对对象采用的不是引用调用，实际上，对象�
 
 参考：《Java核心技术卷Ⅰ》基础知识第十版第四章4.5小节
 
+## Java 泛型
+
+[聊一聊-JAVA 泛型中的通配符 T，E，K，V，？](https://juejin.im/post/5d5789d26fb9a06ad0056bd9)
+
 ## Java 中 IO 流分为几种？BIO,NIO,AIO 有什么区别？
 
 ### java 中 IO 流分为几种？
@@ -434,3 +410,6 @@ Java Io流共涉及40多个类，这些类看上去很杂乱，但实际上很�
 - **BIO (Blocking I/O):** 同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。在活动连接数不是特别高（小于单机1000）的情况下，这种模型是比较不错的，可以让每一个连接专注于自己的 I/O 并且编程模型简单，也不用过多考虑系统的过载、限流等问题。线程池本身就是一个天然的漏斗，可以缓冲一些系统处理不了的连接或请求。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。
 - **NIO (New I/O):** NIO是一种同步非阻塞的I/O模型，在Java 1.4 中引入了NIO框架，对应 java.nio 包，提供了 Channel , Selector，Buffer等抽象。NIO中的N可以理解为Non-blocking，不单纯是New。它支持面向缓冲的，基于通道的I/O操作方法。 NIO提供了与传统BIO模型中的 `Socket` 和 `ServerSocket` 相对应的 `SocketChannel` 和 `ServerSocketChannel` 两种不同的套接字通道实现,两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载、低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好的维护性；对于高负载、高并发的（网络）应用，应使用 NIO 的非阻塞模式来开发
 - **AIO (Asynchronous I/O):** AIO 也就是 NIO 2。在 Java 7 中引入了 NIO 的改进版 NIO 2,它是异步非阻塞的IO模型。异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。AIO 是异步IO的缩写，虽然 NIO 在网络操作中，提供了非阻塞的方法，但是 NIO 的 IO 行为还是同步的。对于 NIO 来说，我们的业务线程是在 IO 操作准备好时，得到通知，接着就由这个线程自行进行 IO 操作，IO操作本身是同步的。查阅网上相关资料，我发现就目前来说 AIO 的应用还不是很广泛，Netty 之前也尝试使用过 AIO，不过又放弃了。
+
+[Java 基础知识 下](https://github.com/CyC2018/CS-Notes/blob/master/notes/Java%20%E5%9F%BA%E7%A1%80.md)
+

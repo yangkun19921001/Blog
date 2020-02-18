@@ -40,7 +40,7 @@
 
 查看哪个程序占用了adb端口，结束这个程序，然后重启adb就好了。
 
-### 
+### 版本
 
 1. 
 
@@ -141,7 +141,7 @@ ADB很强大，记住一些ADB命令有助于提高工作效率。
     adb shell  cat /sys/class/net/wlan0/address
    ```
 
-10. 获取CPU序列号：
+10. 获取CPU info：
 
     ```
     adb shell cat /proc/cpuinfo
@@ -411,8 +411,9 @@ adb shell dumpsys window w |grep \\/ |grep name=
 
     ```java
     data/anr/traces.txt
+    
     ```
-
+    
 48. 获取手机 IP 
 
     ```java
