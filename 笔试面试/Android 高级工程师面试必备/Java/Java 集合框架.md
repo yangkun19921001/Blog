@@ -1,5 +1,13 @@
 [TOC]
 
+List 集合框架简单关系图
+
+[![czOoM.png](https://storage1.cuntuku.com/2019/09/02/czOoM.png)](https://cuntuku.com/image/czOoM)
+
+Map 集合框架简单关系图
+
+[![czXFy.png](https://storage6.cuntuku.com/2019/09/02/czXFy.png)](https://cuntuku.com/image/czXFy)
+
 ## 说说List,Set,Map三者的区别？
 
 - **List(对付顺序的好帮手)：** List接口存储一组不唯一（可以有多个元素引用相同的对象），有序的对象
@@ -199,7 +207,7 @@ static int hash(int h) {
 
 **推荐阅读：**
 
-- 《Java 8系列之重新认识HashMap》 ：https://zhuanlan.zhihu.com/p/2167380524
+- [《Java 8系列之重新认识HashMap》](https://tech.meituan.com/2016/06/24/java-hashmap.html)
 
 ## HashMap 的长度为什么是2的幂次方
 
