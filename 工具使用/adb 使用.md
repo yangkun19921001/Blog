@@ -458,6 +458,27 @@ adb shell dumpsys window w |grep \\/ |grep name=
     adb shell getprop ro.product.cpu.abilist
     ```
 
+54. 读取手机 data 目录下的数据
+
+    ```shell
+    正确使用adb读取data目录下的文件方式
+    shell@android:/data $ run-as com.your.package
+    run-as com.your.package
+    shell@android:/data/data/com.your.package $ cd /data/data/com.your.package
+    cd /data/data/com.your.package
+    shell@android:/data/data/com.your.package $ ls
+    ls
+    cache
+    databases
+    lib
+    shared_prefs
+    shell@android:/data/data/com.your.package $ cd databases
+    cd databases
+    shell@android:/data/data/com.your.package/databases $ ls
+    yourpackagename.db
+    $ cat preferences.db > /mnt/sdcard/yourpackagename.db  
+    ```
+
     
 
 

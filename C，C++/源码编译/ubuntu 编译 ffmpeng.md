@@ -8,6 +8,30 @@ ffmpeg 查看视频信息
 ffmpeg -i xxx.mp4
 ```
 
+ffmpeg Mp4 to H264
+
+```
+有时候为了找到个合适的264测试视频比较难，那就只能自己动手生成了。
+
+先用手机拍一段MP4（现在的手机默认拍的视频都是MP4）.再放到电脑上用ffmpeg  提取H264
+
+命令行：
+
+ffmpeg -i 20130312_133313.mp4 -codec copy -bsf h264_mp4toannexb -f h264 20130312_133313.264
+
+说明：
+
+ -i 20130312_133313.mp4 :是输入的MP4文件
+
+-codec copy：从MP4封装中进行拷贝
+
+-bsf: h264_mp4toannexb：从MP4拷贝到annexB封装
+
+-f h264：采用h.264格式
+
+20130312_133313.264：输出的文件名称
+```
+
 
 
 ffmpeg udp h264 拉流
