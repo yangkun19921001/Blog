@@ -31,4 +31,5 @@
 - 进程和 Application 的生命周期
 - 封装View的时候怎么知道view的大小
 - RecycleView原理
+  - [RecyclerView 刷新，复用，动画]([https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/recyclerview/README.md](https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework源码分析/recyclerview/README.md))
 - AndroidManifest的作用与理解
