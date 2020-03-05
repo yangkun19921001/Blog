@@ -1,0 +1,437 @@
+# 设计模式 \(十八\) 适配器模式、装饰模式、享元模式
+
+## 适配器模式
+
+### 介绍
+
+适配器模式在我们开发中使用率极高，从最早的 ListView、GridView 到现在的 RecyclerView 都需要使用 Adapter ，并且在开发中我们遇到的优化问题，出错概率较大的地方也基本都出在 Adapter,这是一个让人又爱又恨的角色。
+
+说到底，适配器是将两个不兼容的类融合到一起，它有点像粘合剂，将不同的东西通过一种转换使得它们能够协作起来。例如，经常碰到要两个没有关系的类型之间进行交互，第一个解决方案是修改各自类的接口，但是如果没有源代码或者我们不愿意为了一个应用而修改各自的接口，此时怎么办？这种情况我们往往会使用一个 Adapter,在这两种接口之间创建一个 “混血儿” 接口，这个 Adapter 会将这两个接口进行兼容，在不修改原有代码的情况下满足需求。
+
+### 定义
+
+* 适配器模式把一个类的接口变换成客户端所期待的另一种接口，从而使原本因接口不匹配而无法在一起工作的两个类能够在一起工作。
+
+### 使用场景
+
+1. 系统需要使用现有的类，而此类的接口不符合系统的需要，即接口不兼容。
+2. 想要建立一个可以重复使用的类，用于一些彼此之间没有太大关联的类，包括一些可能在将来引进的类一起工作。
+3. 需要统一的输出接口，而输入端的类型不可预知。
+
+### UML 类图
+
+[![hfeHe.png](https://storage7.cuntuku.com/2019/09/15/hfeHe.png)](https://cuntuku.com/image/hfeHe)
+
+* Target: 目标角色，也就是所期待得到的接口。注意：由于这里讨论的是类适配器，因此目标不可以是类。
+* Adaptee: 现在需要适配的接口。
+* Adapter: 适配器角色，也是本模式的核心。适配器把源接口换成目标接口，当然，这一角色不可以是接口，而必须是具体类。
+
+### 代码示例
+
+#### 简单示例
+
+适配器模分为两种，即类适配器和对象适配器，我们先来看类适配器。
+
+**业务背景**: 用电源接口做例子，笔记本电脑的电源一般是 5V 电压，但是我们生活中的电线电压一般都是 220V 。这个时候就出现了不匹配的状况，在软件开发中我们称为接口不兼容，此时就需要适配器来进行一个接口转换。在软件开发中有一句话正好体现了这点：任何问题都可以加一个中间层来解决。这个层我们可以理解为这里的 Apapter 层，通过这层来进行一个接口转换就达到了兼容的目的。
+
+在上述电源接口这个示例中， 5V 电压就是 Target 接口，220V 电压就是 Adapter 类，而将电压从 220V 转换到 5V 就是 Adapter。
+
+类适配器:
+
+**target:**
+
+```java
+public interface FiveVolt {
+
+    int getVolt5();
+}
+```
+
+**Adapter 角色，需要被转换的对象**
+
+```java
+public class Volt220 {
+
+    public int getVolt220(){
+        return 220;
+    }
+}
+```
+
+**Adapter 角色，将 220 -&gt; 5 V 的电压:**
+
+```java
+public class VoltAdapter extends Volt220 implements FiveVolt {
+    @Override
+    public int getVolt5() {
+        return 5;
+    }
+}
+```
+
+**test:**
+
+```java
+    @Test
+    public void testAdapter1(){
+        VoltAdapter voltAdapter = new VoltAdapter();
+        System.out.println("voltAdapter:"+voltAdapter.getVolt5());
+    }
+```
+
+**output:**
+
+```java
+voltAdapter:5
+```
+
+Target 角色给出了需要的目标接口，而 Adapter 类则是需要被转换的对象。Adapter 则是将 Volt220 转换成 Target 的接口。对应的 Target 的目标是要获取 5V 的输出电压，而 Adapter 真正输出电压是 220V ，此时就需要电源适配器类将 220V 电压转换为 5V 电压，解决接口不兼容的问题。
+
+对象适配器:
+
+我们只需要变换下 Adapter 对象，如下:
+
+```java
+public class VoltAdapter extends Volt220 implements FiveVolt {
+
+    private Volt220 mVolt220;
+
+    public VoltAdapter(Volt220 mVolt220) {
+        this.mVolt220 = mVolt220;
+    }
+
+    @Override
+    public int getVolt220() {
+        return mVolt220.getVolt220();
+    }
+
+    @Override
+    public int getVolt5() {
+        return 5;
+    }
+}
+```
+
+**test / output:**
+
+```java
+  VoltAdapter voltAdapter = new VoltAdapter(new Volt220());
+  System.out.println("voltAdapter:"+voltAdapter.getVolt5());
+
+
+    voltAdapter:5
+```
+
+这种实现方式直接将要被适配的对象传递到 Adapter 中，使用组合的形式是吸纳接口兼容的效果。这比类适配器方式更为灵活，它的另一个好处是被适配的对象中的方法不会暴露出来，而类适配由于继承了被适配对象，因此，被适配对象类的函数在 Adapter 类中也都含有，这使得 Adapter 类出现了一些奇怪的接口，用户使用成本较高，因此，对象适配器模式更加灵活、实用。
+
+### 总结
+
+Adapter 模式的经典实现在于将原本不兼容的接口融合在一起，使之能够很好的进行合作。但是，在实际开发中，Adapter 模式也有一些灵活的实现。例如 ListView 中的隔离变化，使得整个 UI 架构变得更灵活，能够拥抱变化。Adapter 模式在开发中运用非常广泛，因此，掌握 Adapter 模式是非常必要的。
+
+**优点:**
+
+1. 更好的复用性，系统需要使用现有的类，而此类的接口不符合系统的需要。那么通过适配器模式就可以让这些功能得到更好的复用。
+2. 更好的扩展性，在实现适配器功能的时候，可以调用自己开发的功能，从而自然地扩展系统的功能。
+
+**缺点:**
+
+1. 过多地使用适配器，会让系统非常凌乱，不易整体把握。
+
+## 装饰模式
+
+### 介绍
+
+装饰模式 \(也称为 Decorator Pattern\) 也称为包装模式，属于结构型模式之一，其使用一种对客户端透明的方式来动态的扩展对象的功能，同时它也是继承关系的一种替代方案之一。在现实生活中你也看见很多装饰模式的例子，或者可以大胆地说装饰模式无处不在，就拿人来说，人需要各式各样的衣着，不管你穿着怎么，但是，对于个人的本质来说是不变的，充其量只是在外面披上一层 “遮羞物” 而已，这就是装饰模式。
+
+### 定义
+
+动态的给一个对象田爱军一些额外的职责。就是增加功能来说，装饰模式生成子类更为灵活。
+
+### 使用场景
+
+需要透明且动态地扩展类的功能时。
+
+### UML 类图
+
+[![65f78b7b2b7ce711c5f59e09551475b8.png](https://s5.ex2x.com/2019/09/15/65f78b7b2b7ce711c5f59e09551475b8.png)](https://free.imgsha.com/i/vatvE)
+
+* Component: 抽象组件，可以试一个接口或者抽象类，其充当的就是被装饰的原始对象。
+* ConcreteComponent: 组件具体实现类，该类是 Component 类的基本实现，也是我们装饰的具体对象。
+* Decorator: 抽象装饰者。
+* ConcreteDecorator: 装饰者具体实现类
+
+### 代码示例
+
+**业务背景:** 为 boy 穿衣
+
+**定义一个抽象的穿衣行为:**
+
+```java
+public abstract class Person {
+
+    /**
+     * Person 下有一个穿着的抽象方法
+     */
+    public  abstract void dressed();
+}
+```
+
+**声明一个具体行为实现:**
+
+```java
+public class Boy extends Person {
+    @Override
+    public void dressed() {
+        System.out.println("男孩穿着内裤");
+    }
+}
+```
+
+**定义一个用来装饰具体行为的抽象:**
+
+```java
+public abstract class PersonCloth extends Person {
+    protected Person person
+            ;
+
+    public PersonCloth(Person person) {
+        this.person = person;
+    }
+
+    @Override
+    public void dressed() {
+        person.dressed();
+    }
+}
+```
+
+**具体装饰实现:**
+
+```java
+public class ExpensiveCloth extends PersonCloth {
+    public ExpensiveCloth(Person person) {
+        super(person);
+    }
+
+    @Override
+    public void dressed() {
+        super.dressed();
+        //穿短袖
+        dressShirt();
+        //穿皮衣
+        dressLeather();
+        //穿牛仔裤
+        dressJean();
+    }
+
+    private void dressShirt() {
+        System.out.println("穿上短袖");
+    }
+
+    private void dressLeather() {
+        System.out.println("穿上皮衣");
+    }
+
+    private void dressJean() {
+        System.out.println("穿上牛仔裤");
+    }
+}
+```
+
+```java
+public class CheapCloth extends PersonCloth {
+    public CheapCloth(Person person) {
+        super(person);
+    }
+
+    @Override
+    public void dressed() {
+        super.dressed();
+        dressShorts();
+    }
+
+    private void dressShorts() {
+        System.out.println("穿条短裤");
+    }
+}
+```
+
+**test:**
+
+```java
+    @Test
+    public void testDecorator(){
+        //首先得有一个男孩
+        Person person = new Boy();
+
+        //先穿上便宜的衣服
+        PersonCloth cheapCloth = new CheapCloth(person);
+        cheapCloth.dressed();
+
+        //或者在穿上有点档次的衣服
+        PersonCloth personCloth = new ExpensiveCloth(person);
+        personCloth.dressed();
+
+    }
+```
+
+**output:**
+
+```java
+男孩穿着内裤
+穿条短裤
+
+男孩穿着内裤
+穿上短袖
+穿上皮衣
+穿上牛仔裤
+```
+
+### 总结
+
+装饰模式和我们前面讲的 [代理模式](https://juejin.im/post/5d7c6bc7f265da03f3338254) 有点类似，有时候甚至容易混淆，倒不是说会把代理当成装饰，而是常常会是将装饰看作代理，装饰模式是以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案；而代理模式则是给一个对象提供一个代理对象，并有代理对象来控制对原有的对象的引用。装饰模式应该为所装饰的对象增强功能；代理模式对代理的对象施加控制，但不对对象本身的功能进行增强。
+
+## 享元模式
+
+### 介绍
+
+享元模式是对象池的一种实现，享元模式用来尽可能减少内存使用量，它适合用于可能存在大量重复对象的场景，来缓存可共享的对象，达到对象共享、避免创建过多对象的效果，这样一来就可以提升性能、避免内存移除等。
+
+### 定义
+
+使用共享对象可以有效地支持大量的细粒度的对象。
+
+### 使用场景
+
+* 系统中存在大量的相似对象。
+* 细粒度的对象都具备较接近的外部状态，而且内部状态与环境无关，也就是说对象没有特定身份。
+* 需要缓冲池的场景。
+
+### UML 类图
+
+[![ec7dca17360103164d7c29eb65db45ea.png](https://s5.ex2x.com/2019/09/15/ec7dca17360103164d7c29eb65db45ea.png)](https://free.imgsha.com/i/vaE3p)
+
+* Flyweiget : 享元对象抽象基类或者接口
+* ConcreteFlyweiget: 具体的享元对象。
+* FlyweigetFactory: 享元工厂，负责管理享元对象池和创建享元对象。
+
+### 代码示例
+
+**需求背景:** 过年回家买车票，如果在并发 1W 人次同时 http 请求数据，如果后台每次都重新创建一个查询的车票结果，那么必然会造成大量重复对象的创建、销毁、使得 GC 任务繁重、内存高居不下。
+
+**展示车票信息接口**
+
+```java
+public interface Ticket {
+    public void showTicketInfo(String info);
+}
+```
+
+**展示车票具体实现:**
+
+```java
+public class TrainTicket implements Ticket {
+    public String from;
+    public String to;
+    public String bunk;
+    public int price;
+
+    public TrainTicket(String from, String to) {
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public void showTicketInfo(String info) {
+        bunk = info;
+        price = new Random().nextInt(300);
+        System.out.println("购买从" + from + " -> " + to + "的 " + bunk + " 火车票 ，价格：" + price);
+
+    }
+}
+```
+
+**车票信息管理:**
+
+```java
+public class TicketFactory {
+
+    static Map<String, Ticket> sTicketMap = new ConcurrentHashMap<>();
+
+    public static Ticket getTicket(String from, String to) {
+        String key = from + "-" + to;
+        if (sTicketMap.containsKey(key)) {
+            //使用已经存在的对象
+            System.out.println("使用存在的对象 = [" + from + "], to = [" + to + "]");
+            return sTicketMap.get(key);
+        } else {
+            System.out.println("创建对象 = [" + from + "], to = [" + to + "]");
+            TrainTicket trainTicket = new TrainTicket(from, to);
+            sTicketMap.put(key, trainTicket);
+            return trainTicket;
+        }
+
+    }
+}
+```
+
+**test:**
+
+```java
+    @Test
+    public void testFlaweiget(){
+        Ticket ticket1 = TicketFactory.getTicket("北京", "上海");
+        ticket1.showTicketInfo("上铺");
+        Ticket ticket7 = TicketFactory.getTicket("北京", "上海");
+        ticket7.showTicketInfo("下铺");
+        Ticket ticket2 = TicketFactory.getTicket("北京", "上海");
+        ticket2.showTicketInfo("上铺");
+        Ticket ticket3 = TicketFactory.getTicket("北京", "上海");
+        ticket3.showTicketInfo("上铺");
+        Ticket ticket4 = TicketFactory.getTicket("北京", "成都");
+        ticket4.showTicketInfo("下铺");
+        Ticket ticket5 = TicketFactory.getTicket("北京", "上海");
+        ticket5.showTicketInfo("上铺");
+        Ticket ticket6 = TicketFactory.getTicket("北京", "上海");
+        ticket6.showTicketInfo("上铺");
+    }
+```
+
+**output:**
+
+```java
+创建对象 = [北京], to = [上海]
+购买从北京 -> 上海的 上铺 火车票 ，价格：36
+使用存在的对象 = [北京], to = [上海]
+购买从北京 -> 上海的 下铺 火车票 ，价格：261
+使用存在的对象 = [北京], to = [上海]
+购买从北京 -> 上海的 上铺 火车票 ，价格：100
+使用存在的对象 = [北京], to = [上海]
+购买从北京 -> 上海的 上铺 火车票 ，价格：247
+创建对象 = [北京], to = [成都]
+购买从北京 -> 成都的 下铺 火车票 ，价格：224
+使用存在的对象 = [北京], to = [上海]
+购买从北京 -> 上海的 上铺 火车票 ，价格：262
+使用存在的对象 = [北京], to = [上海]
+购买从北京 -> 上海的 上铺 火车票 ，价格：114
+```
+
+从上面的查询结果得知，如果已经查询了就使用缓存，没有就创建对象。
+
+### 总结
+
+享元模式是实现比较简单，但是它的作用在某些场景确实极其重要的。它可以大大减少应用程序创建的对象，降低程序内存的占用，增强程序的性能，但它同时也提高了系统的复杂性，需要分离出外部状态和内部状态，而且外部状态具有固化特性，不应该随内部状态改变而改变，否则导致系统的逻辑混乱。
+
+享元模式的有点在于大幅度地降低内存中对象的数量。但是，它做到这一点所付出的代价也是很高的。
+
+* 享元模式使得系统更加复杂。为了使对象可以共享，需要将一些状态外部化，这使得程序的逻辑复杂化。
+* 享元模式将享元对象的状态外部化，而读取外部状态使得运行时间稍微变长。
+
+[文章代码地址](https://github.com/yangkun19921001/AndroidDpCode)
+
+## 特别感谢
+
+[《 Android 源码设计模式解析与实战 》](https://item.jd.com/12113187.html)
+
+感谢你的阅读，谢谢！
+
