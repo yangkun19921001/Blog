@@ -1,0 +1,133 @@
+# 设计模式 \(十\) 观察者模式
+
+## 介绍
+
+观察者模式是一个使用率非常高的模式，它最常用的地方是 GUI 系统、订阅-发布因为这个模式的一个重要作用就是解耦，将被观察者和观察者解耦，使得她们之间的依赖性更小，甚至做到毫无依赖。以 GUI 系统来说，应用的 UI 具有易变性，尤其是前期随着业务的改变或者产品的需求更改，应用界面也会经常性变化，但是业务逻辑基本变化不好，此时， GUI 系统需要一套机制来应对这种情况，使得 UI 层与具体的业务逻辑解耦，观察者模式此时就派上用场了。
+
+## 定义
+
+定义对象间一种 1对 N 的关系，使得每当一个对象改变状态，则所有依赖于它的对象都会得到通知并被自动更新。
+
+## 使用场景
+
+1. 关联行为场景，需要注意的是，关联行为是可拆分的，而不是 "组合" 关系。
+2. 事件多级触发场景。
+3. 跨系统的消息交换场景，如消息队列、事件总线的消息机制。
+
+## XML 类图
+
+[![hUWcJ.png](https://storage6.cuntuku.com/2019/09/08/hUWcJ.png)](https://cuntuku.com/image/hUWcJ)
+
+* Subject : 抽象主题，也就是被观察者的角色，抽象主题角色把所有观察者
+
+  对象的引用保存在一个集合里，每个主题都可以有任意数量的观察者，抽象主题提供一个借口，可以增加和删除观察者对象。
+
+* ConcreteSubject: 具体主题，改角色将有关状态存入具体观察者对象，在具体主题的内部状态发生改变时，给所有注册过的观察者发出通知，具体主题角色又叫做具体被观察者角色。
+* Observer: 抽象观察者，该角色实现抽象观察者角色所定义的更新接口，以便在主题的状态发生变化时更新自身的状态。
+
+## 实战
+
+需求：订阅某网站技术文章，有更新就推送。
+
+定义一个观察者对象 - 用户
+
+```java
+public class Coder implements Observer {
+    private String name;
+
+    public Coder(String name) {
+        this.name = name;
+    }
+
+
+    /**
+     * 有更新将执行
+     * @param o
+     * @param arg
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("o = [" + o + "], arg = [" + name + " " + (String) arg + "]");
+
+    }
+
+    @Override
+    public String toString() {
+        return "Coder{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+```
+
+定义被观察者对象 - 技术网站
+
+```java
+public class JueJ extends Observable {
+    /**
+     * 推送
+     * @param content
+     */
+    public void post(String content){
+        //标识状态或者内容需要发生改变
+        setChanged();
+        //通知所有订阅者
+        notifyObservers(content);
+    }
+}
+```
+
+测试：
+
+```java
+    @Test
+    public void testObserver(){
+        //创建被观察者--》技术网站
+        JueJ jueJ = new JueJ();
+
+        //创建观察者
+        Coder coderA = new Coder("A");
+        Coder coderB = new Coder("B");
+        Coder coderC = new Coder("C");
+
+        //产生订阅关系，加入被观察者列表中，有更新就推送给它们
+        jueJ.addObserver(coderA);
+        jueJ.addObserver(coderB);
+        jueJ.addObserver(coderC);
+
+        //有更新了，通知观察者们
+        jueJ.post("Dev_YK: 更新了一篇设计模式文章，点击进行查看。" );
+    }
+```
+
+Output:
+
+```java
+o = [com.devyk.android_dp_code.observer.JueJ@48533e64], arg = [C Dev_YK: 更新了一篇设计模式文章，点击进行查看。]
+o = [com.devyk.android_dp_code.observer.JueJ@48533e64], arg = [B Dev_YK: 更新了一篇设计模式文章，点击进行查看。]
+o = [com.devyk.android_dp_code.observer.JueJ@48533e64], arg = [A Dev_YK: 更新了一篇设计模式文章，点击进行查看。]
+```
+
+可以看到所有订阅了某技术网站的用户都收到了通知更新，一对多的订阅-发布系统就完成了。
+
+## 总结
+
+观察者模式主要的作用就是解耦，将观察者与被观察者完全隔离，只依赖于 Observe 和 Observable 抽象。
+
+**优点：**
+
+* 观察者和被观察者之间是抽象耦合，应对业务变化。
+* 增强系统灵活性，可扩展性。
+
+**缺点：**
+
+* 在应用观察者模式时需要考虑一下开发效率和运行效率问题，程序中包括一个被观察者、多个观察者、开发和调试等内容会比较复杂，而且在 Java 中消息的通知默认是顺序执行，一个观察者卡顿，会影响整体的执行效率，在这个情况下，一般考虑使用异步方式。
+
+[文章代码地址](https://github.com/yangkun19921001/AndroidDpCode)
+
+## 特别感谢
+
+[《 Android 源码设计模式解析与实战 》](https://item.jd.com/12113187.html)
+
+感谢你的阅读，谢谢！
+

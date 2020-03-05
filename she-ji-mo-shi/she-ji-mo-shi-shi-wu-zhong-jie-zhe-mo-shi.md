@@ -1,0 +1,320 @@
+# 设计模式 \(十五\) 中介者模式
+
+## 介绍
+
+中介者模式 \(Mediator Pattern\) 也称为调解者模式或调停者模式，Madiator 本身就有调停者和调解者的意思。在日常生活中调停者或调解者这个角色我们见得比较多的是 ”和事佬“，也就是说调解两个有争端的人的角色。
+
+## 定义
+
+中介者模式包装了一系列对象相互作用的方式，使得这些对象不必相互明显作用。从而使他们可以松散偶合。当某些对象之间的作用发生改变时，不会立即影响其他的一些对象之间的作用，保证这些作用可以彼此独立变化。中介者模式将多对多的相互作用转化为一对多的相互作用。中介者模式将对象的行为和协作抽象化，把对象在小尺度的行为上与其他对象的相互作用分开处理。
+
+## 使用场景
+
+当对象之间的交互操作很多且每个对象的行为操作都依赖彼此时，为防止在修改一个对象的行为时，同时涉及修改很多其他对象的行为，可采用中介者模式来解决紧耦合问题。该模式将对象之间的多对多变成一对多关系，中介者对象将系统从网状结构变成以调解者为中心的星形结构，达到降低系统的复杂性，提高可扩展性的作用。
+
+## UML 类图
+
+[![7e3e23444827e089062ff772db49ad8f.png](https://s5.ex2x.com/2019/09/13/7e3e23444827e089062ff772db49ad8f.png)](https://free.imgsha.com/i/voCJ0)
+
+* Mediator: 抽象中介者角色，定义了同事对象到中介者对象的接口，一般以抽象类的方式实现。
+* ConcreteMediator: 具体中介者角色，继承于抽象中介者，实现了父类定义的方法，它从具体的同事对象接收消息，向具体同事对象发出命令。
+* Colleague: 抽象同事类角色，定义了中介者对象的接口，它只知道中介者而不知道其它的同事对象。
+* ConcreteColleagueA/B: 具体同事类角色，继承于抽象同事类，每个具体同事类都知道本身在小范围内的行为，而不知道它在大范围内的目的。
+
+## 代码示例
+
+### 简单示例
+
+**中介抽象类:**
+
+```java
+public abstract class Mediator {
+    /**
+     * 具体同事类 A
+     */
+    protected ConcreteColleagueA concreteColleagueA;
+
+    /**
+     * 具体同事类 B
+     */
+    protected ConcreteColleagueB concreteColleagueB;
+
+    /**
+     * 抽象中介方法、子类实现
+     */
+    public abstract void  method();
+
+    public void setConcreteColleagueA(ConcreteColleagueA concreteColleagueA){
+        this.concreteColleagueA = concreteColleagueA;
+    }
+
+    public void setConcreteColleagueA(ConcreteColleagueB concreteColleagueB){
+        this.concreteColleagueB = concreteColleagueB;
+    }
+
+}
+```
+
+**具体中介者:**
+
+```java
+public class ConcreteMediator extends Mediator {
+    @Override
+    public void method() {
+        concreteColleagueA.action();
+        concreteColleagueB.action();
+    }
+}
+```
+
+**抽象同事:**
+
+```java
+public abstract class Colleague {
+    /**
+     * 中介者对象
+     */
+    protected Mediator mediator;
+
+    /**
+     * 同事角色具体行为，由子类实现
+     */
+    public abstract void  action();
+
+    public Colleague(Mediator mediator) {
+        this.mediator = mediator;
+    }
+}
+```
+
+**具体同事实现类A/B**
+
+```java
+public class ConcreteColleagueA extends Colleague {
+    public ConcreteColleagueA(Mediator mediator) {
+        super(mediator);
+    }
+
+    @Override
+    public void action() {
+        System.out.println("ConcreteColleagueA 将信息递交给中介者处理");
+
+    }
+}
+```
+
+```java
+public class ConcreteColleagueB extends Colleague {
+    public ConcreteColleagueB(Mediator mediator) {
+        super(mediator);
+    }
+
+    public void action() {
+        System.out.println("ConcreteColleagueB 将信息递交给中介者处理");
+    }
+}
+```
+
+**test**
+
+```java
+    @Test
+    public void testMediator(){
+        ConcreteMediator mediator = new ConcreteMediator();
+        mediator.setConcreteColleagueA(new ConcreteColleagueA(mediator));
+        mediator.setConcreteColleagueB(new ConcreteColleagueB(mediator));
+        mediator.method();
+    }
+```
+
+**output**
+
+```java
+ConcreteColleagueA 将信息递交给中介者处理
+ConcreteColleagueB 将信息递交给中介者处理
+```
+
+### 实战
+
+_需求:_ 用代码演示电脑中的主板怎么把 CPU、内存、显卡、IO 设备 等组合在一起的？用中介者模式
+
+**抽象中介类:**
+
+```java
+public abstract class Mediator {
+
+    /**
+     * 同事对象改变时通知中介者的方法
+     * 在同事对象改变时由中介者去通知其它同事对象
+     */
+    public abstract void changed(Colleague c);
+}
+```
+
+**具体抽象中介类:**
+
+```java
+public class MainBoard extends Mediator {
+
+    /**
+     * 光驱设备
+     */
+    private CDDevice cdDevice;
+    /**
+     * CPU
+     */
+    private CPU cpu;
+    /**
+     * 声卡设备
+     */
+    private SoundCard soundCard;
+    /**
+     * 光驱设备
+     */
+    private GraphicsCard graphicsCard;
+
+
+    @Override
+    public void changed(Colleague c) {
+        //如果是光驱读取了数据
+        if (c == cdDevice){
+            handleCD((CDDevice)c);
+        }
+
+        //如果 CPU 处理完数据
+        if (c == cpu){
+            handleCPU((CPU)c);
+        }
+
+    }
+
+    /**
+     * 处理 CPU 读取数据后与其它设备的交互
+     * @param cpu
+     */
+    private void handleCPU(CPU cpu) {
+        this.soundCard.soundPlay(cpu.getDataSound());
+        this.graphicsCard.videoPlay(cpu.getDataVideo());
+
+
+    }
+
+    /**
+     * 处理光驱读取数据后与其它设备的交互
+     * @param cdDevice
+     */
+    private void handleCD(CDDevice cdDevice) {
+        this.cpu.decodeData(cdDevice.read());
+    }
+
+
+    /**
+     * 设置 CPU
+     */
+    public  void  setCPU(CPU cpu){
+        this.cpu = cpu;
+    }
+
+    /**
+     * 设置 CD
+     */
+    public void  setCdDevice(CDDevice cdDevice){
+        this.cdDevice = cdDevice;
+    }
+
+    /**
+     * 设置声卡
+     */
+    public void setSoundCard(SoundCard soundCard){
+        this.soundCard = soundCard;
+    }
+
+    /**
+     * 设置显卡
+     */
+    public void setGraphicsCard(GraphicsCard graphicsCard){
+        this.graphicsCard = graphicsCard;
+    }
+}
+```
+
+**抽象同事:**
+
+```java
+public class CDDevice extends Colleague {
+    private String videoData;//视频数据
+    public CDDevice(Mediator mediator) {
+        super(mediator);
+    }
+
+    /**
+     * 读取视频数据
+     * @return
+     */
+    public String read(){
+        return videoData;
+    }
+
+    /**
+     * 加载视频数据
+     */
+    public void load(){
+        videoData = "视频数据,音频数据";
+        mediator.changed(this);
+    }
+}
+```
+
+cpu、GraphicsCard,SoundCard, 这几个实现都差不多就不在贴代码了。
+
+**操作类:**
+
+```java
+    @Test
+    public void testMediator2(){
+
+        //构造主板对象--也就是中介者
+        MainBoard mainBoard = new MainBoard();
+        //分别构造零部件
+        CPU cpu = new CPU(mainBoard);
+
+        CDDevice cdDevice = new CDDevice(mainBoard);
+
+        GraphicsCard graphicsCard = new GraphicsCard(mainBoard);
+
+        SoundCard soundCard = new SoundCard(mainBoard);
+
+        //将各个零部件安装到主板身上
+        mainBoard.setCdDevice(cdDevice);
+        mainBoard.setCPU(cpu);
+        mainBoard.setGraphicsCard(graphicsCard);
+        mainBoard.setSoundCard(soundCard);
+
+        //安装完成后，开始播放视频。
+        cdDevice.load();
+
+
+    }
+```
+
+**output:**
+
+```java
+音频 = [音频数据]
+视频 = [视频数据]
+```
+
+从上述程序演示中大家可以明白，中介者模式就是用来协调多个对象之间的交互，就像上面实例中的主板，如果没有主板这个中介者，那么计算机里的没一个零部件都要与其它零部件建立关联，比如 CPU 要与内存交互、CPU 要与显卡交互、CPU 要与 IO 设备交互等，这么一来就会构成一个错综复杂的网状图，而中介者模式的出现则是将这一个错综复杂的网状图编程一个结构清晰的星状图，其中心就是中介者。
+
+## 总结
+
+在面向对象的编程语言里，一个类必然会与其他类产生依赖关系，如果这种依赖关系如网状般错综复杂，那么必然会影响我们的代码执行效率，适当的使用中介者模式可以对这种依赖关系解耦使逻辑结构清晰，但是，如果几个类之间的依赖关系并不复杂，使用中介者模式反而使得原本不复杂的逻辑结构变得复杂，所以，我们在决定使用中介者模式之前要多考虑权衡利弊。
+
+[文章代码地址](https://github.com/yangkun19921001/AndroidDpCode)
+
+## 特别感谢
+
+[《 Android 源码设计模式解析与实战 》](https://item.jd.com/12113187.html)
+
+感谢你的阅读，谢谢！
+
