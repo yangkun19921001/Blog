@@ -25,6 +25,7 @@
     * [类加载器分类](#类加载器分类)
     * [双亲委派模型](#双亲委派模型)
     * [自定义类加载器实现](#自定义类加载器实现)
+    * [Android 类加载器与 Java 类加载器的对比](#Android 类加载器与 Java 类加载器的对比)
 * [参考资料](#参考资料)
 <!-- GFM-TOC -->
 
@@ -147,7 +148,6 @@ Java 虚拟机使用该算法来判断对象是否可被回收，GC Roots 一般
 - 方法区中的常量引用的对象
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/83d909d2-3858-4fe1-8ff4-16471db0b180.png" width="350px"> </div><br>
-
 ### 3. 方法区的回收
 
 因为方法区主要存放永久代对象，而永久代对象的回收率比新生代低很多，所以在方法区上进行回收性价比不高。
@@ -445,6 +445,8 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 ## 类的生命周期
 
+(Ps：这里要区别 类跟对象的生命周期)
+
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/335fe19c-4a76-45ab-9320-88c90d6a0d7e.png" width="600px"> </div><br>
 包括以下 7 个阶段：
 
@@ -458,7 +460,7 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 ## 类加载过程
 
-包含了加载、验证、准备、解析和初始化这 5 个阶段。
+包含了加载、验证、准备、解析和初始化这 5 个阶段。也可以参考[面试官：请你谈谈Java的类加载过程](https://darylliu.github.io/archives/1e480d2f.html)
 
 ### 1. 加载
 
@@ -610,6 +612,8 @@ System.out.println(ConstClass.HELLOWORLD);
 <div data="modify <--"></div>
 ## 双亲委派模型
 
+[双亲委派模型，类的加载机制，搞定大厂高频面试题](https://juejin.im/post/5d27dc7de51d4510a37bac85)
+
 应用程序是由三种类加载器互相配合从而实现类加载，除此之外还可以加入自己定义的类加载器。
 
 下图展示了类加载器之间的层次关系，称为双亲委派模型（Parents Delegation Model）。该模型要求除了顶层的启动类加载器外，其它的类加载器都要有自己的父类加载器。这里的父子关系一般通过组合关系（Composition）来实现，而不是继承关系（Inheritance）。
@@ -617,13 +621,15 @@ System.out.println(ConstClass.HELLOWORLD);
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/0dd2d40a-5b2b-4d45-b176-e75a4cd4bdbf.png" width="500px"> </div><br>
 ### 1. 工作过程
 
-一个类加载器首先将类加载请求转发到父类加载器，只有当父类加载器无法完成时才尝试自己加载。
+所谓双亲委派是指每次收到类加载请求时，先将请求委派给父类加载器完成（所有加载请求最终会委派到顶层的Bootstrap ClassLoader加载器中），如果父类加载器无法完成这个加载（该加载器的**搜索范围**中没有找到对应的类），子类尝试自己加载， 如果都没加载到，则会抛出 ClassNotFoundException 异常。 看到这里其实就解释了文章开头提出的第一个问题，父加载器已经加载了JDK 中的 String.class 文件，所以我们不能定义同名的 String java 文件。
+
+
 
 ### 2. 好处
 
-使得 Java 类随着它的类加载器一起具有一种带有优先级的层次关系，从而使得基础类得到统一。
+- 问题:为什么我们不能定义同名的 **String** 的 java 文件？
 
-例如 java.lang.Object 存放在 rt.jar 中，如果编写另外一个 java.lang.Object 并放到 ClassPath 中，程序可以编译通过。由于双亲委派模型的存在，所以在 rt.jar 中的 Object 比在 ClassPath 中的 Object 优先级更高，这是因为 rt.jar 中的 Object 使用的是启动类加载器，而 ClassPath 中的 Object 使用的是应用程序类加载器。rt.jar 中的 Object 优先级更高，那么程序中所有的 Object 都是这个 Object。
+> 因为这样可以避免重复加载，当父亲已经加载了该类的时候，就没有必要 ClassLoader 再加载一次。考虑到安全因素，我们试想一下，如果不使用这种委托模式，那我们就可以随时使用自定义的 String 来动态替代java核心api中定义的类型，这样会存在非常大的安全隐患，而双亲委托的方式，就可以避免这种情况，因为 String 已经在启动时就被引导类加载器（Bootstrcp ClassLoader）加载，所以用户自定义的 ClassLoader 永远也无法加载一个自己写的 String，除非你改变 JDK 中 ClassLoader 搜索类的默认算法。
 
 ### 3. 实现
 
@@ -721,6 +727,10 @@ public class FileSystemClassLoader extends ClassLoader {
     }
 }
 ```
+
+## Android 类加载器与 Java 类加载器的对比
+
+- https://juejin.im/post/5d68f7a46fb9a06b0202d804#heading-20
 
 # 参考资料
 
