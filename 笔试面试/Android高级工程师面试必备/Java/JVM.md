@@ -25,7 +25,7 @@
     * [类加载器分类](#类加载器分类)
     * [双亲委派模型](#双亲委派模型)
     * [自定义类加载器实现](#自定义类加载器实现)
-    * [Android 类加载器与 Java 类加载器的对比](#Android 类加载器与 Java 类加载器的对比)
+    * [Android类加载器与Java类加载器的对比](#Android类加载器与Java类加载器的对比)
 * [参考资料](#参考资料)
 <!-- GFM-TOC -->
 
@@ -381,6 +381,11 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 ## 内存分配策略
 
+**可参考部分优化文章:**
+
+- [浅析JVM内存分区](https://juejin.im/post/5a421479518825519408e0f7)
+- 
+
 ### 1. 对象优先在 Eden 分配
 
 大多数情况下，对象在新生代 Eden 上分配，当 Eden 空间不够时，发起 Minor GC。
@@ -442,6 +447,10 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 # 四、类加载机制
 
 类是在运行期间第一次使用时动态加载的，而不是一次性加载所有类。因为如果一次性加载，那么会占用很多的内存。
+
+**推荐阅读:**
+
+- [深入理解JVM类加载机制](https://juejin.im/post/5a1d5f286fb9a045132a7100)
 
 ## 类的生命周期
 
@@ -589,6 +598,10 @@ System.out.println(ConstClass.HELLOWORLD);
 
 ## 类与类加载器
 
+**推荐阅读:**
+
+- [深入理解JVM类加载器](https://juejin.im/post/5a1e76ff51882531b15b4112)
+
 两个类相等，需要类本身相等，并且使用同一个类加载器进行加载。这是因为每一个类加载器都拥有一个独立的类名称空间。
 
 这里的相等，包括类的 Class 对象的 equals() 方法、isAssignableFrom() 方法、isInstance() 方法的返回结果为 true，也包括使用 instanceof 关键字做对象所属关系判定结果为 true。
@@ -728,7 +741,7 @@ public class FileSystemClassLoader extends ClassLoader {
 }
 ```
 
-## Android 类加载器与 Java 类加载器的对比
+## Android类加载器与Java类加载器的对比
 
 - https://juejin.im/post/5d68f7a46fb9a06b0202d804#heading-20
 
