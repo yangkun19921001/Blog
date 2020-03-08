@@ -30,7 +30,7 @@
   - [类加载过程](https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B)
   - [类加载器](https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/类加载器)
   - [**大白话带你认识JVM**](https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/jvm/%5B%E5%8A%A0%E9%A4%90%5D%E5%A4%A7%E7%99%BD%E8%AF%9D%E5%B8%A6%E4%BD%A0%E8%AE%A4%E8%AF%86JVM.md)
-- [Java 进阶核心技术精讲(一) (ps: 需要购买)](https://time.geekbang.org/column/article/6478)
+- [Java 进阶核心技术面试精讲(一) (ps: 需要购买)](https://time.geekbang.org/column/article/6478)
 - [Java 进阶源码解析专题(二) （ps: 需要购买 ￥49）](http://www.imooc.com/read/47/article/847)
 
 ## Android
