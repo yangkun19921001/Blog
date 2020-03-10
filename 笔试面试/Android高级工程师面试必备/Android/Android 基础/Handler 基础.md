@@ -97,3 +97,35 @@ handler.postDelay并不是先等待一定的时间再放入到MessageQueue中，
 - HandlerThread优点是异步不会堵塞，减少对性能的消耗。
 - HandlerThread缺点是不能同时继续进行多任务处理，要等待进行处理，处理效率较低。
 - HandlerThread与线程池不同，HandlerThread是一个串队列，背后只有一个线程。
+
+
+
+#### 4. **Handler 如何防止内存泄漏？**
+
+除了写弱引用这个方法后，还有一个就是 handler.removeCallbacksAndMessages(null);，就
+
+是移除所有的消息和回调，简单一句话就是清空了消息队列。注意，不要以为你 post 的是
+
+个 Runnable 或者只是 sendEmptyMessage。你可以看一下源码，在 handler 里面都是会把
+
+这些转成正统的 Message，放入消息队列里面，所以清空队列就意味着这个 Handler 直接被
+
+打成原型了，当然也就可以回收了。
+
+
+
+####5. 主线程的死循环是否一致耗费 CPU 资源？
+
+【参考】
+
+在主线程使用 Looper.loop 可以保证主线程一直在运行，事实上，在 Looper.loop 死循环之
+
+前，已经创建了一个 Binder 线程: thread.attach 会建立 Binder 通道，创建新线程。attach(false)会创建一个 ApplicaitonThread的 Binder 线程，用于接受 AMS 发来的消息，该 Binder 线程通过 ActivityThread 的 H 类型Handler 将消息发送给主线程。ActivityThread 并不是线程类，只是它运行在主线程。Handler 底层采用 Linux 的 pipe/epoll 机制，MessageQueue 没有消息的时候，便阻塞在
+
+Looper.mQueue.next 方法中，此时主线程会释放 CPU 资源进入休眠，直到下个事件到达，当有新消息的时候，通过往 pipe 管道写数据来唤醒主线程工作。所以主线程大多数时候处于休眠状态，不会阻塞。
+
+
+
+#### 6. **Handler 主线程向子线程发消息**
+
+- 【参考】https://www.jianshu.com/p/34fb9f9815f4

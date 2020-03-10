@@ -253,3 +253,196 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
 ####15. 横竖屏切换时候Activity的生命周期
 
 不设置Activity的android:configChanges时，切屏会重新回调各个生命周期，切横屏时会执行一次，切竖屏时会执行两次。 设置Activity的android:configChanges=”orientation”时，切屏还是会调用各个生命周期，切换横竖屏只会执行一次 设置Activity的android:configChanges=”orientation |keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
+
+
+
+####16. onRestart 什么时候调用？
+
+【参考】
+
+1、按下 home 键执行，再次打开这个 demo 执行；onRestart()--->onStart()--->onResume()
+
+三个方法。
+
+2、点击界面的 btn，跳转到另一个 Activity1，从 Activity1 返回，会执行如下图 2；onRestart()-
+
+-->onStart()--->onResume()三个方法
+
+3、切换到其他的应用，从其他应用切换回来。onRestart()--->onStart()--->onResume()三个
+
+方法
+
+
+
+####17. onSaveInstanceState 和onRestoreInstanceState 调用时机
+
+【参考】
+
+03-09 12:14:32.529 2298-2298/com.example.myapplication I/MY_TEST: onPause
+
+03-09 12:14:32.556 2298-2298/com.example.myapplication I/MY_TEST: onCreate2
+
+03-09 12:14:32.557 2298-2298/com.example.myapplication I/MY_TEST: onStart2
+
+03-09 12:14:32.557 2298-2298/com.example.myapplication I/MY_TEST: onResume2
+
+03-09 12:14:32.981 2298-2298/com.example.myapplication I/MY_TEST: onSaveInstanceState
+
+一个参数
+
+03-09 12:14:32.981 2298-2298/com.example.myapplication I/MY_TEST: onStop
+
+分割线-------------------------------------------------------------------------
+
+\---------------------
+
+03-09 12:15:28.715 2298-2298/com.example.myapplication I/MY_TEST: onPause2
+
+03-09 12:15:28.763 2298-2298/com.example.myapplication I/MY_TEST: onCreate
+
+03-09 12:15:28.764 2298-2298/com.example.myapplication I/MY_TEST: onStart
+
+03-09 12:15:28.764 2298-2298/com.example.myapplication I/MY_TEST: 
+
+onRestoreInstanceState
+
+03-09 12:15:28.767 2298-2298/com.example.myapplication I/MY_TEST: onActivityResult
+
+03-09 12:15:28.767 2298-2298/com.example.myapplication I/MY_TEST: onResume
+
+03-09 12:15:29.141 2298-2298/com.example.myapplication I/MY_TEST: onStop2
+
+03-09 12:15:29.141 2298-2298/com.example.myapplication I/MY_TEST: onDestroy2
+
+注意点：
+
+1.跳转过程中，先执行 1 的 onpause，等等 onstop，等待 2 的 onresume 执行完之后，再执
+
+行 1 的 onstop、ondestory
+
+2.onSaveInstanceState 每次隐藏 activity 都会在 onpause 之后执行（即使 activity 没有销毁也
+
+会执行）
+
+3.onRestoreInstance 在 onstart 之后，onActivityResult 之前执行
+
+
+
+#### 18. **Activity 与 Service 通信的四种方式**
+
+【参考】
+
+1、Binder
+
+2、Intent3、接口 Interface
+
+4、Broadcast 广播接收
+
+http://itindex.net/detail/45126-android-service-activity
+
+
+
+####19. **Activity 之间的几种通信方式**
+
+【参考】
+
+1、Intent
+
+2、借助类的静态变量
+
+3、借助全局变量/Application
+
+4、借助外部工具
+
+5、 借助 SharedPreference 
+
+6、使用 Android 数据库 SQLite 
+
+7、 赤裸裸的使用 File 
+
+8、Android 剪切板
+
+9、借助 Service
+
+https://blog.csdn.net/cyanchen666/article/details/81982562
+
+
+
+####20. AlertDialog，Toast 对 Activity 生命周期的影响
+
+【参考】：无论 Dialog 弹出覆盖页面，对 Activity 生命周期没有影响，只有再启动另外一个
+
+Activity 的时候才会进入 onPause 状态，而不是想象中的被覆盖或者不可见，同时通过
+
+AlertDialog 源 码 或 者 Toast 源 码 我 们 都 可 以 发 现 它 们 实 现 的 原 理 都 是
+
+windowmanager.addView();来添加的， 它们都是一个个 view ,因此不会对 activity 的生命周
+
+期有任何影响。
+
+https://blog.csdn.net/cloud_castle/article/details/56011562
+
+
+
+####21. **onCreate 中的 Bundle 有什么用？**
+
+【参考】 Activity 中有一个名称叫 onCreate 的方法。该方法是在 Activity 创建时被系统调
+
+用，是一个 Activity 生命周期的开始。可是有一点容易被忽视，就是 onCreate 方法的参数
+
+saveInsanceState。一般的程序开发中，很少用到这个参数。
+
+onCreate 方法的完整定义如下:
+
+```java
+public void onCreate(Bundle saveInsanceState){super.onCreate(saveInsanceState);
+
+}
+```
+
+Bundle 类型的数据与 Map 类型的数据相似，都是以 key-value 的形式存储数据的。
+
+从字面上看 saveInsanceState，是保存实例状态的。实际上，saveInsanceState 也就是保存
+
+Activity 的状态的。那么，saveInsanceState 中的状态数据是从何处而来的呢？下面我们介绍
+
+Activity 的另一个方法 saveInsanceState。onsaveInsanceState 方法是用来保存 Activity 的状态的。当一个 Activity 在生命周期结束前，会调用该方法保存状态。
+
+如下所示：
+
+```java
+public void onSaveInsanceState(Bundle saveInsanceState){
+
+super.onSaveInsanceState(saveInsanceState);
+
+}
+```
+
+在实际应用中，当一个 Activity 结束前，如果需要保存状态，就在 onsaveInsanceState 中，
+
+将状态数据以 key-value 的形式放入到 saveInsanceState 中。这样，当一个 Activity 被创建
+
+时，就能从 onCreate 的参数 saveInsanceState 中获得状态数据。
+
+状态这个参数在实现应用中有很大的用途，比如：一个游戏在退出前，保存一下当前游戏运
+
+行的状态，当下次开启时能接着上次的继续玩下去。再比如：电子书程序，当一本小说被阅
+
+读到第 199 页后退出了（不管是内存不足还是用户自动关闭程序），当下次打开时，读者可
+
+能已忘记了上次已阅读到第几页了，但是，读者想接着上次的读下去。如果采用
+
+saveInstallState 参数，就很容易解决上述问题。
+
+https://blog.csdn.net/liubin8095/article/details/9328563 
+
+
+
+####22. onSaveInstanceState() 与 onRestoreIntanceState()
+
+Activity的 onSaveInstanceState() 和 onRestoreInstanceState()并不是生命周期方法，它们不同于 onCreate()、onPause()等生命周期方法，它们并不一定会被触发。当应用遇到意外情况（如：内存不足、用户直接按Home键）由系统销毁一个Activity时，onSaveInstanceState() 会被调用。但是当用户主动去销毁一个Activity时，例如在应用中按返回键，onSaveInstanceState()就不会被调用。因为在这种情况下，用户的行为决定了不需要保存Activity的状态。通常onSaveInstanceState()只适合用于保存一些临时性的状态，而onPause()适合用于数据的持久化保存。 在activity被杀掉之前调用保存每个实例的状态,以保证该状态可以在onCreate(Bundle)或者onRestoreInstanceState(Bundle) (传入的Bundle参数是由onSaveInstanceState封装好的)中恢复。这个方法在一个activity被杀死前调用，当该activity在将来某个时刻回来时可以恢复其先前状态。 例如，如果activity B启用后位于activity A的前端，在某个时刻activity A因为系统回收资源的问题要被杀掉，A通过onSaveInstanceState将有机会保存其用户界面状态，使得将来用户返回到activity A时能通过onCreate(Bundle)或者onRestoreInstanceState(Bundle)恢复界面的状态
+
+[深入理解](https://www.jianshu.com/p/89e0a7533dbe)
+
+
+

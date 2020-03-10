@@ -32,9 +32,7 @@ bitmap recycler引发的问题：当图像的旋转角度小余两个像素点�
 
 #### 3. 如何计算一个Bitmap占用内存的大小，怎么保证加载Bitmap不产生内存溢出？
 
-```
-
-```
+[一般我们所说的 Bitmap 究竟占用多大内存](https://blog.csdn.net/lsyz0021/article/details/51356670)
 
 注：这里inDensity表示目标图片的dpi（放在哪个资源文件夹下），inTargetDensity表示目标屏幕的dpi，所以你可以发现inDensity和inTargetDensity会对Bitmap的宽高进行拉伸，进而改变Bitmap占用内存的大小。
 
@@ -45,3 +43,46 @@ getByteCount()：API12 加入，代表存储 Bitmap 的像素需要的最少内�
 为了保证在加载Bitmap的时候不产生内存溢出，可以使用BitmapFactory进行图片压缩，主要有以下几个参数：
 
 BitmapFactory.Options.inPreferredConfig：将ARGB_8888改为RGB_565，改变编码方式，节约内存。 BitmapFactory.Options.inSampleSize：缩放比例，可以参考Luban那个库，根据图片宽高计算出合适的缩放比例。 BitmapFactory.Options.inPurgeable：让系统可以内存不足时回收内存。
+
+
+
+#### 4. **如何获取一个图片的宽高？**
+
+```java
+public static int[] getImageWidthHeight(String path){
+BitmapFactory.Options options = new BitmapFactory.Options();
+/**
+* 最关键在此，把 options.inJustDecodeBounds = true;
+* 这里再 decodeFile()，返回的 bitmap 为空，但此时调用 options.outHeight 时，已经
+包含了图片的高了
+*/
+options.inJustDecodeBounds = true;
+Bitmap bitmap = BitmapFactory.decodeFile(path, options); // 此时返回的 bitmap 为 null
+/**
+*options.outHeight 为原始图片的高
+*/
+return new int[]{options.outWidth,options.outHeight};
+}
+```
+
+通过 BitmapFactory 从不同位置获取 Bitmap：
+
+```java
+1.资源文件(drawable/mipmap/raw)
+BitmapFactory.decodeResource(getResources(), 
+R.mipmap.slim_lose_weight_plan_copenhagen,options);
+2.资源文件(assets)
+InputStream is = getActivity().getAssets().open("bitmap.png");
+BitmapFactory.decodeStream(is);
+3.内存卡文件
+bitmap = BitmapFactory.decodeFile("/sdcard/bitmap.png");
+4.网络文件
+bitmap = BitmapFactory.decodeStream(is);
+可根据 BitmapFactory 获取图片时传入 option，通过上述方法获取图片的宽高
+```
+
+
+
+####5. **一张图片加载到手机内存中真正的大**小是怎么计算的
+
+参考】 https://www.cnblogs.com/dasusu/p/9789389.html

@@ -118,3 +118,126 @@ IntentService是一种特殊的Service，它继承了Service并且它是一个�
         android:enabled="true" />
 ```
 
+
+
+####8. **onStartCommand 的几种模式**
+
+- START_NOT_STICKY
+
+  如果返回 START_NOT_STICKY，表示当 Service 运行的进程被 Android 系统强制杀掉之后，
+
+  不会重新创建该 Service。当然如果在其被杀掉之后一段时间又调用了 startService，那么该
+
+  Service 又将被实例化。那什么情境下返回该值比较恰当呢？
+
+  如果我们某个 Service 执行的工作被中断几次无关紧要或者对 Android 内存紧张的情况下需
+
+  要被杀掉且不会立即重新创建这种行为也可接受，那么我们便可将 onStartCommand 的返
+
+  回值设置为 START_NOT_STICKY。
+
+  举个例子，某个 Service 需要定时从服务器获取最新数据：通过一个定时器每隔指定的 N 分
+
+  钟让定时器启动 Service 去获取服务端的最新数据。当执行到 Service 的 onStartCommand
+
+  时，在该方法内再规划一个 N 分钟后的定时器用于再次启动该 Service 并开辟一个新的线程
+
+  去执行网络操作。假设Service在从服务器获取最新数据的过程中被Android系统强制杀掉，
+
+  Service 不会再重新创建，这也没关系，因为再过 N 分钟定时器就会再次启动该 Service 并重
+
+  新获取数据。
+
+
+
+- START_STICKY
+
+  如果返回 START_STICKY，表示 Service 运行的进程被 Android 系统强制杀掉之后，Android
+
+  系统会将该 Service 依然设置为 started 状态（即运行状态），但是不再保存 onStartCommand
+
+  方法传入的 intent 对象，然后 Android 系统会尝试再次重新创建该 Service，并执行
+
+  onStartCommand 回调方法，但是 onStartCommand 回调方法的 Intent 参数为 null，也就是
+
+  onStartCommand 方法虽然会执行但是获取不到 intent 信息。如果你的 Service 可以在任意
+
+  时刻运行或结束都没什么问题，而且不需要 intent 信息，那么就可以在 onStartCommand 方
+
+  法中返回 START_STICKY，比如一个用来播放背景音乐功能的 Service 就适合返回该值。
+
+  
+
+- START_REDELIVER_INTENT
+
+  如果返回 START_REDELIVER_INTENT，表示 Service 运行的进程被 Android 系统强制杀掉之
+
+  后，与返回 START_STICKY 的情况类似，Android 系统会将再次重新创建该 Service，并执行
+
+  onStartCommand 回调方法，但是不同的是，Android 系统会再次将 Service 在被杀掉之前
+
+  最后一次传入 onStartCommand 方法中的 Intent 再次保留下来并再次传入到重新创建后的
+
+  Service 的 onStartCommand 方法中，这样我们就能读取到 intent 参数。只要返回
+
+  START_REDELIVER_INTENT，那么 onStartCommand 重的 intent 一定不是 null。如果我们的
+
+  Service 需要依赖具体的 Intent 才能运行（需要从 Intent 中读取相关数据信息等），并且在强
+
+  制销毁后有必要重新创建运行，那么这样的 Service 就适合返回 START_REDELIVER_INTENT
+
+
+
+#### 9. **Service 和 IntentService 的区别？**
+
+【参考】：
+
+- 1、IntentService 是继承并处理异步请求的一个类，在 IntentService 内有一个工作
+
+  线程来处理耗时操作，启动 IntentService 的方式和启动传统的 Service 一样，同时，当任务
+
+  执行完后，IntentService 会自动停止，而不需要我们手动去控制或 stopSelf()。另外，可以启
+
+  动 IntentService 多次 ，而 每 一个 耗时 操作 会以工 作 队列 的方 式 在 IntentService 的
+
+  onHandleIntent 回调方法中执行，并且，每次只会执行一个工作线程，执行完第一个再执行
+
+  第二个，以此类推。
+
+- 2、子类需继承 IntentService 并且实现里面的 onHandlerIntent 抽象方法来处理 intent 类型
+
+  的任务请求。
+
+- 3、子类需要重写默认的构造方法，且在构造方法中调用父类带参数的构造方法。
+
+- 4、IntentService 类内部利用 HandlerThread+Handler 构建了一个带有消息循环处理机制的
+
+  后台工作线程，客户端只需调用 Content#startService(Intent)将 Intent 任务请求放入后台工
+
+  作队列中，且客户端无需关注服务是否结束，非常适合一次性的后台任务。比如浏览器下载
+
+  文件，退出当前浏览器之后，下载任务依然存在后台，直到下载文件结束，服务自动销毁。
+
+  只要当前 IntentService 服务没有被销毁，客户端就可以同时投放多个 Intent 异步任务请求，
+
+  IntentService 服务端这边是顺序执行当前后台工作队列中的 Intent 请求的，也就是每一时刻
+
+  只能执行一个 Intent 请求，直到该 Intent 处理结束才处理下一个 Intent。因为 IntentService
+
+  类内部利用 HandlerThread+Handler 构建的是一个单线程来处理异步任务。
+
+
+
+#### 10 .**Service 和 Activity 通信**
+
+【参考】
+
+Activity 调用 bindService (Intent service, ServiceConnection conn, int flags)方法，得到 Service
+
+对象的一个引用，这样 Activity 可以直接调用到 Service 中的方法，如果要主动通知 Activity，
+
+我们可以利用回调方法
+
+Service 向 Activity 发送消息，可以使用广播，当然 Activity 要注册相应的接收器。比如 Service
+
+要向多个 Activity 发送同样的消息的话，用这种方法就更好
