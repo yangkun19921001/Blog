@@ -1,0 +1,120 @@
+#性能优化
+
+## 启动
+
+- [支付宝客户端架构解析：Android 客户端启动速度优化之「垃圾回收」](https://juejin.im/post/5be1077d518825171140dbfa)
+- [Android App 启动优化全记录](https://androidperformance.com/2019/11/18/Android-App-Lunch-Optimize/)
+- [Android 中如何计算 App 的启动时间](https://androidperformance.com/2015/12/31/How-to-calculation-android-app-lunch-time/)
+- [都9102年了，Android 冷启动优化除了老三样还有哪些新招？](https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650829097&idx=2&sn=e59841d4b1ed7e12a30e29ec51072d70&chksm=80b7a5b7b7c02ca184e0c06289d90823d589e738c55712318875f51e4aeb8646294b8d426299&mpshare=1&scene=1&srcid=&sharer_sharetime=1571275213308&sharer_shareid=60bd7acea7881a97fbf9a6126d3e88d3#rd)
+- [支付宝 App 构建优化解析：通过安装包重排布优化 Android 端启动性能](https://mp.weixin.qq.com/s/79tAFx6zi3JRG-ewoapIVQ)
+- [Redex 初探与 Interdex：Andorid 冷启动优化](https://mp.weixin.qq.com/s/Bf41Kez_OLZTyty4EondHA?)
+- [Android性能优化笔记（一）——启动优化](https://juejin.im/post/5c21ea325188254eaa5c45b1#heading-5)
+- [抖音研发实践：基于二进制文件重排的解决方案 APP启动速度提升超15%](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247485101&idx=1&sn=abbbb6da1aba37a04047fc210363bcc9&chksm=e9d0cd4fdea7445989cf26623a16fc8ce2876bf3bda95a5532bb0e5e5b1420765653df0b94d1&mpshare=1&scene=1&srcid=&sharer_sharetime=1565403851018&sharer_shareid=60bd7acea7881a97fbf9a6126d3e88d3#rd)
+- [爱奇艺Android客户端启动优化与分析](https://mp.weixin.qq.com/s?__biz=MzI4MTQyNDg3Mg==&mid=2247485301&idx=2&sn=bb1e9c17b705d0dce176f127e539dd97&chksm=eba821f2dcdfa8e4890696f0870a6f48306c0bdb7bffaab146f7250446494470245647a4eb09&mpshare=1&scene=1&srcid=0114JKmlCgbw5D3pMso2K2i8#rd)
+
+## 内存
+
+- [我这样减少了26.5M Java内存！](https://mp.weixin.qq.com/s?__biz=MzA3NjA3NTI5Mg==&mid=2656330117&idx=1&sn=a304224af107ab97a6dfc8e04e153bef&chksm=84c619f6b3b190e08796ba9448d8e23e92b9977e1c12845457b27b3cb6e824d455ab7759e400&scene=21#wechat_redirect)
+- [微信 Android 终端内存优化实践](https://mp.weixin.qq.com/s/KtGfi5th-4YHOZsEmTOsjg)
+- [Android 中低内存对性能的影响](https://androidperformance.com/2019/09/18/Android-Jank-Due-To-Low-Memory/)
+- [Low RAM Configuration](https://source.android.com/devices/tech/perf/low-ram)
+- [Linux Swap 与 Zram 详解](http://www.tinylab.cn/linux-swap-and-zramfs/#zram-)
+- [Android 加载不同 DPI 资源与内存消耗间的关系](http://www.tinylab.cn/android-loading-a-different-relationship-between-dpi-and-memory-consumption-of-resources/)
+- [ZRAM SWAP 内存管理讲解](https://nekosc.com/technology/zram.html)
+- [Android OOM 案例分析](https://tech.meituan.com/oom_analysis.html)
+- [Android 代码内存优化建议-Android 资源篇](https://androidperformance.com/2015/07/20/Android-Performance-Memory-AndroidResource/)
+- [Android 代码内存优化建议-Android 官方篇](https://androidperformance.com/2015/07/20/Android-Performance-Memory-Google/)
+- [Android 代码内存优化建议-Java 官方篇](https://androidperformance.com/2015/07/20/Android-Performance-Memory-Java/)
+- [Android 内存优化之一：MAT 使用入门](https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/)
+- [Android 内存优化之二：MAT 使用进阶](https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT-Pro/)
+- [Android 内存优化之三：打开 MAT 中的 Bitmap 原图](https://androidperformance.com/2015/04/11/AndroidMemory-Open-Bitmap-Object-In-MAT/)
+- [Android 代码内存优化建议-OnTrimMemory 优化](https://androidperformance.com/2015/07/20/Android-Performance-Memory-onTrimMemory/)
+- [Android LowMemoryKiller原理分析](http://gityuan.com/2016/09/17/android-lowmemorykiller/)
+- [Android 匿名共享内存（Ashmem）原理](https://juejin.im/post/59e818bb6fb9a044fd10de38)
+- [郝健: Linux内存管理学习笔记-第1节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664286&idx=1&sn=370af253ab45e8ce6da7c7eaeae0fbd1&chksm=810f3743b678be55df8f08dd554586e7e6a4e93fe61a9c557f5b161a6242eee6cd463f68a7e9&mpshare=1&scene=1&srcid=0425PBKSCz1pnccS17NcC4GX%23rd)
+- [郝健: Linux内存管理学习笔记-第2节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664286&idx=2&sn=d6f22ef91a616e8e9232217e6dea96d4&chksm=810f3743b678be559350754a23bae993303f785ab9a46e71c09dc52ac980dd53b0d8ea7d2892&mpshare=1&scene=1&srcid=0425t2vpFk5Q1h02R7jrapFy%23rd)
+- [郝健: Linux内存管理学习笔记-第3节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664286&idx=3&sn=9124b05c129eedc47e6dd222779a4ea6&chksm=810f3743b678be556d267e68102911aaaa68a31299705c5714a184e97478f45c8aa69cb96472&mpshare=1&scene=1&srcid=0425yjP3kUsqYPi4WgBMNs0q%23rd)
+- [郝健: Linux内存管理学习笔记-第4节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664305&idx=1&sn=4f6de1dedec10704704ece849d395525&chksm=810f376cb678be7a7a18a7a3626615e5b8ecedae737a3f18d01db6a1af59cc04529832d1f7cb&mpshare=1&scene=1&srcid=0425iqjnsJkZEnueYQGAhWkj%23rd)
+- [郝健: Linux内存管理学习笔记-第5节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664329&idx=1&sn=6b7841d49a5ddff8383097a3c60490e9&chksm=810f3494b678bd82fa38e95fa07e411820499f5a4a772ac60a9ade35bde48c248a30929758a1&mpshare=1&scene=1&srcid=0425aPqzRj0bES2nCueOQMqb%23rd)
+- [郝健: Linux内存管理学习笔记-第6节课](https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652664344&idx=1&sn=e5975e775e25e2ad1612c9dda5df52f4&chksm=810f3485b678bd933fa0c4a5bcad4298ae797724614018933f426a53b952d130557badd19518&mpshare=1&scene=1&srcid=04262p3N4EDsCVq23hxqLteY%23rd)
+- [Manage your app’s memory](https://developer.android.google.cn/topic/performance/memory)
+- [Overview of memory management](https://developer.android.google.cn/topic/performance/memory-overview)
+- [Linux 查看进程消耗内存情况总结](https://mp.weixin.qq.com/s?__biz=MjM5NzMyMjAwMA==&mid=2651481746&idx=1&sn=17ffd1a167e6cd4abb71ef84a1d78dac&chksm=bd250aed8a5283fb9a09a166b58606dc7bccf03eef3e28594470a84f94ef4db1b0c2cc5e5fb6&mpshare=1&scene=1&srcid=0916ILFD69CAZIwr7fzDjip8%23rd)
+- [一次过程Android平台native heap内存泄露的追查过程](https://blog.csdn.net/mychen/article/details/80001687)
+- [浅谈Cache Memory](http://www.wowotech.net/memory_management/458.html)
+- [Bitmap优化详谈](https://juejin.im/post/5bfbd5406fb9a049be5d2a20)
+- [探索 Android 内存优化方法](https://mp.weixin.qq.com/s/EerrwaRGdTkOFPLrg8_-oQ)
+
+## 耗电
+
+- [Android性能优化系列之电量优化](https://blog.csdn.net/u012124438/article/details/74617649)
+- [大众点评App的短视频耗电量优化实战](https://tech.meituan.com/Dianping_Shortvideo_Battery_TestCase.html)
+
+## 稳定流畅
+
+- [Android 中的卡顿丢帧原因概述 - 方法论](https://www.androidperformance.com/2019/09/05/Android-Jank-Debug/)
+- [Android 中的卡顿丢帧原因概述 - 系统篇](https://www.androidperformance.com/2019/09/05/Android-Jank-Due-To-System/)
+- [Android 中的卡顿丢帧原因概述 - 应用篇](https://www.androidperformance.com/2019/09/05/Android-Jank-Due-To-App/)
+- [Android 平台应用宝和讯飞输入法无障碍服务导致的全局卡顿分析](https://androidperformance.com/2019/01/21/android-performance-case-jank-accessbility/)
+- [那些年我们用过的显示性能指标](http://blog.csdn.net/tencent_bugly/article/details/51354517)
+- [Android 流畅度检测原理简析](https://juejin.im/post/5ae98d33518825670b33e5e6)
+- [Android JankTracker 原理解析](https://blog.csdn.net/msf568834002/article/details/79015497)
+- [彻底理解安卓应用无响应机制](http://gityuan.com/2019/04/06/android-anr/)
+- [应用与系统稳定性第一篇—ANR问题分析的一般套路](https://www.jianshu.com/p/18f16aba79dd)
+- [应用与系统稳定性第二篇—ANR的监测与信息采集](https://www.jianshu.com/p/ac545e10e39e)
+- [应用与系统稳定性第三篇—FD泄露问题漫谈](https://www.jianshu.com/p/1f9cff12b84f)
+- [应用与系统稳定性第四篇—单线程导致的空指针问题分析](https://www.jianshu.com/p/3017487b881f)
+- [应用与系统稳定性第五篇—Watchdog原理和问题分析](https://www.jianshu.com/p/f2713f371589)
+- [应用与系统稳定性第六篇—JVM垃圾回收之finalize执行时引起timed out 闪退分析](https://www.jianshu.com/p/e398e450c597)
+- [应用与系统稳定性第七篇— 用Asan 提前解决NDK疑难crash](https://www.jianshu.com/p/2addc08cb84b)
+
+## 浏览器
+
+- 浏览器相关
+
+## 网络
+
+- [腾讯TMQ团队移动App的网络优化：24小时流量优化到原来15%历程](http://chuansong.me/n/1365714451480)
+
+##日志
+
+- 日志性能优化
+
+## View
+
+- 优化自定义view百度-乐视-小米
+- TextView 性能问题
+
+## 虚拟机
+
+- [Android性能优化之虚拟机调优](http://weishu.me/2016/12/23/dive-into-android-optimize-vm-heap/)
+
+## 性能检测
+
+- LeakCanary 实现原理
+- [微信读书（Android）阅读引擎卡顿监控测试](https://www.infoq.cn/article/weixin-reading-stuck-monitor-and-test?useSponsorshipSuggestions=true&utm_source=articles_about_architecture-design&utm_medium=link&utm_campaign=architecture-design)
+- [Matrix TraceCanary – 初恋·卡顿](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=2649287054&idx=1&sn=40f1b9935c280547926fc5f799c0b9c2&chksm=8334cd0cb443441aad977bd462df6cafcb20ae55bf9d70c99a7b3045178c848a7e75b6e02aa1&mpshare=1&scene=1&srcid=#rd)
+- [Matrix IOCanary – I/O 质量监控](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=2649287034&idx=1&sn=6706196ff0824578f1400fdf9906c025&chksm=8334cdf8b44344ee51bc30820756ea737d2615fc5b30122c91a88dd7f7e7694847071a7c3b9c&mpshare=1&scene=1&srcid=#rd)
+- [移动端性能监控方案Hertz](https://tech.meituan.com/hertz.html)
+
+- [HierarchyViewer](https://www.jianshu.com/p/afbf3444db19)
+- [TraceView](http://blog.csdn.net/u011240877/article/details/54347396)
+- [Systrace](http://blog.csdn.net/hfreeman2008/article/details/53538155)
+- [性能工具Systrace](http://gityuan.com/2016/01/17/systrace/)
+- [手把手教你使用Systrace（一）](https://zhuanlan.zhihu.com/p/27331842)
+- [手把手教你使用Systrace（二）——锁优化](https://zhuanlan.zhihu.com/p/27535205)
+
+##Android性能优化典范
+
+- [Android性能优化典范 - 第1季](http://hukai.me/android-performance-patterns/)
+- [Android性能优化典范 - 第2季](http://hukai.me/android-performance-patterns-season-2/)
+- [Android性能优化典范 - 第3季](http://hukai.me/android-performance-patterns-season-3/)
+- [Android性能优化典范 - 第4季](http://hukai.me/android-performance-patterns-season-4/)
+- [Android性能优化典范 - 第5季](http://hukai.me/android-performance-patterns-season-5/)
+- [Android性能优化典范 - 第6季](http://hukai.me/android-performance-patterns-season-6/)
+- 
+
+## 参考
+
+- https://www.androidperformance.com/2018/05/07/Android-performance-optimization-skills-and-tools/
+

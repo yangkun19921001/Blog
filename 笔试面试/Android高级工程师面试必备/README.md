@@ -16,7 +16,6 @@
 ## Java
 
 - [Java 基础](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/%E5%9F%BA%E7%A1%80.md)
-
 - [Java 容器](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/%E5%AE%B9%E5%99%A8.md)
 - [Java 并发 一](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/%E5%B9%B6%E5%8F%91.md)
 - [Java 并发 二](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E8%BF%9B%E9%98%B6(%E4%B8%8A).md)
@@ -33,20 +32,9 @@
 - [Java 进阶核心技术面试精讲(一) (ps: 需要购买)](https://time.geekbang.org/column/article/6478)
 - [Java 进阶源码解析专题(二) （ps: 需要购买 ￥49）](http://www.imooc.com/read/47/article/847)
 
-## Android
-
-- [Android 基础](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80.md)
-- [Android 中高级面试清单](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E4%B8%AD%E9%AB%98%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%B8%85%E5%8D%95.md)
-- [Android 源码相关分析](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E6%BA%90%E7%A0%81%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90.md)
-- [原理性问题](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8E%9F%E7%90%86%E6%80%A7%E9%97%AE%E9%A2%98.md)
-- [开发中常见的一些问题](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98.md)
-- [混合开发技术面试题](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E9%9D%A2%E8%AF%95%E9%A2%98.md)
-- [Android 高端技术面试题](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E9%AB%98%E7%AB%AF%E6%8A%80%E6%9C%AF%E4%B8%93%E9%A2%98.md)
-
 ## 面向对象
 
 - [面向对象思想](https://cyc2018.github.io/CS-Notes/#/notes/面向对象思想)
-
 - [设计模式](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)
 
 ## 网络
@@ -54,6 +42,39 @@
 - [计算机网络](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)
 - [HTTP](https://cyc2018.github.io/CS-Notes/#/notes/HTTP)
 - [Socket](https://cyc2018.github.io/CS-Notes/#/notes/Socket)
+
+## Android
+
+- Android 基础
+  - [Context]()
+  - [Application]()
+  - [Activity]()
+  - [Service]()
+  - [BroadcastReceiver]()
+  - [ContentProvider]()
+  - [fragment]()
+  - [动画]()
+  - [存储]()
+  - [View]()
+  - [接口]()
+  - [序列化]()
+  - [进程处理]()
+  - [内存]()
+  - [网络]()
+  - [多线程]()
+  - [应用无响应]()
+  - [Android 版本新特性]()
+  - [Bitmap]()
+  - [随机应变]()
+  - [其它]()
+- [Android 性能优化面试题]()
+- [Android 专题问题]()
+- [Android SDK 源码分析]()
+- [Android NDK 面试题]()
+- [Android 音视频面试题]()
+- [Android 大厂面试题]()
+- [Android 开发中遇见的问题]()
+- [混合开发面试题]()
 
 ## 操作系统
 
@@ -78,7 +99,7 @@
 - [代码可读性](https://github.com/CyC2018/CS-Notes/blob/master/notes/代码可读性.md)
 - [代码风格规范](https://github.com/CyC2018/CS-Notes/blob/master/notes/代码风格规范.md)
 
-## 参考
+## 感谢
 
 - [2000+ start **CommonDevKnowledge**](https://github.com/AweiLoveAndroid/CommonDevKnowledge)
 - [70000+star **CS-Notes**](https://github.com/CyC2018/CS-Notes)
@@ -89,6 +110,7 @@
 - [慕课网-Java 源码及大厂真题解析 需要购买专栏 ￥49](http://www.imooc.com/read/47/article/847)
 - [Android面试2019年最新版](https://github.com/interviewandroid/AndroidInterView)
 - [每日一道面试题 2.5K](https://github.com/Moosphan/Android-Daily-Interview)
+- https://juejin.im/post/5e5c5e306fb9a07cbe346d71#heading-153
 
 
 
