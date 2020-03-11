@@ -72,35 +72,36 @@
   - [随机应变](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E5%BA%94%E5%8F%98.md)
   - [其它](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/%E5%85%B6%E5%AE%83.md)
 - Android 中高级专题 - 原理
-  - [性能优化]()
-  - 图片
-  - 网络
-  - 异步
-  - 注入
-  - 数据库
-  - 屏幕适配
-  - 插件化
-  - 热修复
-  - 架构
-  - 组件化
-  - 路由
-  - View
-  - Gradle
-  - 多渠道
-  - 性能监控
-  - NDK
-  - 音视频
-  - 混合开发
-  - 疑难杂症
+  - [性能优化](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.md)
+  - [图片](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E5%9B%BE%E7%89%87.md)
+  - [网络](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E7%BD%91%E7%BB%9C.md)
+  - [异步](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E5%BC%82%E6%AD%A5.md)
+  - [注入](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%B3%A8%E5%85%A5.md)
+  - [Handler](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/Handler%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8A%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A6%81%E7%82%B9.md)
+  - [数据库](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E5%BA%93.md)
+  - [屏幕适配](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D.md)
+  - [插件化](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%8F%92%E4%BB%B6%E5%8C%96.md)
+  - [热修复](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E7%83%AD%E4%BF%AE%E5%A4%8D.md)
+  - [架构](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%9E%B6%E6%9E%84.md)
+  - [组件化](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E7%BB%84%E4%BB%B6%E5%8C%96.md)
+  - [路由](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E8%B7%AF%E7%94%B1.md)
+  - [View](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/View.md)
+  - [Gradle](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/Gradle.md)
+  - [多渠道](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E5%A4%9A%E6%B8%A0%E9%81%93.md)
+  - [性能监控](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7.md)
+  - [NDK](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/NDK.md)
+  - [音视频](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E9%9F%B3%E8%A7%86%E9%A2%91.md)
+  - [混合开发](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91.md)
+  - [疑难杂症](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87.md)
 - Android 高级 - SDK源码
-  - 窗口管理
-  - 组件管理
-  - 包管理
-  - 资源管理
-  - 进程框架
-  - 通信框架
-  - 内存框架
-  - 虚拟机框架
+  - [窗口管理](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
+  - [组件管理](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E7%BB%84%E4%BB%B6%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
+  - [包管理](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E5%8C%85%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
+  - [资源管理](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
+  - [进程框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E8%BF%9B%E7%A8%8B%E6%A1%86%E6%9E%B6.md)
+  - [通信框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6.md)
+  - [内存框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E5%86%85%E5%AD%98%E6%A1%86%E6%9E%B6.md)
+  - [虚拟机框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A1%86%E6%9E%B6.md)
 - [走向大厂]()
 
 ## 操作系统
