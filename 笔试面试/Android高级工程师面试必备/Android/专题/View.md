@@ -1,0 +1,3 @@
+- [高级 UI 成长之路 (一) View 的基础知识你必须知道](https://juejin.im/post/5dcff9d3f265da0bd20af0da)
+- [高级 UI 成长之路 (二) 深入理解 Android 8.0 View 触摸事件分发机制](https://juejin.im/post/5dd7a4796fb9a07a8f412d17)
+- [高级 UI 成长之路 (三) 理解 View 工作原理并带你入自定义 View 门](https://juejin.im/post/5ddff234518825793218d2e4)

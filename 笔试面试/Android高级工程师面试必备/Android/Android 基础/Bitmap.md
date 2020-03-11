@@ -86,3 +86,8 @@ bitmap = BitmapFactory.decodeStream(is);
 ####5. **一张图片加载到手机内存中真正的大**小是怎么计算的
 
 参考】 https://www.cnblogs.com/dasusu/p/9789389.html
+
+
+
+####6. [01Android媒体开发：Bitmap实践指南](https://github.com/guoxiaoxing/android-open-source-project-analysis/blob/master/doc/Android应用开发实践篇/Android媒体开发/01Android媒体开发：Bitmap实践指南.md)
+
