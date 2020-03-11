@@ -17,7 +17,7 @@
       * [Java 源码分析](#java-源码分析)
       * [Android 源码分析](#android-源码分析)
       * [第三方流行框架源码分析](#第三方流行框架源码分析)
-      * [性能优化系列](#性能优化系列)
+      * Recycleview 和 ListView的区别
       * [移动架构师系列](#移动架构师系列)
       * [设计模式](#设计模式)
       * [高级 UI 系列](#高级-ui-系列)
@@ -178,14 +178,11 @@
 
 ## 关于我
 
-- 手机/微信: 15810618744
 - Email: yang1001yk@gmail.com
 
 - [个人博客](https://www.devyk.top/)
 - [掘金](https://juejin.im/user/578259398ac2470061f3a3fb)
 - [GitHub](https://github.com/yangkun19921001)
-
-## 
 
 
 
