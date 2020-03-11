@@ -102,7 +102,11 @@
   - [通信框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6.md)
   - [内存框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E5%86%85%E5%AD%98%E6%A1%86%E6%9E%B6.md)
   - [虚拟机框架](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/SDK%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A1%86%E6%9E%B6.md)
-- [走向大厂]()
+- 走向大厂
+  - [Alibaba]()
+  - [BaiDu]()
+  - [Tencent]()
+  - [ByteDance]()
 
 ## 操作系统
 
