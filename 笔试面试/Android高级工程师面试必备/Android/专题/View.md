@@ -1,3 +1,4 @@
 - [高级 UI 成长之路 (一) View 的基础知识你必须知道](https://juejin.im/post/5dcff9d3f265da0bd20af0da)
 - [高级 UI 成长之路 (二) 深入理解 Android 8.0 View 触摸事件分发机制](https://juejin.im/post/5dd7a4796fb9a07a8f412d17)
 - [高级 UI 成长之路 (三) 理解 View 工作原理并带你入自定义 View 门](https://juejin.im/post/5ddff234518825793218d2e4)
+- [事件分发设计](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91.md)
