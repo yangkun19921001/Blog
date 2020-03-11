@@ -45,7 +45,7 @@
 
 ## Android
 
-- Android 基础
+- Android - 基础
   - [Context](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/Context.md)
   - [Application](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/Application.md)
   - [Activity](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/Activity.md)
@@ -71,14 +71,37 @@
   - [Lru](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/Lru%20%E7%AE%97%E6%B3%95.md)
   - [随机应变](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/%E9%9A%8F%E6%9C%BA%E5%BA%94%E5%8F%98.md)
   - [其它](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/Android%20%E5%9F%BA%E7%A1%80/%E5%85%B6%E5%AE%83.md)
-- [Android 性能优化面试题]()
-- [Android 专题问题]()
-- [Android SDK 源码分析]()
-- [Android NDK 面试题]()
-- [Android 音视频面试题]()
-- [Android 大厂面试题]()
-- [Android 开发中遇见的问题]()
-- [混合开发面试题]()
+- Android 中高级专题 - 原理
+  - [性能优化]()
+  - 图片
+  - 网络
+  - 异步
+  - 注入
+  - 数据库
+  - 屏幕适配
+  - 插件化
+  - 热修复
+  - 架构
+  - 组件化
+  - 路由
+  - View
+  - Gradle
+  - 多渠道
+  - 性能监控
+  - NDK
+  - 音视频
+  - 混合开发
+  - 疑难杂症
+- Android 高级 - SDK源码
+  - 窗口管理
+  - 组件管理
+  - 包管理
+  - 资源管理
+  - 进程框架
+  - 通信框架
+  - 内存框架
+  - 虚拟机框架
+- [走向大厂]()
 
 ## 操作系统
 
@@ -115,6 +138,7 @@
 - [Android面试2019年最新版](https://github.com/interviewandroid/AndroidInterView)
 - [每日一道面试题 2.5K](https://github.com/Moosphan/Android-Daily-Interview)
 - https://juejin.im/post/5e5c5e306fb9a07cbe346d71#heading-153
+- https://github.com/sucese/android-open-source-project-analysis
 
 
 
