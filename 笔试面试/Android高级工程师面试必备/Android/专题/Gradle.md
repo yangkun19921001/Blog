@@ -1,0 +1,5 @@
+- [*Gradle*配置最佳实践](https://juejin.im/post/582d606767f3560063320b21)
+- [*Gradle* 完整指南（Android）](http://www.jianshu.com/p/9df3c3b6067a)
+- [*Gradle* for Android 系列：为什么 *Gradle* 这么火](http://blog.csdn.net/u011240877/article/details/53572264)
+- [Android *Gradle* 看这一篇就够了](http://android.walfud.com/android-gradle-看这一篇就够了/)
+- 
