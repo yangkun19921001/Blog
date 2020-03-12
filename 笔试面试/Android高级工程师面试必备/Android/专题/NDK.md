@@ -10,3 +10,4 @@
 - [怎么编译一个FFmpeg 并且集成到AndroidStudio中](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [webrtc是如何实现点对点通信的](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [谈下webrtc 内网穿透原理](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+- [Android 动态链接库加载原理及 HotFix 方案介绍](https://mp.weixin.qq.com/s/wvt3NABA-NnQxpbcxhAGiA)

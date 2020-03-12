@@ -9,3 +9,5 @@
 - [今日头条-View绘制机制，onMeasure onLayout ,onDraw方法的调用机制谈一下](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [今日头条-ThreadLocal底层原理和Handler的关系](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [今日头条-sync关键字和lock的区别? 他们对线程的控制原理简单说下](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+- [今日头条大佬十年面试了 2000 人，总结了这 5 点](https://mp.weixin.qq.com/s?__biz=MzUzMjUyMDQ5Mw==&mid=2247484057&idx=1&sn=ca225ba9b647206d391624f9f7f9300a&chksm=fab349dbcdc4c0cd0ede64a8dc956e6fe1b6a7cd370a638010792185826c55264d3db1bcdac5&mpshare=1&scene=1&srcid=0918xJfW9762pd5y9E56E4Bh%23rd)
+- 

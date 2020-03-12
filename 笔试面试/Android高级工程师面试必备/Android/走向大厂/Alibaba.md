@@ -15,4 +15,7 @@
 - [接下来说说 Android 虚拟机Dalvik与ART区别在哪里？](https://github.com/interviewandroid/AndroidInterView/blob/master/android/artordalvik.md)
 - [Handler的原理是什么?能深入分析下 Handler的实现机制吗？](https://github.com/interviewandroid/AndroidInterView/blob/master/study/framework/Handler机制源码.md)
 - [Handler中有Loop死循环，为什么没有阻塞主线程，原理是什么](https://github.com/interviewandroid/AndroidInterView/blob/master/study/framework/Android消息机制.md)
+- [阿里电话面试面试题总结，附答案！](https://mp.weixin.qq.com/s?__biz=MzA3NzMxODEyMQ==&mid=2666454354&idx=2&sn=b08cfa0ba5d403c92bce5e7fb57f233f&chksm=8449afd4b33e26c2b04adad207e9bf93fa7af46be75cfb860aeba30bed5bc93340ca8965d2bc&mpshare=1&scene=1&srcid=0815726HCm2RAyWr0mKdKiHL%23rd)
+- [阿里巴巴面试题](https://github.com/francistao/LearningNotes/blob/master/Part6/InterviewExperience/Alibaba.md)
+- 
 
