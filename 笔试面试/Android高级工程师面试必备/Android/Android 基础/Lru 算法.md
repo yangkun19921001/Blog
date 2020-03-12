@@ -9,3 +9,8 @@
 #### 2. **LRUCache 使用及原理**
 
 【参考】https://www.cnblogs.com/huhx/p/useLruCache.html
+
+
+
+#### 3.LruCache默认缓存大小
+

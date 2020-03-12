@@ -14,3 +14,9 @@
 - [从 *View 的绘制*谈性能优化](http://blog.csdn.net/wl9739/article/details/57416433)
 - [View 的工作原理上 View 绘制流程梳理及 Measure 过程详解](https://yongyu.itscoder.com/2016/09/11/view_measure/)
 
+
+
+#### RecycleView 原理
+
+- [RecyclerView 刷新，复用，动画]([https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/recyclerview/README.md](https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework源码分析/recyclerview/README.md))
+
