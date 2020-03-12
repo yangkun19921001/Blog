@@ -128,7 +128,7 @@
 
 ## 工具
 
-- [Git](https://github.com/CyC2018/CS-Notes/blob/master/notes/Git.md)
+- [廖雪峰-史上最浅显易懂的Git教程！](https://www.liaoxuefeng.com/wiki/896043488029600)
 - [Docker](https://github.com/CyC2018/CS-Notes/blob/master/notes/Docker.md)
 - [构建工具](https://github.com/CyC2018/CS-Notes/blob/master/notes/构建工具.md)
 - [正则表达式](https://github.com/CyC2018/CS-Notes/blob/master/notes/正则表达式.md)
