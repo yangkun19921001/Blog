@@ -444,5 +444,9 @@ Activity的 onSaveInstanceState() 和 onRestoreInstanceState()并不是生命周
 
 [深入理解](https://www.jianshu.com/p/89e0a7533dbe)
 
+####23.[Activity 全面总结](https://github.com/yangchong211/YCBlogs/blob/master/android/基础组件/02.Activity基础介绍.md)
+
+
+
 
 
