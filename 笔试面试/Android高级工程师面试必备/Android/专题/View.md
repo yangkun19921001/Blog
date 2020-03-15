@@ -1,17 +1,19 @@
+### View 基础
+
 - [高级 UI 成长之路 (一) View 的基础知识你必须知道](https://juejin.im/post/5dcff9d3f265da0bd20af0da)
-- [高级 UI 成长之路 (三) 理解 View 工作原理并带你入自定义 View 门](https://juejin.im/post/5ddff234518825793218d2e4)
-- [事件分发设计](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Android/%E4%B8%93%E9%A2%98/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91.md)
-- [你知道Bat公司如何对屏幕适配的](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
-- [谈谈对刘海屏开发与适配方案](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
-- [Android9.0Api适配举例有哪些不一样的地方](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
-- [讲讲你对UI绘制流程及其原理的](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
-- [谈谈你对事件传递机制的认识](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+
 - [在自定义View中如何开启硬件加速](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [淘宝如何做到展示亿级商品（强排版，强交互实现机制）](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+
+
+
+### View 工作原理
+
+- [高级 UI 成长之路 (三) 理解 View 工作原理并带你入自定义 View 门](https://juejin.im/post/5ddff234518825793218d2e4)
+- [讲讲你对UI绘制流程及其原理的](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
 - [Android *View 绘制* 13 问 13 答](http://www.cnblogs.com/punkisnotdead/p/5181821.html)
 - [深入理解 Android 之 *View 的绘制*流程](http://www.jianshu.com/p/060b5f68da79)
 - [*View 绘制*流程浅析，我所理解的 *View 绘制*。](http://blog.csdn.net/silentweek/article/details/53467002)
-- [从 *View 的绘制*谈性能优化](http://blog.csdn.net/wl9739/article/details/57416433)
 - [View 的工作原理上 View 绘制流程梳理及 Measure 过程详解](https://yongyu.itscoder.com/2016/09/11/view_measure/)
 
 
@@ -19,4 +21,6 @@
 #### RecycleView 原理
 
 - [RecyclerView 刷新，复用，动画]([https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/recyclerview/README.md](https://github.com/SusionSuc/AdvancedAndroid/blob/master/AndroidFramework源码分析/recyclerview/README.md))
+
+
 
