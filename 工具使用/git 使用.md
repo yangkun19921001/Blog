@@ -39,5 +39,23 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 
 上面的操作有点复杂，直接用git checkout 就ok了
 
+##远程拉取指定版本
+
+以 [glide](https://links.jianshu.com/go?to=%5Bhttps%3A%2F%2Fgithub.com%2Fbumptech%2Fglide%5D(https%3A%2F%2Fgithub.com%2Fbumptech%2Fglide)) 为例，目前官网最新是 4.9.0 版本，如果要编译 4.8.0 版本的 jar，该如何操作呢。
+
+1. 首先clone项目到本地
+   `git clone https://github.com/bumptech/glide.git`
+
+2. 然后进入项目
+   `cd glide/`
+
+3. 查看历史版本
+   `git tag`
+4. 拉取指定版本
+   `git checkout tags/1.2.1`
+
+5. 编译 jar 包
+   `./gradlew assemble`
+
 
 

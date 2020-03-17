@@ -91,3 +91,5 @@ bitmap = BitmapFactory.decodeStream(is);
 
 ####6. [01Android媒体开发：Bitmap实践指南](https://github.com/guoxiaoxing/android-open-source-project-analysis/blob/master/doc/Android应用开发实践篇/Android媒体开发/01Android媒体开发：Bitmap实践指南.md)
 
+####7. [推荐:Bitmap 比你想的更费内存 | 吊打 OOM](https://mp.weixin.qq.com/s?__biz=MzIxNjc0ODExMA==&mid=2247484679&idx=1&sn=d738f5ec092c8490484b66cb1ab80eab&chksm=97851c26a0f29530c2359cec1bbe74d93b90e4a1ba8df751dd6469734c8e58280fb265442d0c&scene=21#wechat_redirect)
+
