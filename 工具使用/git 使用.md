@@ -2,7 +2,7 @@
 
 - git 介绍
 
-  https://gitee.com/help/articles/4104
+  https://www.liaoxuefeng.com/wiki/896043488029600
 
   
 
@@ -32,7 +32,7 @@
 ```
 $ git fetch --all
 $ git reset --hard origin/master 
-$ git pull123
+$ git pull
 ```
 
 Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比如用SaltStack部署web项目，强制覆盖可以保持与服务器内容一致。
@@ -51,11 +51,30 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 
 3. 查看历史版本
    `git tag`
+   
 4. 拉取指定版本
    `git checkout tags/1.2.1`
 
 5. 编译 jar 包
    `./gradlew assemble`
+   
+6. Push  单个 tag
+
+   git push origin [tagname]
+   
+7. 强制与远端同步
+
+   git pull
+   
+8. 删除 tag
+
+   1. 删除本地 tag
+
+      git tag -d [tagname]
+
+   2. 删除远端 tag
+
+      git push origin :refs/tags/[tagname]
 
 
 
