@@ -201,36 +201,89 @@ libjpeg-turbo 是一个 JPEG 图像编解码器，它使用 SIMD 指令（MMX，
       build_bin x86_64 x86_64 x86_64 x86_64-linux-android "$ANDROID_X86_64_CFLAGS" x86_64
       ```
 
+      ```shell
+   #!/bin/bash
+      #ndk所在目录
+   NDK_PATH=$NDK_HOME
+      #编译环境这里是 linux
+   BUILD_PLATFORM=linux-x86_64
+      #编译工具链版本
+   TOOLCHAIN_VERSION=4.9
+      #最低兼容
+   ANDROID_VERSION=14
+      
+   
+      #源码目录 这里是当前脚本所在目录
+   MY_SOURCE_DIR=$(pwd)
+      # 生成目标文件目录
+   PREFIX=$(pwd)/android
+      
+   
+      # 目标平台
+   HOST=arm-linux-androideabi
+      SYSROOT=${NDK_PATH}/platforms/android-${ANDROID_VERSION}/arch-arm
+   # armera-v7平台
+      
+   export CFLAGS="-march=armv7-a -mfloat-abi=softfp -fprefetch-loop-arrays \
+        -D__ANDROID_API__=${ANDROID_VERSION} --sysroot=${SYSROOT} \
+     -isystem ${NDK_PATH}/sysroot/usr/include \
+        -isystem ${NDK_PATH}/sysroot/usr/include/${HOST}"
+     
+      export LDFLAGS=-pie
+   TOOLCHAIN=${NDK_PATH}/toolchains/${HOST}-${TOOLCHAIN_VERSION}/prebuilt/${BUILD_PLATFORM}
+      
+      cat <<EOF >toolchain.cmake
+      set(CMAKE_SYSTEM_NAME Linux)
+      set(CMAKE_SYSTEM_PROCESSOR arm)
+      set(CMAKE_C_COMPILER ${TOOLCHAIN}/bin/${HOST}-gcc)
+      set(CMAKE_FIND_ROOT_PATH ${TOOLCHAIN}/${HOST})
+      EOF
+      
+      cmake -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake \
+          -DCMAKE_POSITION_INDEPENDENT_CODE=1 \
+          -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+          ${MY_SOURCE_DIR}
+      
+      make clean
+      make
+      make install
+      
+      
+      
+      ```
+   
+      
+   
    2. 如果编译遇见 权限问题
-
+   
       ![](https://user-gold-cdn.xitu.io/2019/5/19/16ad0568e451867d?w=816&h=673&f=jpeg&s=216141)
-
+   
       给它一个 可执行文件的权限 chmod +x build.sh
-
+   
    3. 继续执行
-
+   
       ![](https://user-gold-cdn.xitu.io/2019/5/19/16ad0565d2e01fea)
-
+   
    4. 编译完成
-
+   
       ![](https://user-gold-cdn.xitu.io/2019/5/19/16ad055fc25cbb9b?w=800&h=600&f=jpeg&s=210778)
-
+   
       这里我们发现 已经有我们需要的 静态库 .a 和 动态库 .so
-
+   
    5. 在 AndroidStudio 中创建一个简单的项目 用于测试是否压缩成功
-
+   
       1. 结构目录
-
+   
       ![](https://user-gold-cdn.xitu.io/2019/5/19/16ad0578463b6131?w=829&h=866&f=jpeg&s=83392)
-
+   
       标红的都是重要的文件，include 头文件和 libs/armeabi-v7a 是我们刚刚编译出来的文件
-
+   
       下面我们就来运行一下看看压缩效果
-
+   
       2. 压缩主要代码
-
+   
          **jni 代码**
-
+   
          ```c++
          #include <jni.h>
          #include <string>
@@ -272,9 +325,9 @@ libjpeg-turbo 是一个 JPEG 图像编解码器，它使用 SIMD 指令（MMX，
                  jpeg_write_scanlines(&jcs, row, 1);
              }
          //    3.6、压缩完成
-             jpeg_finish_compress(&jcs);
+          jpeg_finish_compress(&jcs);
          //    3.7、释放jpeg对象
-             fclose(f);
+          fclose(f);
              jpeg_destroy_compress(&jcs);
          }
          
@@ -325,9 +378,9 @@ libjpeg-turbo 是一个 JPEG 图像编解码器，它使用 SIMD 指令（MMX，
              env->ReleaseStringUTFChars(path_, path);
          }
          ```
-
+   
          **调用代码**
-
+   
          ```java
          public class JpegUtils {
              static {
