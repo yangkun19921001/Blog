@@ -29,6 +29,8 @@
     - TreeMap
     - Hashtable
     - ConcurrentHashMap
+  - Cloneable
+    - SparseArray
   - Set
     - HashSet
     - TreeSet
