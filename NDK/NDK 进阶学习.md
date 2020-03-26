@@ -115,7 +115,13 @@
 
 ## Day 二十二 openCV
 
+- 人脸检测
+
+### Day 二十三 openCV
+
 - 人脸识别
+- 计算机视觉开发一般套路
+- opencv mac编译
 
 
 
