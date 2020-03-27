@@ -1,3 +1,4 @@
 *.css linguist-language=java
 *.js linguist-language=java
 *.html linguist-language=java
+*.md linguist-language=java
