@@ -2,7 +2,7 @@
 
 
 
-![img](http://img3.sycdn.imooc.com/5d89764e0001be1e06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165848.jpg)
 
 
 
@@ -33,7 +33,7 @@
 虽然 ConcurrentHashMap 的底层数据结构，和方法的实现细节和 HashMap 大体一致，但两者在类结构上却没有任何关联，我们看下 ConcurrentHashMap 的类图：
 
 
-![图片描述](http://img1.sycdn.imooc.com/5d883afd0001a01a04670199.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165916.jpeg)
 
 看 ConcurrentHashMap 源码，我们会发现很多方法和代码和 HashMap 很相似，有的同学可能会问，为什么不继承 HashMap 呢？继承的确是个好办法，但尴尬的是，ConcurrentHashMap 都是在方法中间进行一些加锁操作，也就是说加锁把方法切割了，继承就很难解决这个问题。
 
@@ -215,10 +215,10 @@ private final Node<K,V>[] initTable() {
 
    put 时，如果当前槽点有值，就是 key 的 hash 冲突的情况，此时槽点上可能是链表或红黑树，我们通过锁住槽点，来保证同一时刻只会有一个线程能对槽点进行修改，截图如下：
 
-​		![图片描述](http://img1.sycdn.imooc.com/5d883acd0001833304130067.png)
+​		![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165945.jpeg)
 
 4. 红黑树旋转时，锁住红黑树的根节点，保证同一时刻，当前红黑树只能被一个线程旋转，代码截图如下：
-   ![图片描述](http://img1.sycdn.imooc.com/5d883adb000166bb05880443.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170011.jpeg)
 
 
 

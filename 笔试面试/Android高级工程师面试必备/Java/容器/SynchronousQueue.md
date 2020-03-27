@@ -1,6 +1,6 @@
 ## SynchronousQueue 源码解析
 
-![img](http://img4.sycdn.imooc.com/5da483310001d01f06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170850.jpg)
 
 ##引导语
 
@@ -12,7 +12,7 @@ SynchronousQueue 是比较独特的队列，其本身是没有容量大小，比
 
 SynchronousQueue 的整体设计比较抽象，在内部抽象出了两种算法实现，一种是先入先出的队列，一种是后入先出的堆栈，两种算法被两个内部类实现，而直接对外的 put，take 方法的实现就非常简单，都是直接调用两个内部类的 transfer 方法进行实现，整体的调用关系如下图所示：
 
-![图片描述](http://img1.sycdn.imooc.com/5da53a4a0001ce6924601406.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170923.jpeg)
 
 
 
@@ -32,7 +32,7 @@ SynchronousQueue 的整体设计比较抽象，在内部抽象出了两种算法
 
 SynchronousQueue 整体类图和 LinkedBlockingQueue 相似，都是实现了 BlockingQueue 接口，但因为其不储存数据结构，有一些方法是没有实现的，比如说 isEmpty、size、contains、remove 和迭代等方法，这些方法都是默认实现，如下截图：
 
-![图片描述](http://img1.sycdn.imooc.com/5da53a3e0001e3c213841432.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170947.jpeg)
 
 
 
@@ -81,7 +81,7 @@ SynchronousQueue 底层结构和其它队列完全不同，有着独特的两种
 
 首先我们来介绍下堆栈的整体结构，如下：
 
-![图片描述](http://img1.sycdn.imooc.com/5da53a31000147a007280674.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327171021.jpeg)
 
 从上图中我们可以看到，我们有一个大的堆栈池，池的开口叫做堆栈头，put 的时候，就往堆栈池中放数据。take 的时候，就从堆栈池中拿数据，两者操作都是在堆栈头上操作数据，从图中可以看到，越靠近堆栈头，数据越新，所以每次 take 的时候，都会拿到堆栈头的最新数据，这就是我们说的后入先出，也就是非公平的。
 

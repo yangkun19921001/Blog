@@ -2,7 +2,7 @@
 
 更新时间：2019-09-27 12:52:38
 
-![img](http://img2.sycdn.imooc.com/5d63579e000121c606400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170256.jpg)
 
 ## 引导语
 
@@ -15,7 +15,7 @@ HashMap 源码很长，面试的问题也非常多，但这些面试问题，基
 HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构如下：
 
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc7cc0001ec3211040928.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170319.jpeg)
 
 
 
@@ -94,7 +94,7 @@ HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当
 我们来画一张示意图来描述下：
 
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc7e200016af809121188.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170351.jpg)
 
 代码细节如下：
 

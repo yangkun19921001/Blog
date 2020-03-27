@@ -2,7 +2,7 @@
 
 
 
-![img](http://img1.sycdn.imooc.com/5d89760c000109d506400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170041.jpg)
 
 ## 引导语
 
@@ -255,13 +255,13 @@ indexOf 方法在 CopyOnWriteArrayList 内部使用也比较广泛，比如在�
 在 CopyOnWriteArrayList 类注释中，明确说明了，在其迭代过程中，即使数组的原值被改变，也不会抛出 ConcurrentModificationException 异常，其根源在于数组的每次变动，都会生成新的数组，不会影响老数组，这样的话，迭代过程中，根本就不会发生迭代数组的变动，我们截几个图说明一下：
 
 1. 迭代是直接持有原有数组的引用，也就是说迭代过程中，一旦原有数组的值内存地址发生变化，必然会影响到迭代过程，下图源码演示的是 CopyOnWriteArrayList 的迭代方法，我们可以看到迭代器是直接持有原数组的引用：
-   ![图片描述](http://img1.sycdn.imooc.com/5d88354300010c5111460592.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170113.jpeg)
 2. 我们写了一个 demo，在 CopyOnWriteArrayList 迭代之后，往 CopyOnWriteArrayList 里面新增值，从下图中可以看到在 CopyOnWriteArrayList 迭代之前，数组的内存地址是 962，请记住这个数字：
-   ![图片描述](http://img1.sycdn.imooc.com/5d8835800001ffca14040700.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170139.jpeg)
 3. CopyOnWriteArrayList 迭代之后，我们使用 add(“50”) 代码给数组新增一个数据后，数组内存地址发生了变化，内存地址从原来的 962 变成了 968，这是因为 CopyOnWriteArrayList 的 add 操作，会生成新的数组，所以数组的内存地址发生了变化：
-   ![图片描述](http://img1.sycdn.imooc.com/5d8835ac0001af7d13980550.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170205.jpeg)
 4. 迭代继续进行时，我们发现迭代器中的地址仍然是迭代之前引用的地址，是 962，而不是新的数组的内存地址：
-   ![图片描述](http://img1.sycdn.imooc.com/5d8835c20001596615780740.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170229.jpeg)
 
 
 

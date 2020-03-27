@@ -1,6 +1,6 @@
 ##HashSet 源码解析
 
-![img](http://img4.sycdn.imooc.com/5d77064e0001864d06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170424.jpg)
 
 ## 引导语
 

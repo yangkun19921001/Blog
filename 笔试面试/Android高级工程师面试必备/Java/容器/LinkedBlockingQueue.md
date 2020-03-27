@@ -2,7 +2,7 @@
 
 
 
-![img](http://img1.sycdn.imooc.com/5d91984400013fbc06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170459.jpg)
 
 
 
@@ -25,7 +25,7 @@ LinkedBlockingQueue 中文叫做链表阻塞队列，这个命名很好，从命
 首先我们来看下 LinkedBlockingQueue 类图，如下：
 
 
-![图片描述](http://img1.sycdn.imooc.com/5d9db50c00011ed210740736.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170521.jpeg)
 
 从类图中，我们大概可以看出两条路径：
 
@@ -263,7 +263,7 @@ private void enqueue(Node<E> node) {
 
 以上就是 put 方法的原理，至于 offer 方法阻塞超过一端时间后，仍未成功，就会直接返回默认值的实现，和 put 方法相比只修改了几行代码，如下截图：
 
-![图片描述](http://img1.sycdn.imooc.com/5d9db53e000110c724481374.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170549.jpeg)
 
 
 
