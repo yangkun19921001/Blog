@@ -67,7 +67,7 @@ public ArrayList(Collection<? extends E> c) {
 
 2：指定初始数据初始化时，我们发现一个这样子的注释 see 6260652，这是 Java 的一个 bug，意思是当给定集合内的元素不是 Object 类型时，我们会转化成 Object 的类型。一般情况下都不会触发此 bug，只有在下列场景下才会触发：ArrayList 初始化之后（ArrayList 元素非 Object 类型），再次调用 toArray 方法，得到 Object 数组，并且往 Object 数组赋值时，才会触发此 bug，代码和原因如图：
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc6100001109518100714.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327125723.jpeg)
 
 官方查看文档地址：https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6260652，问题在 Java 9 中被解决。
 
@@ -135,11 +135,11 @@ private void grow(int minCapacity) {
 注解应该比较详细，我们需要注意的四点是：
 
 - 扩容的规则并不是翻倍，是原来容量大小 + 容量大小的一半，直白来说，扩容后的大小是原来容量的 1.5 倍；
-   
+  
 - ArrayList 中的数组的最大值是 Integer.MAX_VALUE，超过这个值，JVM 就不会给数组分配内存空间了。
-   
+  
 - 新增时，并没有对值进行严格的校验，所以 ArrayList 是允许 null 值的。
-   
+  
 
 从新增和扩容源码中，下面这点值得我们借鉴：
 
@@ -147,7 +147,7 @@ private void grow(int minCapacity) {
 
 扩容完成之后，赋值是非常简单的，直接往数组上添加元素即可：elementData [size++] = e。也正是通过这种简单赋值，没有任何锁控制，所以这里的操作是线程不安全的，对于新增和扩容的实现，画了一个动图，如下：
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc62e000112c203600240.gif)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327125637.gif)
 
 ###**2.3** **扩容的本质**
 
@@ -230,7 +230,7 @@ private void fastRemove(int index) {
 
 从源码中，我们可以看出，某一个元素被删除后，为了维护数组结构，我们都会把数组后面的元素往前移动，下面动图也演示了其过程：
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc643000142a403600240.gif)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327125502.gif)
 
 ###**2.5** **迭代器**
 
