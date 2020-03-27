@@ -2,7 +2,7 @@
 
 ## LinkedList 源码解析
 
-![img](https://img4.sycdn.imooc.com/5d63560c0001044d06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170649.jpg)
 
 ## 引导语
 
@@ -14,7 +14,7 @@ LinkedList 适用于集合元素先入先出和先入后出的场景，在队列
 
 LinkedList 底层数据结构是一个双向链表，整体结构如下图所示：
 
-![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327130146.jpeg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170710.jpeg)
 
 上图代表了一个双向链表结构，链表中的每个节点都可以向前或者向后追溯，我们有几个概念如下：
 
@@ -77,7 +77,7 @@ void linkLast(E e) {
 
 从源码上来看，尾部追加节点比较简单，只需要简单地把指向位置修改下即可，我们做个动图来描述下整个过程：
 
-![图片描述](https://img1.sycdn.imooc.com/5d5fc6a300013e4803600240.gif)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170814.gif)
 
 **从头部追加（**addFirst)
 

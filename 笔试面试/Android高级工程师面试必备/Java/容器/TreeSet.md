@@ -1,6 +1,6 @@
 ## TreeSet 源码解析
 
-![img](http://img4.sycdn.imooc.com/5d77064e0001864d06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327170424.jpg)
 
 ## 1 TreeSet
 
@@ -48,7 +48,7 @@ public Iterator<E> iterator() {
 
 TreeMap 中对 NavigableSet 接口的实现源码截图如下：
 
-![图片描述](http://img1.sycdn.imooc.com/5d763f6e00018e0114461250.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327171142.jpeg)
 
 从截图中（截图是在 TreeMap 中），我们可以看出 TreeMap 实现了 TreeSet 定义的各种特殊方法。
 

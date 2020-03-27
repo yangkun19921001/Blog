@@ -10,7 +10,7 @@ ArrayList 我们几乎每天都会使用到，但真正面试的时候，发现�
 
 ArrayList 整体架构比较简单，就是一个数组结构，比较简单，如下图：
 
-![图片描述](http://img1.sycdn.imooc.com/5d5fc5f80001e20e15080238.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165231.jpeg)
 
 图中展示是长度为 10 的数组，从 1 开始计数，index 表示数组的下标，从 0 开始计数，elementData 表示数组本身，源码中除了这两个概念，还有以下三个基本概念：
 

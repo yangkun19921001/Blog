@@ -1,6 +1,6 @@
 ## ArrayBlockingQueue 源码解析
 
-![img](http://img1.sycdn.imooc.com/5da483730001b51b06400359.jpg)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165418.jpg)
 
 
 
@@ -95,13 +95,13 @@ ArrayBlockingQueue 通过锁的公平和非公平，轻松实现了数组元素�
 
 初始化时，如果给定了原始数据的话，一定要注意原始数据的大小一定要小于队列的容量，否则会抛异常，如下图所示：
 
-![图片描述](http://img1.sycdn.imooc.com/5da9962c0001338b13541200.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165518.jpeg)
 
 
 
 我们写了一个 demo，报错如下：
 
-![图片描述](http://img1.sycdn.imooc.com/5da9963b00018d9022401200.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165549.jpeg)
 
 
 
@@ -146,9 +146,9 @@ private void enqueue(E x) {
 从源码中，我们可以看出，其实新增就两种情况：
 
 1. 本次新增的位置居中，直接新增，下图演示的是 putIndex 在数组下标为 5 的位置，还不到队尾，那么可以直接新增，计算下次新增的位置应该是 6；
-   ![图片描述](http://img1.sycdn.imooc.com/5da996520001b78412100296.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165617.jpeg)
 2. 新增的位置到队尾了，那么下次新增时就要从头开始了，示意图如下：
-   ![图片描述](http://img1.sycdn.imooc.com/5dc385f60001236510260354.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165645.jpeg)
 
 上面这张图演示的就是这行代码：`if (++putIndex == items.length) putIndex = 0;`
 
@@ -255,18 +255,18 @@ void removeAt(final int removeIndex) {
 
 删除数据的情况比较复杂，一共有两种情况，第一种情况是 takeIndex == removeIndex，我们画个示意图来看下处理方式：
 
-![图片描述](http://img1.sycdn.imooc.com/5da9967c0001f1a112600970.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165717.jpeg)
 
 第二种情况又分两种：
 
 1. 如果 removeIndex + 1 != putIndex 的话，就把下一个元素往前移动一位，示意图如下：
-   ![图片描述](http://img1.sycdn.imooc.com/5da996880001782712280958.png)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165742.jpeg)
 
 2. 如果 removeIndex + 1 == putIndex 的话，就把 putIndex 的值修改成删除的位置，
 
    示意图如下：
 
-![图片描述](http://img1.sycdn.imooc.com/5da9969c0001254d12300940.png)
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200327165813.jpeg)
 
 
 
