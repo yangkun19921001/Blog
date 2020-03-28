@@ -178,10 +178,13 @@
 ## 关于我
 
 - Email: yang1001yk@gmail.com
-
 - [个人博客](https://www.devyk.top/)
 - [掘金](https://juejin.im/user/578259398ac2470061f3a3fb)
 - [GitHub](https://github.com/yangkun19921001)
+
+扫码关注我的公众号，让我们离得更进一些!
+
+![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200328235020.jpg)
 
 
 
