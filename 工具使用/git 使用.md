@@ -75,6 +75,12 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
    2. 删除远端 tag
 
       git push origin :refs/tags/[tagname]
+   
+9. update 某个文件
+
+   git fetch
+
+   git checkout -m 2408ca5 文件名
 
 
 
