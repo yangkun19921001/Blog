@@ -99,6 +99,13 @@ HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当
 代码细节如下：
 
 ```java
+//hash 计算
+static final int hash(Object key) {
+ int h;
+ return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+}
+
+
 // 入参 hash：通过 hash 算法计算出来的值。
 // 入参 onlyIfAbsent：false 表示即使 key 已经存在了，仍然会用新值覆盖原来的值，默认为 false
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,

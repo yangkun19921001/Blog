@@ -6,7 +6,7 @@
 
 ### 引导语
 
-本小节我们来介绍本章最后一个队列：ArrayBlockingQueue。按照字面翻译，中文叫做数组阻塞队列，从名称上看，我们就比较清楚此阻塞队列底层使用的是数组。一说到数组，大家可能会想到 ArrayList 和 HashMap，举新增场景来说 ArrayList 通过 size ++ 找到新增的数组下标位置，HashMap 通过 hash 算法计算出下标位置，那么 ArrayBlockingQueue 是不是也是这两种方法呢？都不是，ArrayBlockingQueue 使用的是一种非常奇妙的方式，我们一起拭目以待。
+本小节我们来介绍 ArrayBlockingQueue。按照字面翻译，中文叫做数组阻塞队列，从名称上看，我们就比较清楚此阻塞队列底层使用的是数组。一说到数组，大家可能会想到 ArrayList 和 HashMap，举新增场景来说 ArrayList 通过 size ++ 找到新增的数组下标位置，HashMap 通过 hash 算法计算出下标位置，那么 ArrayBlockingQueue 是不是也是这两种方法呢？都不是，ArrayBlockingQueue 使用的是一种非常奇妙的方式，我们一起拭目以待。
 
 
 

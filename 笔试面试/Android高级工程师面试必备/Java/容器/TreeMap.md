@@ -4,7 +4,7 @@
 
 ### 引导语
 
-在熟悉 HashMap 之后，本小节我们来看下 TreeMap 和 LinkedHashMap，看看 TreeMap 是如何根据 key 进行排序的，LinkedHashMap 是如何用两种策略进行访问的。
+在熟悉 HashMap 之后，本小节我们来看下 TreeMap 是如何根据 key 进行排序的。
 
 
 

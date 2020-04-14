@@ -141,13 +141,15 @@ ADB很强大，记住一些ADB命令有助于提高工作效率。
     adb shell  cat /sys/class/net/wlan0/address
    ```
 
-10. 获取CPU info：
+10. 获取 CPU info：
 
-    ```
-    adb shell cat /proc/cpuinfo
-    ```
+   ```
+   adb shell cat /proc/cpuinfo
+   
+   
+   ```
 
-    ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+   ![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
 
 11. 安装APK：
 
@@ -477,6 +479,24 @@ adb shell dumpsys window w |grep \\/ |grep name=
     shell@android:/data/data/com.your.package/databases $ ls
     yourpackagename.db
     $ cat preferences.db > /mnt/sdcard/yourpackagename.db  
+    ```
+
+55. 获取 CPU 使用情况
+
+    ```shell
+    adb shell dumpsys cpuinfo
+    ```
+
+56. 根据 pid 查看 CPU 使用率
+
+    ```shell
+    adb shell top –n 25822 | grep proc
+    ```
+
+57. 获取手机型号
+
+    ```shell
+    adb shell getprop ro.product.model
     ```
 
     

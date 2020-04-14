@@ -1,4 +1,4 @@
-问题 ？
+1问题 ？
 
 - ANDROID_TOOLCHAIN
 - ANDROID_STL
@@ -15,10 +15,6 @@
 
   Android < 6 需要
 
-## 作业
 
-1. message 输出
 
-2. 动态加载
-
-   
+ 
