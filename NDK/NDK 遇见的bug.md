@@ -44,4 +44,47 @@
 
    
 
-2. 
+2. 找不到 so
+
+   检查 `set_target_properties` 是否设置正确
+
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200412214345.png)
+
+   
+
+   
+
+   ```
+   
+   FAILURE: Build failed with an exception.
+   
+   * What went wrong:
+   Execution failed for task ':utils:externalNativeBuildDebug'.
+   > Build command failed.
+     Error while executing process /Users/devyk/Data/Android/SDK/cmake/3.6.4111459/bin/cmake with arguments {--build /Users/devyk/Data/Project/sample/github_code/DexEncryptionDecryption/utils/.externalNativeBuild/cmake/debug/arm64-v8a --target aes}
+     
+     ninja: error: '/Users/devyk/Data/Project/sample/github_code/DexEncryptionDecryption/utils../libs/lib/arm64-v8a/libcrypto.so', needed by '../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libaes.so', missing and no known rule to make it
+   
+   
+   * Try:
+   Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+   
+   * Get more help at https://help.gradle.org
+   ```
+
+   
+
+   
+
+3. needed or dlopened by "/vendor/lib64/libnativeloader.so" is not accessible for the namespace "classloader-namespace"
+
+   版本过高导致，小于 <= 23 就行
+
+   https://stackoverflow.com/questions/52515309/libraries-not-accessible-for-classloader-namespace-when-loading-dl4j-model-us
+
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200412215011.png)
+
+4. 
+
+
+

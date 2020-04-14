@@ -78,8 +78,8 @@ private void linkNodeLast(LinkedHashMap.Entry<K,V> p) {
         head = p;
     // 链表有数据，直接建立新增节点和上个尾节点之间的前后关系即可
     else {
-        p.before = last;
-        last.after = p;
+        p.before = last;//将上一个尾结点赋值给当前尾结点的前节点
+        last.after = p;//将上一个尾结点的后节点指向当前尾结点
     }
 }
 ```

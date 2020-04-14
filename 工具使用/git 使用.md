@@ -81,6 +81,34 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
    git fetch
 
    git checkout -m 2408ca5 文件名
+   
+10. 打一个 tag
+
+   Git tag [tagname]
+   
+11. 删除一个本地分支
+
+   git branch -d [name]
+
+12. 检出一个新分支
+
+   git checkout -b 11120c30443f7e3861d78225fe0cd949c131cc19
+
+13. 如何处理一个 pull request 
+
+   https://blog.lzuer.net/2016/10/10/github-pr/
+
+14. 
+
+   
+
+   
+
+   
+
+   
+
+   
 
 
 
