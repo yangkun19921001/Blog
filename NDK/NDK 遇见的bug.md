@@ -84,7 +84,63 @@
 
    ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200412215011.png)
 
-4. 
+4. 缺少 c++_shared 动态库
 
+   ```groovy
+   externalNativeBuild {
+       cmake {
+   	//java.lang.UnsatisfiedLinkError: dlopen failed: library "libc++_shared.so" not found
+          //加上这句解决
+          arguments "-DANDROID_STL=c++_shared"
+           
+       }
+   }
+   ```
 
+5. 解决 " lib64 libc so 6 version `GLIBC_2 18' not found (required by lib
 
+   ```
+   curl -O http://ftp.gnu.org/gnu/glibc/glibc-2.18.tar.gz
+   tar zxf glibc-2.18.tar.gz 
+   cd glibc-2.18/
+   mkdir build
+   cd build/
+   ../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+   
+   
+   make 
+   make install
+   
+   安装完成后，查看是否成功
+   ll /lib64/libc*
+   然后可以继续查看 glibc支持的版本
+   strings /lib64/libc.so.6 | grep GLIBC
+   
+   //ll cp 等命令失效请用以下进行软连接   
+   LD_PRELOAD=/lib64/libc-2.17.so ln -s /lib64/libc-2.17.so /lib64/libc.so.6
+   
+   //升级glibc 版本
+   LD_PRELOAD=/opt/glibc-2.18/lib/libc-2.18.so ln -s /opt/glibc-2.18/lib/libc-2.18.so /lib64/libc.so.6
+   
+   //删除配置的环境变量
+   unset LD_LIBRARY_PATH
+   ```
+
+6、在make install过程中出现如下错误：
+   find / -name "ld.so.conf"
+
+   cp /etc/ld.so.conf / opt/glibc-2.14/etc/
+
+   make install
+
+   //查看 glibc 版本
+   ll /lib64/libc.so.6
+
+7、 undefined reference to
+
+CMakeFiles/audio.dir/native_audio.cpp.o: In function `Android_JNI_start(_JNIEnv*, _jobject*)':
+/Users/devyk/Data/Project/sample/github_code/audioplayer/audio_library/src/main/cpp/native_audio.cpp:52: undefined reference to `AudioPlayer::AudioPlayer(Status*)'
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+检查是否有定义 cpp/c 文件 是否有链接到库里面

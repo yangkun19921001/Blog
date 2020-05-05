@@ -244,37 +244,27 @@ Individual component options:
 
 ```
 
-### 编写 FFmpeg4.2.2 shell 脚本
+### 编写 32/64 位 FFmpeg4.2.2 shell 脚本
 
 ```shell
 #!/bin/bash
 
+echo ">>>>>>>>> 注意：该编译环境目前只在 NDK17c + ffmpeg4.2.2 测试过 <<<<<<<<"
+echo ">>>>>>>>> 注意：该编译环境目前只在 NDK17c + ffmpeg4.2.2 测试过 <<<<<<<<"
+echo ">>>>>>>>> 注意：该编译环境目前只在 NDK17c + ffmpeg4.2.2 测试过 <<<<<<<<"
+
 #NDK_ROOT 变量指向 ndk 目录
 NDK_ROOT=$NDK_HOME
-
-#TOOLCHAIN 变量指向 ndk 中的交叉编译gcc所在的目录。注意 NDK 高版本 18 开始移除了 #gcc 使用了 clang 
-TOOLCHAIN=$NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64
-
 #指定android api版本
-ANDROID_API=17
+ANDROID_API=21
 
-#此变量用于编译完成之后的库与头文件存放在哪个目录
-PREFIX=./android/armeabi-v7a
 
-#执行configure脚本，用于生成makefile
-#--prefix : 安装目录
-#--enable-small : 优化大小
-#--disable-programs : 不编译ffmpeg程序(命令行工具)，我们是需要获得静态(动态)库。
-#--disable-avdevice : 关闭avdevice模块，此模块在android中无用
-#--disable-encoders : 关闭所有编码器 (播放不需要编码)
-#--disable-muxers :  关闭所有复用器(封装器)，不需要生成mp4这样的文件，所以关闭
-#--disable-filters :关闭视频滤镜
-#--enable-cross-compile : 开启交叉编译
-#--cross-prefix: gcc的前缀 xxx/xxx/xxx-gcc 则给xxx/xxx/xxx-
-#disable-shared enable-static 不写也可以，默认就是这样的。
-#--sysroot: 
-#--extra-cflags: 会传给gcc的参数
-#--arch --target-os : 必须要给
+#开始编译 在下面调用传入参数即可
+function build_ffmpeg
+{
+echo "开始编译 $PREFIX_CPU"
+echo "开始编译 $PREFIX"
+echo "开始编译 $TOOLCHAIN"
 
 ./configure \
 --prefix=$PREFIX \
@@ -285,21 +275,47 @@ PREFIX=./android/armeabi-v7a
 --disable-muxers \
 --disable-filters \
 --enable-cross-compile \
---cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \
+--cross-prefix=$CROSS_PREFIX \
 --disable-shared \
 --enable-static \
---sysroot=$NDK_ROOT/platforms/android-$ANDROID_API/arch-arm \
---extra-cflags="-isysroot $NDK_ROOT/sysroot -isystem $NDK_ROOT/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=$ANDROID_API -U_FILE_OFFSET_BITS  -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -O0 -fPIC" \
---arch=arm \
+--sysroot=$NDK_ROOT/platforms/android-$ANDROID_API/arch-$ARCH \
+--extra-cflags="$CFLAGES" \
+--arch=$ARCH \
 --target-os=android
 
 #上面运行脚本生成makefile之后，使用make执行脚本
 make clean
 make
 make install
+
+echo "$PREFIX_CPU 编译完成"
+echo "$PREFIX_CPU 编译完成"
+echo "$PREFIX_CPU 编译完成"
+}
+
+#armeabi-v7a
+PREFIX=./result/armeabi-v7a
+TOOLCHAIN=$NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64
+ARCH=arm
+CROSS_PREFIX=$TOOLCHAIN/bin/arm-linux-androideabi-
+CFLAGES="-isysroot $NDK_ROOT/sysroot -isystem $NDK_ROOT/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=$ANDROID_API -U_FILE_OFFSET_BITS  -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -O0 -fPIC"
+
+build_ffmpeg
+
+#arm64-v8a
+PREFIX=./result/arm64-v8a
+TOOLCHAIN=$NDK_ROOT/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64
+ARCH=arm64
+CROSS_PREFIX=$TOOLCHAIN/bin/aarch64-linux-android-
+CFLAGES="-isysroot $NDK_ROOT/sysroot -isystem $NDK_ROOT/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=$ANDROID_API -U_FILE_OFFSET_BITS  -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O0 -fPIC"
+
+build_ffmpeg
+
+#直接跳转到编译完成的路径
+cd /result
 ```
 
-可以根据自己项目中的实际需求来传参。
+
 
 **编译遇见的坑:**
 
@@ -307,8 +323,9 @@ make install
 
    ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115101836.png)
 
-   原因：
+   原因 1：
    FFmpeg 4.2.2 版本默认使用了 clang 进行编译
+
    解决：
 
    ```shell
@@ -321,13 +338,17 @@ make install
    fi
    ```
 
+   原因 2：
+
+   检查路径是否正确
+
 2. nasm/yasm not found or too old. Use --disable-x86asm for a crippled build.
 
    分析：yasm 是汇编编译器，ffmpeg 为了提高效率使用了汇编指令，如 MMX 和 SSE等。
 
    所以系统中未安装yasm时，就会报上面错误。
 
-   ```
+   ```shell
    解决错误：安装yasm编译器。安装方法如下：
    
    1）下载：[yasm的下载链接]
@@ -350,7 +371,34 @@ make install
    
    ```
 
-3. config.mak 文件没有生成
+3. 解决 " lib64 libc so 6 version `GLIBC_2 18' not found (required by lib...
+
+   ```shell
+   curl -O http://ftp.gnu.org/gnu/glibc/glibc-2.18.tar.gz
+   tar zxf glibc-2.18.tar.gz 
+   cd glibc-2.18/
+   mkdir build
+   cd build/
+   ../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+   
+   make 
+   make install
+   
+   安装完成后，查看是否成功
+   ll /lib64/libc*
+   
+   然后可以继续查看 glibc 支持的版本
+   strings /lib64/libc.so.6 | grep GLIBC
+   
+   //------------------------------------------------------------
+   //下面可以不用参考，这个是我在升级 glibc 的时候把 libc-2.17.so 给误删除了，导致基本上瘫痪了，可以使用以下命令恢复
+   //ll cp 等命令失效请用以下进行软连接   
+   LD_PRELOAD=/lib64/libc-2.17.so ln -s /lib64/libc-2.17.so /lib64/libc.so.6
+   //如果不小心定义了错误环境变量可以通过以下命令删除
+   unset LD_LIBRARY_PATH
+   ```
+
+4. config.mak 文件没有生成
 
    ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115101946.png)
 
@@ -359,13 +407,15 @@ make install
 
    [更多坑错误请点击此处查看](https://www.laoyuyu.me/2019/05/23/android/clang_compile_ffmpeg/)
 
-错误解决完之后，按下回车键，如果出现如下输出，就开始在编译了:
+   错误解决完之后，按下回车键，如果出现如下输出，就开始在编译了:
 
-![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115101504.jpg)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115101504.jpg)
 
-大概等 10 分钟左右就会编译完成，如下所示就代表编译静态库成功了:
+   大概等 10 分钟左右就会编译完成，如下所示就代表编译静态库成功了:
 
-![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115120011.gif)
+   ![](https://devyk.oss-cn-qingdao.aliyuncs.com/blog/20200115120011.gif)
+
+
 
 如果想编译动态库，仅仅修改下参数就行了，如下所示:
 
@@ -530,4 +580,4 @@ tar -zcvf ffmpeg_android.tar.gz android
 
 ## 感谢
 
-- [FFmpeg 开源项目](https://www.ffmpeg.org/download.html)
+- [FFmpeg](https://www.ffmpeg.org/download.html)
