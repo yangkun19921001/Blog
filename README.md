@@ -157,6 +157,7 @@
 - [音视频学习 (九) 从 0 ~ 1 开发一款 Android 端播放器(支持多协议网络拉流/本地文件)](https://juejin.im/post/5e495ec1e51d452713551017)
 - [音视频学习 (十) 基于 Nginx 搭建(rtmp、http)直播服务器](https://juejin.im/post/5e4ec66c5188254967067502)
 - [音视频学习 (十一) Android 端实现 rtmp 推流](https://juejin.im/post/5e5d17276fb9a07cc01a29d3)
+- [音视频学习 (十二) 基于 FFmpeg + OpenSLES 实现音频万能播放器](https://juejin.im/post/5eb1880be51d454de7772152)
 - [WebRTC 学习记录 (一) 云服务器搭建 AppRTC 环境](https://juejin.im/post/5e8f4a606fb9a03c7a331bd3)
 
 ## 开源项目
