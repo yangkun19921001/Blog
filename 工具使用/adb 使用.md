@@ -499,6 +499,12 @@ adb shell dumpsys window w |grep \\/ |grep name=
     adb shell getprop ro.product.model
     ```
 
+58. 查看 CPU 信息
+
+    ```shell
+    adb shell cat /proc/cpuinfo
+    ```
+
     
 
 

@@ -98,17 +98,100 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 
    https://blog.lzuer.net/2016/10/10/github-pr/
 
-14. 
+14. Git 回退到某一个版本
 
+   ```
+   git reset --hard [commit id]
+   ```
+
+15. Git push 大文件处理
+
+   ```
+   https://git-lfs.github.com/
+   ```
+
+16. 合并某个分支某个文件代码
+
+   ```shell
+   git checkout 分支名 分支文件
    
+   ```
+```
+## git error
 
-   
+1、error: RPC failed; curl 18 transfer closed with outstanding read data remaining
 
-   
+        遇到的问题一：
+    
+    error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+    fatal: The remote end hung up unexpectedly
+    fatal: early EOF
+    fatal: index-pack failed
+    
+      #    解决方式一， 网上大部分解决措施：命令终端输入 
+      #   这个错误是因为项目太久，tag资源文件太大
+       git config --global http.postBuffer 524288000
 
-   
 
-   
+```
 
+## 强制 push
 
+```git
+git push -f origin master
+```
+
+## git push 大文件
+
+```shell
+#1. 直接从官网下载安装包 [](https://git-lfs.github.com/)
+
+#2. 解压进入包类输入命令 
+		git lfs install
+
+#3. 在项目中输入命令 追踪 所有 .a 文件
+		git lfs track "*.a"
+
+#4. 之后操作跟以往不变  add commit push
+```
+
+## git 查看需要删除远程的文件
+
+```
+#查看
+git rm -r -n --cached app/build
+#删除 
+git rm -r --cached app/build
+# 查看 git 相关文件占用的空间
+git count-objects -v 
+# 查看 .git 文件夹占用磁盘空间
+du -sh .git 
+```
+
+## git 删除所有提交记录
+
+```
+删除.git文件夹可能会导致git存储库中的问题。如果要删除所有提交历史记录，但将代码保持在当前状态，可以按照以下方式安全地执行此操作：
+
+#尝试  运行  
+git checkout --orphan latest_branch
+添加所有文件
+#git add -A
+#提交更改
+git commit -am "commit message"
+#删除分支
+git branch -D master
+#将当前分支重命名
+git branch -m master
+#最后，强制更新存储库。
+git push -f origin master
+```
+
+## 修改已经提交的 message
+
+```
+#1.输入如下命令
+git commit --amend
+#2. 在编辑框中输入修改的 message
+```
 

@@ -508,7 +508,7 @@ ProGuard 会移除所有 (并且只会移除) 未使用的代码。不过 , ProG
 
 ###### 编写基础通用版本混淆规则
 
-```java
+```
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #

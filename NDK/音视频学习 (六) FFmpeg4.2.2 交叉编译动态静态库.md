@@ -268,6 +268,14 @@ echo "开始编译 $TOOLCHAIN"
 
 ./configure \
 --prefix=$PREFIX \
+--disable-doc \
+--disable-yasm \
+--disable-asm \
+--disable-symver \
+--enable-gpl \
+--disable-ffplay \
+--disable-ffmpeg \
+--disable-ffprobe \
 --enable-small \
 --disable-programs \
 --disable-avdevice \
