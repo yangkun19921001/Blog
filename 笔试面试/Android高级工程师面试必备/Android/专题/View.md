@@ -13,6 +13,7 @@
 - [深入理解 Android 之 *View 的绘制*流程](http://www.jianshu.com/p/060b5f68da79)
 - [*View 绘制*流程浅析，我所理解的 *View 绘制*。](http://blog.csdn.net/silentweek/article/details/53467002)
 - [View 的工作原理上 View 绘制流程梳理及 Measure 过程详解](https://yongyu.itscoder.com/2016/09/11/view_measure/)
+-  [屏幕刷新机制](https://mp.weixin.qq.com/s/sYz0D7rxCOVzVgTIJImXaQ)
 
 
 
