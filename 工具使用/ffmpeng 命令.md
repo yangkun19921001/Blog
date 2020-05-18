@@ -1,6 +1,58 @@
 ## FFMPEG  - ffplay 命令
 
+//查看文件大小 ls -lht
+
 ## install
+
+## FFmpeg 学习地址
+
+```
+[Ffmpeg视频开发王纲](https://www.iqiyi.com/u/1426749687/videos)
+[FFmpeg音视频核心技术精讲与实战](https://coding.imooc.com/class/279.html)
+[ffmpeg 跟我学 视频教程](https://www.cnblogs.com/wanggang123/p/6412799.html)
+```
+
+### MAC
+
+- MAC install ffmpeg 的路径
+
+  ```
+  /usr/local/Cellar/ffmpeg/4.2.2_2
+  ```
+
+  
+
+## 码流建议
+
+- https://docs.agora.io/cn/Video/video_profile_android?platform=Android
+
+| 分辨率 (宽 x 高) | 帧率 (fps) | 基准码率 (Kbps，适用于通信) | 直播码率 (Kbps，适用于直播) |
+| ---------------- | ---------- | --------------------------- | --------------------------- |
+| 160 x 120        | 15         | 65                          | 130                         |
+| 120 x 120        | 15         | 50                          | 100                         |
+| 320 x 180        | 15         | 140                         | 280                         |
+| 180 x 180        | 15         | 100                         | 200                         |
+| 240 x 180        | 15         | 120                         | 240                         |
+| 320 x 240        | 15         | 200                         | 400                         |
+| 240 x 240        | 15         | 140                         | 280                         |
+| 424 x 240        | 15         | 220                         | 440                         |
+| 640 x 360        | 15         | 400                         | 800                         |
+| 360 x 360        | 15         | 260                         | 520                         |
+| 640 x 360        | 30         | 600                         | 1200                        |
+| 360 x 360        | 30         | 400                         | 800                         |
+| 480 x 360        | 15         | 320                         | 640                         |
+| 480 x 360        | 30         | 490                         | 980                         |
+| 640 x 480        | 15         | 500                         | 1000                        |
+| 480 x 480        | 15         | 400                         | 800                         |
+| 640 x 480        | 30         | 750                         | 1500                        |
+| 480 x 480        | 30         | 600                         | 1200                        |
+| 848 x 480        | 15         | 610                         | 1220                        |
+| 848 x 480        | 30         | 930                         | 1860                        |
+| 640 x 480        | 10         | 400                         | 800                         |
+| 1280 x 720       | 15         | 1130                        | 2260                        |
+| 1280 x 720       | 30         | 1710                        | 3420                        |
+| 960 x 720        | 15         | 910                         | 1820                        |
+| 960 x 720        | 30         | 1380                        | 2760                        |
 
 ### MAC
 
@@ -14,7 +66,7 @@ brew update && brew upgrade ffmpeg
 
 ## 推流
 
-### RTP 推流
+##RTP 推流
 
 ```
 ffmpeg -re -i chunwan.h264 -vcodec copy -f rtp rtp://233.233.233.223:6666>test.sdp
@@ -78,6 +130,14 @@ ffmpeg -i 20130312_133313.mp4 -codec copy -bsf h264_mp4toannexb -f h264 20130312
 20130312_133313.264：输出的文件名称
 ```
 
+### Flv_2_MP4
+
+```shell
+ffmpeg -i file.flv file.mp4
+```
+
+
+
 ### h264_2_mp4
 
 ```
@@ -93,11 +153,27 @@ ffplay -f rawvideo -video_size 1920x1080 a.yuv
 ffplay -video_size  1280x720  -i D:\Android\ffmpeg\temp\test3.yuv  -pixel_format  nv21
 ```
 
+### play H264
+
+```
+ffplay -stats -f h264 file.h264
+```
+
+
+
 ### YUV2H264
 
 ```
 ffmpeg -s 1280x720 -i D:\Android\ffmpeg\temp\test2.yuv -vcodec h264 D:\Android\ffmpeg\temp\test3.264
 ```
+
+### H264_2_YUV
+
+```
+ffmpeg -i  text.h264 -vcodec rawvideo -an out.yuv
+```
+
+
 
 ###缩放视频尺寸
 
@@ -158,6 +234,38 @@ ffplay -ar 44100 -channels 2 -f s16le -i ceshi.pcm
 ffmpeg -y -f s16le -ar 16k -ac 1 -i input.raw output.wav
 ```
 
+### pcm2amr
+
+```
+ffmpeg -f s16le -ar 8000 -ac 1 -i audio.pcm out.amr
+```
+
+### pcm2aac
+
+```
+ffmpeg -f s16le -ar 8000 -ac 1 -i audio.pcm out.aac
+```
+
+### pcm2mp3
+
+```
+ffmpeg -f s16le -ar 8000 -ac 1 -i audio.pcm out.mp3
+```
+
+### aac2pcm
+
+```
+-ar:音频的采样率 44100
+-ac2:双声道
+-f:音频的数据存储格式 s16le : 
+s 代表 有符号的，有正有负，
+16 代表每一个数值用16位表示 
+
+ffmpeg -i test.aac -vn -ar 44100 -ac 2 -f s16le test.pcm
+```
+
+
+
 ### 音频转换为 MP3 格式
 
 ```
@@ -186,6 +294,13 @@ ffmpeg -y  -i input.wav  input.mp3
 
 ```
 ffmpeg -y  -i input.mp3  input.wav
+```
+
+### 播放 AAC
+
+```
+// -ac指定通道个数，-ar指定采样率
+ffplay  test.aac
 ```
 
 
