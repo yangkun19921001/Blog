@@ -151,7 +151,7 @@ git push -f origin master
 
 #3. 在项目中输入命令 追踪 所有 .a 文件
 		git lfs track "*.a"
-
+		//git lfs untrack *.txt
 #4. 之后操作跟以往不变  add commit push
 ```
 
@@ -178,7 +178,7 @@ git checkout --orphan latest_branch
 添加所有文件
 #git add -A
 #提交更改
-git commit -am "commit message"
+git commit -m "commit message"
 #删除分支
 git branch -D master
 #将当前分支重命名
@@ -195,3 +195,35 @@ git commit --amend
 #2. 在编辑框中输入修改的 message
 ```
 
+
+
+### 本地仓库同步远程仓库
+
+```
+git fetch origin master
+```
+
+
+
+
+
+
+
+## BUG
+
+- 网页 check ping
+
+  ```
+  http://ping.chinaz.com/www.github.com
+  ```
+
+- git clone
+
+  LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443
+
+  ```
+  vim ~/.gitconfig
+  把里面关于https的配置删掉，然后就可以了
+  ```
+
+  

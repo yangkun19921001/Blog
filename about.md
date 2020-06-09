@@ -1,6 +1,6 @@
 ## 关于我
 
-- 手机/微信: 15810618744 (归属地北京)
+- 手机/微信: 15810618744 
 - Email: yang1001yk@gmail.com
 - 个人博客: [https://www.devyk.top](https://www.devyk.top)
 - GitHub: [https://github.com/yangkun19921001](https://github.com/yangkun19921001)
