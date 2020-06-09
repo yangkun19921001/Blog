@@ -1,6 +1,32 @@
 ## FFMPEG  - ffplay 命令
 
+[ffmpeg 示例代码](https://www.ffmpeg.org/doxygen/2.7/examples.html)
+
+### 查看信息
+
+###查看支持的编解码器
+
+```
 //查看文件大小 ls -lht
+查看支持的编解码器（也就是-vcodec后面可以接的参数）:
+命令：ffmpeg -codecs > codec.txt
+```
+
+### 查看支持的封装格式
+
+```
+
+查看支持的封装格式（也就是-f后面可以接的参数）
+命令：ffmpeg -formats > formats.txt
+```
+
+###查看支持的滤镜
+
+```
+
+查看支持的滤镜（也就是-vf后面可以接的参数）:
+命令：ffmpeg -filters > filters.txt
+```
 
 ## install
 
@@ -20,7 +46,8 @@
   /usr/local/Cellar/ffmpeg/4.2.2_2
   ```
 
-  
+
+
 
 ## 码流建议
 
@@ -134,6 +161,18 @@ ffmpeg -i 20130312_133313.mp4 -codec copy -bsf h264_mp4toannexb -f h264 20130312
 
 ```shell
 ffmpeg -i file.flv file.mp4
+```
+
+### FLV_2_AAC
+
+```
+ffmpeg -i xx.flv -acodec copy -vn test.aac
+```
+
+### MP4_2_PCM
+
+```
+ffmpeg -i out.mp4 -vn -ar 44100 -ac 2 -f s16le out.pcm
 ```
 
 
@@ -301,6 +340,12 @@ ffmpeg -y  -i input.mp3  input.wav
 ```
 // -ac指定通道个数，-ar指定采样率
 ffplay  test.aac
+```
+
+### 重采样
+
+```
+ffpmeg -i test.mp3 -ar 16000 test.wav
 ```
 
 
