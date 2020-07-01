@@ -10,6 +10,13 @@
 
 不设置Activity的android:configChanges时，切屏会重新回调各个生命周期，切横屏时会执行一次，切竖屏时会执行两次。 设置Activity的android:configChanges="orientation"时，切屏还是会调用各个生命周期，切换横竖屏只会执行一次 设置Activity的android:configChanges="orientation |keyboardHidden"时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
 
+>适配 Android 10 横竖屏切换配置：
+>
+><!-- 锁定布局在发生以下改变时，不重置状态 -->
+><item name="android:configChanges">orientation|keyboardHidden|screenSize</item>
+>
+>
+
 
 
 #### 3. activity的startActivity和context的startActivity区别？
@@ -445,6 +452,10 @@ Activity的 onSaveInstanceState() 和 onRestoreInstanceState()并不是生命周
 [深入理解](https://www.jianshu.com/p/89e0a7533dbe)
 
 ####23.[Activity 全面总结](https://github.com/yangchong211/YCBlogs/blob/master/android/基础组件/02.Activity基础介绍.md)
+
+#### 24.[5 道刁钻的 Activity 生命周期面试题](https://mp.weixin.qq.com/s/oFVGHq7h5byrFUfhajM1ww)
+
+
 
 
 

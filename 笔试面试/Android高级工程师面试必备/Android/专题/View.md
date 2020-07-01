@@ -1,8 +1,8 @@
 ### View 基础
 
 - [高级 UI 成长之路 (一) View 的基础知识你必须知道](https://juejin.im/post/5dcff9d3f265da0bd20af0da)
-
 - [淘宝如何做到展示亿级商品（强排版，强交互实现机制）](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+- [Android View 体系竟然还能这么理解？](https://mp.weixin.qq.com/s/ULSW2clH4AjpvlnwD3zgrQ)
 
 
 
@@ -14,6 +14,7 @@
 - [*View 绘制*流程浅析，我所理解的 *View 绘制*。](http://blog.csdn.net/silentweek/article/details/53467002)
 - [View 的工作原理上 View 绘制流程梳理及 Measure 过程详解](https://yongyu.itscoder.com/2016/09/11/view_measure/)
 -  [屏幕刷新机制](https://mp.weixin.qq.com/s/sYz0D7rxCOVzVgTIJImXaQ)
+-  
 
 
 

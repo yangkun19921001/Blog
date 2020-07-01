@@ -86,6 +86,10 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 
    Git tag [tagname]
    
+   //根据描述来打 tag
+   
+   git tag v10433 -m "修复火警类型转换异常问题" 82d7f7c
+   
 11. 删除一个本地分支
 
    git branch -d [name]
@@ -204,6 +208,13 @@ git fetch origin master
 ```
 
 
+
+### 分支合并
+
+```
+//将 dev 分支合并到 merge 中
+git  merge dev
+```
 
 
 

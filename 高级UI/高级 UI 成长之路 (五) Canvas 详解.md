@@ -885,7 +885,16 @@ Canvas 基础 API 绘制和实战示例，到这里就已经全部结束，这�
 
 感谢你的阅读，希望能带给你帮助！
 
+
+
 ## 参考 
 
 - https://juejin.im/post/5be29aa2e51d45228170ff33
 - https://www.cnblogs.com/over140/archive/2011/12/14/2287179.html
+
+
+
+## 适合自定义 View 练习的实战项目
+
+- [绘制小黄人](https://mp.weixin.qq.com/s/8homSyP6l6vYP9qzOk8w8A)
+- [股票折线图](https://github.com/SlamDunk007/StockChart)
