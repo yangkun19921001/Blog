@@ -183,6 +183,7 @@
 - https://github.com/sucese/android-open-source-project-analysis
 - https://github.com/interviewandroid/AndroidInterView
 - [12.1 k Android 面试题](https://github.com/francistao/LearningNotes)
+-  [Java 程序员面试宝典](https://books.google.com.hk/books?id=R8DUDwAAQBAJ&printsec=frontcover&hl=zh-CN#v=onepage&q&f=false)
 
 
 
