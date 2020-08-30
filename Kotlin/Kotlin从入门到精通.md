@@ -414,3 +414,68 @@ typealias AInner = A.Inner
 typealias BInner = B.Inner
 ```
 
+
+
+## 参数传递
+
+### 无参数函数调用
+
+```kotlin
+class HelloWorld {
+
+    fun say() {
+        Timber.i("Hello World")
+    }
+
+    /**
+    * 在 Kotlin 中无返回为 Unit
+    *
+    * 此方法接收一个无参数的函数并且无返回
+    *
+    * 使用参数名加 () 来调用
+    */
+    fun people(hello: () -> Unit) {
+        hello()
+    }
+
+    /**
+    * 在 kotlin 中有一个约定，如果最后一个参数是函数，可以省略括号
+    */
+    fun main() {
+        people ({ say() })
+        people { say() }
+    }
+
+}
+```
+
+
+
+### 有参数函数调用
+
+```kotlin
+class Hello {
+
+    fun say(msg: String) {
+        Timber.i("Hello $msg")
+    }
+
+    /**
+    * 当调用的函数有形参时，
+    * 需要在调用的函数声明，并使用声明的形参；
+    * 函数参数中的形参无法使用
+    */
+    fun people(arg0: String, hello: (arg1: String) -> Unit) {
+        hello(arg0)
+        // hello(arg1) 这样调用将报错
+    }
+
+    fun main() {
+        people("Android") { say("World") }
+    }
+
+}
+```
+
+
+
