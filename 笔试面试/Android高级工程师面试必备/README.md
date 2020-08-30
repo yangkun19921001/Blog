@@ -66,7 +66,7 @@
 
 - [计算机网络](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)
 - [HTTP](https://cyc2018.github.io/CS-Notes/#/notes/HTTP)
-- [Socket](https://cyc2018.github.io/CS-Notes/#/notes/Socket)
+- [TCP](https://mp.weixin.qq.com/s/0VtugnDC5V30EZrctpGwKA)
 
 ## Android
 

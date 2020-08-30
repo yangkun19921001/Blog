@@ -218,7 +218,9 @@ git  merge dev
 
 
 
+## 从 Git Large File Storage 中删除文件
 
+https://docs.github.com/cn/github/managing-large-files/removing-files-from-git-large-file-storage
 
 ## BUG
 

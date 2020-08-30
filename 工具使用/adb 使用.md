@@ -505,6 +505,15 @@ adb shell dumpsys window w |grep \\/ |grep name=
     adb shell cat /proc/cpuinfo
     ```
 
+59. 导出 ANR
+
+    ```
+    //高版本
+    adb bugreport
+    //低版本 
+    adb pull data/anr
+    ```
+
     
 
 
