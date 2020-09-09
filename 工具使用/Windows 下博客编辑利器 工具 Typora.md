@@ -279,6 +279,9 @@ Markdown 使用了类似链接的语法来插入图片, 包含两种形式: **�
 ![Alt text](/path/to/img.jpg)
 或
 ![Alt text](/path/to/img.jpg "Optional title")
+
+//Html
+<div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/0dd2d40a-5b2b-4d45-b176-e75a4cd4bdbf.png" width="500px"> </div><br>
 ```
 
 也就是:
