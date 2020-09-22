@@ -534,6 +534,16 @@ tar -zcvf ffmpeg_android.tar.gz android
 
 利用 **FileZill 工具** 从服务器端把编译好的静态文件导出到电脑本地，导出完之后我们就在 AS 中测试编译的 .a 文件是否有误。
 
+5. ERROR: mediacodec requires --enable-jni
+
+   ```shell
+   --enable-jni 
+   ```
+
+   
+
+
+
 ## Android 集成交叉编译之后的 FFmpeg 静态库
 
 1. 创建一个 C/C++ 项目的 Android 工程，并把编译好的静态库导入项目中，如下结构:

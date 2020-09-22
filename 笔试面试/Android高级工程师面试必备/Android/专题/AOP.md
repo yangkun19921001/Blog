@@ -1,2 +1,4 @@
-- [AOP面向切面编程原理](https://github.com/interviewandroid/AndroidInterView/blob/master/android/thread.md)
+- [Android面向切面编程（AOP）](https://juejin.im/post/6844903511835017223)
+- [谈谈Android AOP技术方案](https://juejin.im/post/6844904017760370695)
+- [Android AOP概述](https://juejin.im/post/6844903871341395975)
 - [一行代码解决多次点击](https://mp.weixin.qq.com/s/Izu2KhtDDB2rTglJa8ouIA)

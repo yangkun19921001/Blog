@@ -1,8 +1,28 @@
 ```java
-    private void hookOnClickListener(View view) {
+/**
+ * 实现点击监听
+ */
+public class OnClickListenerProxy implements View.OnClickListener{
+    private View.OnClickListener mOriginalListener;
+
+    //直接在构造函数中传进来原来的OnClickListener
+    public OnClickListenerProxy(View.OnClickListener originalListener) {
+        mOriginalListener = originalListener;
+    }
+
+    @Override public void onClick(View v) {
+        if (mOriginalListener != null) {
+            mOriginalListener.onClick(v);
+        }
+        Log.d("LOGCAT","hooked!");
+    }
+}   
+
+public static void hookOnClickListener(View view) {
         try {
             // 得到 View 的 ListenerInfo 对象
             Method getListenerInfo = View.class.getDeclaredMethod("getListenerInfo");
+            //修改getListenerInfo为可访问(View中的getListenerInfo不是public)
             getListenerInfo.setAccessible(true);
             Object listenerInfo = getListenerInfo.invoke(view);
             // 得到 原始的 OnClickListener 对象
@@ -11,12 +31,13 @@
             mOnClickListener.setAccessible(true);
             View.OnClickListener originOnClickListener = (View.OnClickListener) mOnClickListener.get(listenerInfo);
             // 用自定义的 OnClickListener 替换原始的 OnClickListener
-            View.OnClickListener hookedOnClickListener = new HookedOnClickListener(originOnClickListener);
+            View.OnClickListener hookedOnClickListener = new OnClickListenerProxy(originOnClickListener);
             mOnClickListener.set(listenerInfo, hookedOnClickListener);
         } catch (Exception e) {
-            Log.e("hook clickListener failed!", e.getMessage());
+            Log.d("LOGCAT","hook clickListener failed!", e);
         }
     }
+
 
     public void hookH_Handler() {
         try {
