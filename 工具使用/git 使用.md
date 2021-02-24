@@ -145,6 +145,12 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 git push -f origin master
 ```
 
+## 拉取最新版本
+
+```
+Git pull
+```
+
 ## git push 大文件
 
 ```shell
@@ -221,6 +227,178 @@ git  merge dev
 ## 从 Git Large File Storage 中删除文件
 
 https://docs.github.com/cn/github/managing-large-files/removing-files-from-git-large-file-storage
+
+## Git push 本地分支
+
+```
+git push origin [name]
+```
+
+
+
+##Git 创建新分支
+
+```
+git checkout -b [name]
+```
+
+
+
+## Git clone 分支
+
+```
+找一个干净目录，假设是git_work
+cd git_work
+git clone http://myrepo.xxx.com/project/.git ,这样在git_work目录下得到一个project子目录
+cd project
+git branch -a，列出所有分支名称如下：
+remotes/origin/dev
+remotes/origin/release
+git checkout -b dev origin/dev，作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
+git checkout -b release origin/release，作用参见上一步解释
+git checkout dev，切换回dev分支，并开始开发。
+```
+
+
+
+### Git checkout 远端分支
+
+```shell
+//查看远程所有分支
+$ git branch -a
+
+* dev
+ master
+ remotes/origin/HEAD -> origin/master
+ remotes/origin/master
+ remotes/origin/release/caigou_v1.0
+ 
+ //新建分支并切换到指定分支
+ git checkout -b dev origin/release/caigou_v1.0
+ 
+ //查看本地分支及追踪的分支
+ git branch -vv
+ 
+ //将本地分支推送到远程
+ git push -u origin dev:release/caigou_v1.0
+```
+
+
+
+
+
+## git commit 撤销
+
+```
+git reset --soft HEAD^
+```
+
+## 版本回退
+
+```
+//先用下面命令找到要回退的版本的commit id：
+git reflog
+//接着回退版本:
+git reset --hard Obfafd
+
+//紧接着强制推送到远程分支：
+git push -f origin master ## 这里假设只有一个master分支
+```
+
+
+
+## Git 寻找大文件并删除
+
+```shell
+//参考 https://harttle.land/2016/03/22/purge-large-files-in-gitrepo.html
+//1、首先通过rev-list来找到仓库记录中的大文件：
+git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
+
+//2、然后通过filter-branch来重写这些大文件涉及到的所有提交（重写历史记录）：
+git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
+```
+
+
+
+## Git 删除远端分支
+
+```shell
+//1、查看远端分支
+git branch -a
+//2、删除远端分支
+git push origin --delete 分支名称
+
+//删除本地分支
+git branch -d
+```
+
+
+
+## Git 修改分支名称
+
+```shell
+1. 本地分支重命名(还没有推送到远程)
+git branch -m oldName newName
+
+2. 远程分支重命名 (已经推送远程-假设本地分支和远程对应分支名称相同)
+a. 重命名远程分支对应的本地分支
+git branch -m oldName newName
+
+b. 删除远程分支
+git push --delete origin oldName
+
+c. 上传新命名的本地分支
+git push origin newName
+
+d.把修改后的本地分支与远程分支关联
+git branch --set-upstream-to origin/newName
+```
+
+
+
+### Git 合并指定分支的文件或文件夹到当前 branch
+
+```shell
+//合并指定分支的文件夹
+git checkout message-module-dev  app/src/main/java/com/piaoquantv/piaoquanvideoplus/videocreate/**
+
+//合并指定分支的文件
+git checkout message-module-dev   app/src/main/java/com/piaoquantv/piaoquanvideoplus/Contacts.kt
+```
+
+
+
+### 临时保存和恢复修改
+
+- git stash
+
+  保存当前工作进度，将工作区和暂存区恢复到修改之前。
+
+- git stash save message
+
+  作用同上，message为此次进度保存的说明。
+
+- git stash list
+
+  显示保存的工作进度列表，编号越小代表保存进度的时间越近。
+
+- git stash pop stash@{num}
+
+  恢复工作进度到工作区，此命令的stash@{num}是可选项，在多个工作进度中可以选择恢复，不带此项则默认恢复最近的一次进度相当于`git stash pop stash@{0}`
+
+- git stash apply stash@{num}
+
+  恢复工作进度到工作区且该工作进度可重复恢复，此命令的stash@{num}是可选项，在多个工作进度中可以选择恢复，不带此项则默认恢复最近的一次进度相当于`git stash apply stash@{0}`。
+
+- git stash drop stash@{num}
+
+  删除一条保存的工作进度，此命令的stash@{num}是可选项，在多个工作进度中可以选择删除，不带此项则默认删除最近的一次进度相当于`git stash drop stash@{0}`
+
+- 命令：`git stash clear`
+
+  删除所有保存的工作进度
+
+
 
 ## BUG
 
