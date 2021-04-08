@@ -4,6 +4,10 @@
 
 [FFmpeg 命令参数](https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html)
 
+[FFmpeg 中文命令文档](https://www.bookstack.cn/read/other-doc-cn-ffmpeg/ffmpeg-doc-cn-34.md)
+
+[官方命令 sample](https://ffmpeg.org/ffmpeg.html#Main-options)
+
 ### 基础参数
 
 ```shell
@@ -16,6 +20,11 @@
 -vcodec libx264                                             # 旧写法
 -acodec aac                                                 # 旧写法
 -fs SIZE                                                    # 指定文件大小
+-buildconf																									# 显示编译配置信息
+-demuxers																										# 显示多路解复用器信息
+-muxers																											# 显示多路封装器信息
+-devices																										# 显示可用的设备
+-hide_banner																								# 禁止打印横幅
 ```
 
 
@@ -94,6 +103,22 @@ ffmpeg -encoders
 
 ### MAC
 
+- install
+
+  ```
+  brew install ffmpeg
+  //配置环境变量
+  vim .bash_profile
+  //保存环境变量
+  source .bash_profile
+  
+  
+  //查看安装是否成功
+  ffmpeg
+  ```
+
+  
+
 - MAC install ffmpeg 的路径
 
   ```
@@ -145,6 +170,32 @@ brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-libass -
 brew update && brew upgrade ffmpeg
 ```
 
+## FFprobe
+
+### 查看详细的帮助信息
+
+```
+ffprobe --help
+```
+
+### 查看多媒体封装格式
+
+```
+-show_format 
+```
+
+### 查看视频文件中的帧信息
+
+```
+-show_frames
+```
+
+### 查看视频文件中的流信息、
+
+```
+-show_streams
+```
+
 ## 推流
 
 ##RTP 推流
@@ -193,11 +244,34 @@ ffplay bunny.sdp -protocol_whitelist file,udp,rtp
 
 
 
+### 获取视频总帧率
+
+```shell
+ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of default=nokey=1:noprint_wrappers=1 test.mp4
+```
+
+
+
+
+
 ###查看视频信息
 
 ```
 ffmpeg -i xxx.mp4
 ```
+
+
+
+### merge
+
+```
+ffmpeg -y -i /Users/devyk/Data/Project/piaoquan/文档/1月出行发票/test_mp4.mp4 -i /Users/devyk/Data/Project/piaoquan/文档/1月出行发票/test_mp4的副本.mp4 -vcodec copy -vsync 2 -filter_complex '[0:v]scale=720:1280,setdar=720/1280[outv0];[1:v]scale=720:1280,setdar=720/1280[outv1];[outv0][outv1]concat=n=2:v=1:a=0[outv];[0:a][1:a]concat=n=2:v=0:a=1[outa]' -map '[outv]' -map '[outa]' -preset superfast out.mp4
+
+
+ 
+```
+
+
 
 ###转码
 
@@ -226,6 +300,32 @@ ffmpeg -i input.mp4 -vf "crop=400:300:10:10" output.mp4     # 视频尺寸裁剪
 ```shell
 ffmpeg -i input.mov output.mp4                              # 转码为 MP4
 ```
+
+### 提取音频和视频合成新的视频
+
+
+
+```
+ffmpeg -itsoffset 00:00:00.900 -i whs_sec08.mp4 -i whs_sec08.mp4  -map 0:v -map 1:a -vcodec copy -acodec copy whsad.mp4
+说明：上面的命令把视频推迟了0.9秒
+
+-itsoffset 00:00:00.900  推迟后面的输入0.9秒
+
+-i whs_sec08.mp4  第一个输入流
+
+-i whs_sec08.mp4  第二个输入流
+
+-map 0:v  提取第一个输入流的视频
+
+-map 1:a  提取第二个输入流的音频
+
+-vcodec copy -acodec copy 视频音频编码均为复制
+
+whsad.mp4 输出文件
+
+```
+
+
 
 
 
@@ -440,7 +540,7 @@ ffmpeg -i big.mov -vf scale=360:-1  small.mov
 ffmpeg -i input.mov -filter:v "setpts=0.5*PTS" output.mov
 ```
 
-### 定义帧率 16fps:
+### 定义帧率 16fps :
 
 ```
 ffmpeg -i input.mov -r 16 -filter:v "setpts=0.125*PTS" -an output.mov
@@ -629,7 +729,77 @@ ffmpeg -i 片头.wav -i 内容.WAV -i 片尾.wav -filter_complex '[0:0] [1:0] [2
 
 //测试成功
 ffmpeg -i 'concat:test_loop.mp3|test_loop.mp3|test_loop.mp3' -acodec copy merge___.mp3
+
+ffmpeg -i 'concat:/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/225502619098923.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/225502629482777.mp3' -acodec copy merge___.mp3
+
+ffmpeg -i 225502619098923.mp3 -i 225502629482777.mp3 -filter_complex '[0:0] [1:0] concat=n=2:v=0:a=1 [a]' -map [a] j5.mp3
+
+ffmpeg -i 225502629482777.mp3 -vn 2.mp3
+ffmpeg -i 225502631949444.mp3 -vn 3.mp3
+ffmpeg -i 225516668949963.mp3 -vn 4.mp3
+ffmpeg -i 225502628459861.mp3 -vn 5.mp3
+ffmpeg -i 225502630660382.mp3 -vn 6.mp3
+ffmpeg -i 225502633395798.mp3 -vn 7.mp3
+
+ffmpeg -i 'concat:/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/a.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/b.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/c.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/d.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/e.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/f.mp3|' -acodec copy -y merge___.mp3
+
+2021-03-31 14:42:53.045 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 29162 , end = 29162
+2021-03-31 14:43:03.276 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 78062 , end = 78062
+2021-03-31 14:43:09.955 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 96356 , end = 96356
+2021-03-31 14:43:18.396 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 141468 , end = 141468
+2021-03-31 14:43:26.645 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 179475 , end = 179475
+
+
+2021-03-31 14:42:53.813 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 0 duration=12192789 delay=0
+2021-03-31 14:42:53.825 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 34416 duration=42982040 delay=34416
+2021-03-31 14:42:53.841 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 77416 duration=18301859 delay=77416
+2021-03-31 14:42:53.853 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 77416 duration=4824000 delay=77416
+2021-03-31 14:42:53.858 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 82240 duration=4572000 delay=82240
+2021-03-31 14:42:53.864 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 86812 duration=3636000 delay=86812
+2021-03-31 14:42:53.870 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 90448 duration=3816000 delay=90448
+2021-03-31 14:42:53.876 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 94264 duration=3240000 delay=94264
+2021-03-31 14:42:53.882 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 97504 duration=3492000 delay=97504
+2021-03-31 14:42:53.895 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 100996 duration=77824000 delay=100996
+2021-03-31 14:42:53.915 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 104615 duration=36208390 delay=104615
+2021-03-31 14:42:53.944 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 140812 duration=38000136 delay=140812
+
+
+0 29162 78062 96356 141468 179475 
+0 34416 77416 77416 82240 86812 90448 94264 97504 100996 104615 140812
+
+
+
+
+
+
+
+
+video   audio 
+18120   18042
+27560   27376
+37000   36687
+68440   68173
+214520  214180
+234760  234543
+
+
+arrayListOf("sdcard/SpeedPiaoquanVideo/create/ossMaterial/62678018a765effdc4646bba82f105a7ad414351616996679950","sdcard/SpeedPiaoquanVideo/create/ossMaterial/62678017f60649e5a624977ab5d8271c641920c1616996690431","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801c5ee0eec8e014fee9625788529a687d71616996694186","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801e959c9d7afb045bc86167d0cf451ffc81616996697882","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801d3699f65c54a4edcb75c3c729ab575c01616996711173","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801199bdb03711c48cd9982ee387c8f22671616996768259")
+
+
+
+
+
+
+
+
 ```
+
+
+
+
+
+225502619098923.mp3            225502629482777.mp3            225502631949444.mp3            225516668949963.mp4
+225502628459861.mp3            225502630660382.mp3            225502633395798.mp3            225516668949963_AudioMerge.mp4
 
 
 
@@ -678,6 +848,68 @@ ffmpeg -i small.mp4 -b 2048k small.gif
 
 
 
+### 图片压缩
+
+```
+ffmpeg -i input.jpg -q 5 output.jpg
+```
+
+### 混音
+
+```
+ffmpeg -y  -i input1.wav  -iinput2.wav -filter_complex amix=inputs=2:duration=first:dropout_transition=4  output.wav
+// input1.wav 和 input2.wav是需要混合输入的两个音频；
+//amix=inputs=输入的音频个数，默认是2；
+//duration=音频周期时常，默认是最长的
+inputs
+The number of inputs. If unspecified, it defaults to 2.//输入的数量，如果没有指明，默认为2.
+ 
+duration
+How to determine the end-of-stream.//决定了流的结束
+ 
+longest
+The duration of the longest input. (default)//最长输入的持续时间
+ 
+shortest
+The duration of the shortest input.//最短输入的持续时间
+ 
+first
+The duration of the first input.//第一个输入的持续时间
+ 
+dropout_transition
+The transition time, in seconds, for volume renormalization when an input stream ends. The default value is 2 seconds.
+//输入流结束时（音频）容量重整化的转换时间（以秒为单位）。 默认值为2秒
+
+大多数的时候，音频混合还会涉及到某个音频需要延迟，例如需要混音的第二个音频要在第一个音频的第五秒才开始播放，这就要使用ffmpeg的-itsoffset命令：
+
+ffmpeg -y  -i  input1.wav -itsoffset 5 -i input2.wav -filter_complex amix=inputs=2:duration=first:dropout_transition=4 -async 1  output.wav    
+
+-itsoffset  offset ： 延迟时间offset秒；
+
+注意：一定要在音频输出之前加上 -async 1 命令，否则 -itsoffset 命令失效。
+
+
+
+// 音频混合，调整第1个音频的音量和第2个音频的音量
+ffmpeg -i ../../video/output.mp3 -i ../../video/new1.mp3 -filter_complex "[0:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.5[a0]; [1:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.9[a1]; [a0][a1]amerge=inputs=2[aout]" -map "[aout]" -ac 2 ../../video/mix_v0.5.mp3
+
+// 音频混合，调整第1个音频的音量和第2个音频的音量
+ffmpeg -i ../../video/output.mp3 -i ../../video/new2.mp3 -filter_complex "[0:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.5[a0]; [1:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.9,adelay=5000|5000|5000,apad[a1]; [a0][a1]amerge=inputs=2[aout]" -shortest -map "[aout]" -ac 2 ../../video/mix_new1.mp3
+// apad  -shortest   是使音频长度为最长
+// adelay            延时播放时间
+
+// 音视频混合，调整第1个音频的音量和第2个音频的音量 
+ffmpeg -i ../../video/demo.mp4 -i ../../video/new2.mp3 -filter_complex "[0:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.4[a0]; [1:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.9,adelay=5000|5000|5000[a1]; [a0][a1]amix=inputs=2:duration=first[aout]" -map [aout] -ac 2 -c:v copy -map 0:v:0 ../../video/mix_amerge3.mp4
+或者
+ffmpeg -i ../../video/demo.mp4 -i ../../video/new2.mp3 -filter_complex [0:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.4[a0];[1:a]aformat=sample_fmts=fltp:channel_layouts=stereo,volume=0.9,adelay="5000|5000|5000"[a1];[a0][a1]amix=inputs=2:duration=first[aout] -map [aout] -ac 2 -c:v copy -map 0:v:0 E:\software\video\outfileName.mp4 E:\software\outfileName.mp4
+
+
+```
+
+
+
+
+
 ## 常用 linux 命令
 
 - 压缩
@@ -720,101 +952,13 @@ ffmpeg -i small.mp4 -b 2048k small.gif
 
 
 
-```
- devyk@DevYK-MacBookPro  ~/Data/Project/piaoquan/PiaoquanVideoPlus/output   video_create_audiorecord ●  ffmpeg -i s_0_1612701420767.mp3 -filter_complex volumedetect -c:v copy -f null /dev/null 
-ffmpeg version 4.3.1 Copyright (c) 2000-2020 the FFmpeg developers
-  built with Apple clang version 11.0.0 (clang-1100.0.33.17)
-  configuration: --prefix=/usr/local/Cellar/ffmpeg/4.3.1_8 --enable-shared --enable-pthreads --enable-version3 --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libbluray --enable-libdav1d --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librtmp --enable-libspeex --enable-libsoxr --enable-videotoolbox --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack
-  libavutil      56. 51.100 / 56. 51.100
-  libavcodec     58. 91.100 / 58. 91.100
-  libavformat    58. 45.100 / 58. 45.100
-  libavdevice    58. 10.100 / 58. 10.100
-  libavfilter     7. 85.100 /  7. 85.100
-  libavresample   4.  0.  0 /  4.  0.  0
-  libswscale      5.  7.100 /  5.  7.100
-  libswresample   3.  7.100 /  3.  7.100
-  libpostproc    55.  7.100 / 55.  7.100
-[mp3 @ 0x7fe6e6001400] Estimating duration from bitrate, this may be inaccurate
-Input #0, mp3, from 's_0_1612701420767.mp3':
-  Duration: 00:00:02.56, start: 0.000000, bitrate: 32 kb/s
-    Stream #0:0: Audio: mp3, 16000 Hz, mono, fltp, 32 kb/s
-[Parsed_volumedetect_0 @ 0x7fe6e5f00440] n_samples: 0
-Stream mapping:
-  Stream #0:0 (mp3float) -> volumedetect
-  volumedetect -> Stream #0:0 (pcm_s16le)
-Press [q] to stop, [?] for help
-Output #0, null, to '/dev/null':
-  Metadata:
-    encoder         : Lavf58.45.100
-    Stream #0:0: Audio: pcm_s16le, 16000 Hz, mono, s16, 256 kb/s
-    Metadata:
-      encoder         : Lavc58.91.100 pcm_s16le
-size=N/A time=00:00:02.55 bitrate=N/A speed= 530x    
-video:0kB audio:80kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] n_samples: 40896
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] mean_volume: -18.6 dB
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] max_volume: -1.6 dB
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] histogram_1db: 3
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] histogram_2db: 27
-[Parsed_volumedetect_0 @ 0x7fe6e5f00680] histogram_3db: 54
-
-```
 
 
 
 
 
-```
- devyk@DevYK-MacBookPro  ~/Data/Project/piaoquan/PiaoquanVideoPlus/output   video_create_audiorecord ●  ffmpeg -i merge_1612700788878.mp3 -filter_complex volumedetect -c:v copy -f null /dev/null 
-ffmpeg version 4.3.1 Copyright (c) 2000-2020 the FFmpeg developers
-  built with Apple clang version 11.0.0 (clang-1100.0.33.17)
-  configuration: --prefix=/usr/local/Cellar/ffmpeg/4.3.1_8 --enable-shared --enable-pthreads --enable-version3 --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libbluray --enable-libdav1d --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librtmp --enable-libspeex --enable-libsoxr --enable-videotoolbox --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack
-  libavutil      56. 51.100 / 56. 51.100
-  libavcodec     58. 91.100 / 58. 91.100
-  libavformat    58. 45.100 / 58. 45.100
-  libavdevice    58. 10.100 / 58. 10.100
-  libavfilter     7. 85.100 /  7. 85.100
-  libavresample   4.  0.  0 /  4.  0.  0
-  libswscale      5.  7.100 /  5.  7.100
-  libswresample   3.  7.100 /  3.  7.100
-  libpostproc    55.  7.100 / 55.  7.100
-[mp3 @ 0x7ffb9c800000] Estimating duration from bitrate, this may be inaccurate
-Input #0, mp3, from 'merge_1612700788878.mp3':
-  Duration: 00:00:02.35, start: 0.000000, bitrate: 32 kb/s
-    Stream #0:0: Audio: mp3, 44100 Hz, mono, fltp, 32 kb/s
-[Parsed_volumedetect_0 @ 0x7ffb9ae01180] n_samples: 0
-Stream mapping:
-  Stream #0:0 (mp3float) -> volumedetect
-  volumedetect -> Stream #0:0 (pcm_s16le)
-Press [q] to stop, [?] for help
-Output #0, null, to '/dev/null':
-  Metadata:
-    encoder         : Lavf58.45.100
-    Stream #0:0: Audio: pcm_s16le, 44100 Hz, mono, s16, 705 kb/s
-    Metadata:
-      encoder         : Lavc58.91.100 pcm_s16le
-size=N/A time=00:00:02.35 bitrate=N/A speed= 386x    
-video:0kB audio:202kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] n_samples: 103680
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] mean_volume: -62.9 dB
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] max_volume: -44.4 dB
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] histogram_44db: 3
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] histogram_45db: 9
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] histogram_46db: 19
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] histogram_47db: 46
-[Parsed_volumedetect_0 @ 0x7ffb9ae09ac0] histogram_48db: 71
 
 
--i  'concat:/storage/emulated/0/SpeedPiaoquanVideo/create/record_mp3/record_1612702954144.mp3|/storage/emulated/0/SpeedPiaoquanVideo/create/record_mp3/record_1612702960645.mp3 -filter：“volume = 20dB” /storage/emulated/0/SpeedPiaoquanVideo/create/record_mp3/merge_1612702967164.mp3
-
-video:0kB audio:666kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-[Parsed_volumedetect_0 @ 0x7f9c47e0f480] n_samples: 340992
-[Parsed_volumedetect_0 @ 0x7f9c47e0f480] mean_volume: -16.6 dB
-[Parsed_volumedetect_0 @ 0x7f9c47e0f480] max_volume: -0.6 dB
-[Parsed_volumedetect_0 @ 0x7f9c47e0f480] histogram_0db: 65
-[Parsed_volumedetect_0 @ 0x7f9c47e0f480] histogram_1db: 605
-
-```
 
 
 

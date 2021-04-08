@@ -516,9 +516,21 @@ adb shell dumpsys window w |grep \\/ |grep name=
 
     
 
+60. apk 签名
 
+    ```
+    /Users/devyk/Data/Android/SDK/build-tools/26.0.1/apksigner sign --ks /Users/devyk/Downloads/jianyin.keystore  --ks-key-alias jianyin --ks-pass pass:112233 --key-pass pass:112233 --out tap_sign.apk /Users/devyk/Downloads/tap_unsign.apk
+    ```
 
+    
 
+61. 过滤日志
+
+    ```
+    adb logcat | grep MyApp
+    ```
+
+    
 
 
 
