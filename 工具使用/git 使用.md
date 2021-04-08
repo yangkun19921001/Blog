@@ -314,6 +314,8 @@ git push -f origin master ## 这里假设只有一个master分支
 //1、首先通过rev-list来找到仓库记录中的大文件：
 git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
 
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch ffmpeg-mediacodec-test-yuv.yuv'
+
 //2、然后通过filter-branch来重写这些大文件涉及到的所有提交（重写历史记录）：
 git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
 ```
