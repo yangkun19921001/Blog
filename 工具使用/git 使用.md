@@ -94,6 +94,33 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 
    git branch -d [name]
 
+     baidu_location_report
+     config_share_wechat
+     del_umeng_push
+
+   * dev
+     dev-piaoquan-jianyin
+     dev-piaoquan-longvideo
+     dev-piaoquan-quanmingjianji
+     dev-v2.4.4-merge
+     dev_lebo_screen
+     dev_umeng_push
+     dev_v2.4.7_netrestips
+     draft_module
+     fix_avmerge_bug
+     fix_dev
+     master
+     git branch -d message-module-dev
+     muxer_optimize
+     git branch -d quanminjianji
+     git branch -d re_create
+     git branch -d v2.3.10
+     git branch -d video-create
+     git branch -d video-create-opt
+     git branch -d video_create_audiorecord
+     git branch -d video_create_music_serach
+     video_create_v2
+
 12. 检出一个新分支
 
    git checkout -b 11120c30443f7e3861d78225fe0cd949c131cc19
@@ -240,6 +267,14 @@ git push origin [name]
 
 ```
 git checkout -b [name]
+```
+
+
+
+### 修改分支名称
+
+```
+git remote set-url origin http://192.168.100.235:9797/john/git_test.git
 ```
 
 
@@ -423,9 +458,5 @@ git checkout message-module-dev   app/src/main/java/com/piaoquantv/piaoquanvideo
 
 
 
-```sql
 
-
-
-```
 

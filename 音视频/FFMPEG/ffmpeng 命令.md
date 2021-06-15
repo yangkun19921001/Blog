@@ -27,7 +27,9 @@
 -hide_banner																								# 禁止打印横幅
 ```
 
-
+```
+We are in 2014 1234 5678 91011 1213 1415
+```
 
 ### 使用格式
 
@@ -91,6 +93,16 @@ ffmpeg -encoders
 命令：ffmpeg -filters > filters.txt
 ```
 
+### 查看版本
+
+```
+ffmpeg   -version
+```
+
+
+
+
+
 ## install
 
 ## FFmpeg 学习地址
@@ -115,6 +127,13 @@ ffmpeg -encoders
   
   //查看安装是否成功
   ffmpeg
+  
+  //或者
+  brew install ffmpeg
+  
+  brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-libass --with-libquvi --with-libvorbis --with-libvpx --with-opus --with-x265
+  
+  brew update && brew upgrade ffmpeg
   ```
 
   
@@ -127,8 +146,9 @@ ffmpeg -encoders
 
 
 
-
 ## 码流建议
+
+[MP4 码流建议](https://support.google.com/youtube/answer/1722171?hl=zh-Hans)
 
 - https://docs.agora.io/cn/Video/video_profile_android?platform=Android
 
@@ -160,15 +180,7 @@ ffmpeg -encoders
 | 960 x 720        | 15         | 910                         | 1820                        |
 | 960 x 720        | 30         | 1380                        | 2760                        |
 
-### MAC
-
-```
-brew install ffmpeg
-
-brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-libass --with-libquvi --with-libvorbis --with-libvpx --with-opus --with-x265
-
-brew update && brew upgrade ffmpeg
-```
+### 
 
 ## FFprobe
 
@@ -195,6 +207,36 @@ ffprobe --help
 ```
 -show_streams
 ```
+
+### 显示每个 packet
+
+```
+-show_packets 
+```
+
+### 显示每个关键帧的时间戳
+
+```
+ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 https://clipres.yishihui.com/test/noBFrame.mp4 
+```
+
+
+
+
+
+### 查看总帧率
+
+```
+ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of default=nokey=1:noprint_wrappers=1 input.mp4
+```
+
+### 提取 IBP 帧的时间戳
+
+```
+ffprobe -i 666051400.mp4 -v quiet -select_streams v -show_entries frame=pkt_pts_time,pict_type
+```
+
+
 
 ## 推流
 
@@ -252,6 +294,14 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 
 
+### 关键帧设置
+
+```
+ffmpeg -i goptest.mp4 -c:v libx264 -preset ultrafast -profile:v baseline -x264-params keyint=30:scenecut=0 -acodec copy out.mp4
+```
+
+
+
 
 
 ###查看视频信息
@@ -269,6 +319,14 @@ ffmpeg -y -i /Users/devyk/Data/Project/piaoquan/文档/1月出行发票/test_mp4
 
 
  
+```
+
+
+
+### 合成
+
+```
+ffmpeg -i video.mp4 -i audio.mp4 -map 0:v -map 1:a -c:a copu -c:v copy -y output.mp4
 ```
 
 
@@ -326,6 +384,12 @@ whsad.mp4 输出文件
 ```
 
 
+
+### 倒放
+
+```
+ffmpeg -i tenet.mp4 -vf reverse -af areverse tenet_r.mp4
+```
 
 
 
@@ -569,6 +633,17 @@ ffmpeg -f gif -i animation.gif animation.webm
 
 
 
+## 给视频添加音频
+
+```
+去掉原视频音轨
+ffmpeg -i G:\hi.mp4 -c:v copy -an G:\nosound.mp4
+添加背景音乐
+ffmpeg -i G:\nosound.mp4 -i G:\songs.mp3 -t 7.1 -c:v copy -y G:\output.mp4
+```
+
+
+
 ### 截图
 
 下面的例子是从指定时间开始，连续对1秒钟的视频进行截图
@@ -587,7 +662,48 @@ ffmpeg \
 -vframes 1 -q:v 2 \
 output.jpg
 上面例子中，-vframes 1指定只截取一帧，-q:v 2表示输出的图片质量，一般是1到5之间（1 为质量最高）
+
+
+# 耗时0.07s
+ffmpeg -ss 00:00:30 -i 666051400.mp4 -vframes 1 0.jpg
+
+# 耗时0.68s
+ffmpeg -i 666051400.mp4 -ss 00:00:30  -vframes 1 0.jpg
+
+指定 1s 截图多少张
+ffmpeg -i /sdcard/dance.mp4 -q 2 -r 3 -y /sdcard/test/dance%05d.jpeg
+
+# 抽取I帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,I)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+
+# 抽取P帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,P)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+
+# 抽取B帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,B)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+
+//每帧都是关键帧
+ffmpeg -i 2.mp4 -c:v libx264 -x264opts keyint=1 -y keyint11.mp4
 ```
+
+
+
+### 均匀抽帧
+
+```
+# -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。
+ffmpeg -i 666051400.mp4 -r 1 -q:v 2 -f image2 ./%08d.000000.jpg
+```
+
+
+
+### png2h264
+
+```
+ffmpeg -start_number 00500 -i frame_00500.jpg -c:v h264 test_500.h264
+```
+
+
 
 
 
@@ -626,6 +742,18 @@ output.jpg
 -an                                                         # 禁止音频
 -vol 512                                                    # 改变音量为 200%
 -b:a 1M                                                     # 设置音频码率 1mbps/s
+```
+
+
+
+### 去除静默音
+
+```shell
+ffmpeg -i input.wav -af silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-30dB output.wav
+剪去所有从开始到结束遇到的音频中超过1秒的静音片段，
+
+ffmpeg -i input.wav -af silenceremove=stop_periods=-1:stop_duration=0.3:stop_threshold=-30dB output.wav
+剪去所有从开始到结束遇到的音频中超过0.3秒的静音片段
 ```
 
 
@@ -720,6 +848,15 @@ ffmpeg -y  -i input.wav  input.mp3
 ffmpeg -y  -i input.mp3  input.wav
 ```
 
+### 音频拼接和混音
+
+```
+ffmpeg -i 1.mp3 -i 2.mp3 -i 3.mp3 \
+  -filter_complex "[1]adelay=4000|4000[del1],[2]adelay=6000|6000[del2],[0][del1]amix[out],[out][del2]amix" output.mp3 
+```
+
+
+
 ### 拼接 MP3
 
 ```
@@ -743,63 +880,7 @@ ffmpeg -i 225502633395798.mp3 -vn 7.mp3
 
 ffmpeg -i 'concat:/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/a.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/b.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/c.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/d.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/e.mp3|/Users/devyk/Data/Project/piaoquan/PiaoquanVideoPlus/output/muxer/videoMp3/f.mp3|' -acodec copy -y merge___.mp3
 
-2021-03-31 14:42:53.045 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 29162 , end = 29162
-2021-03-31 14:43:03.276 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 78062 , end = 78062
-2021-03-31 14:43:09.955 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 96356 , end = 96356
-2021-03-31 14:43:18.396 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 141468 , end = 141468
-2021-03-31 14:43:26.645 25473-26585/com.piaoquantv.piaoquanvideoplus D/VideoMuxerTask: videoDecoderHelper end deocde , pts = 179475 , end = 179475
-
-
-2021-03-31 14:42:53.813 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 0 duration=12192789 delay=0
-2021-03-31 14:42:53.825 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 34416 duration=42982040 delay=34416
-2021-03-31 14:42:53.841 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 77416 duration=18301859 delay=77416
-2021-03-31 14:42:53.853 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 77416 duration=4824000 delay=77416
-2021-03-31 14:42:53.858 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 82240 duration=4572000 delay=82240
-2021-03-31 14:42:53.864 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 86812 duration=3636000 delay=86812
-2021-03-31 14:42:53.870 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 90448 duration=3816000 delay=90448
-2021-03-31 14:42:53.876 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 94264 duration=3240000 delay=94264
-2021-03-31 14:42:53.882 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 97504 duration=3492000 delay=97504
-2021-03-31 14:42:53.895 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 100996 duration=77824000 delay=100996
-2021-03-31 14:42:53.915 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 104615 duration=36208390 delay=104615
-2021-03-31 14:42:53.944 25473-26589/com.piaoquantv.piaoquanvideoplus D/FFmpegMergeAudio: videoDecoderHelper audio end deocde , startTimestamp = 140812 duration=38000136 delay=140812
-
-
-0 29162 78062 96356 141468 179475 
-0 34416 77416 77416 82240 86812 90448 94264 97504 100996 104615 140812
-
-
-
-
-
-
-
-
-video   audio 
-18120   18042
-27560   27376
-37000   36687
-68440   68173
-214520  214180
-234760  234543
-
-
-arrayListOf("sdcard/SpeedPiaoquanVideo/create/ossMaterial/62678018a765effdc4646bba82f105a7ad414351616996679950","sdcard/SpeedPiaoquanVideo/create/ossMaterial/62678017f60649e5a624977ab5d8271c641920c1616996690431","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801c5ee0eec8e014fee9625788529a687d71616996694186","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801e959c9d7afb045bc86167d0cf451ffc81616996697882","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801d3699f65c54a4edcb75c3c729ab575c01616996711173","sdcard/SpeedPiaoquanVideo/create/ossMaterial/6267801199bdb03711c48cd9982ee387c8f22671616996768259")
-
-
-
-
-
-
-
-
 ```
-
-
-
-
-
-225502619098923.mp3            225502629482777.mp3            225502631949444.mp3            225516668949963.mp4
-225502628459861.mp3            225502630660382.mp3            225502633395798.mp3            225516668949963_AudioMerge.mp4
 
 
 

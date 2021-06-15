@@ -172,7 +172,299 @@ C++ File        ——向工程中添加C++语言的.cpp和.hpp文件
 
 ### 第一个类程序
 
+**最简单的类创建**
 
+**声明**
+
+````objective-c
+//声明一个对象
+@interface Day5 : NSObject
+//声明成员变量
+@property NSString *name;
+-(void)display;
+
+@end
+````
+
+**实现**
+
+```objective-c
+@implementation Day5
+-(void)display{
+    NSLog(@"我是 %@ \n %@",@"Day5 学习内容",self.name);
+}
+@end
+```
+
+运行结果:
+
+我是 Day5 学习内容  DevYK
+
+
+
+在使用C语言或者OC语言中的基本数据类型时，需要遵循“先声明，后使用”的原则。学习OC的类时，同样也需要遵循一个原则：“先声明，再实现，后使用”。
+
+
+
+### OC 中的点语法
+
+**点语法的功能**
+
+点语法是通过“类对象.属性”的方式来调用类中属性的一种方法
+
+
+
+### 类中 self 和 “_” 的使用
+
+**对 self 的理解**
+
+如果 self 所在的这个方法是类方法，那么self就代表当前类；如果是对象方法，self就代表当前类的对象。
+
+
+
+**对 “_” 的理解**
+
+如果在编写过程中需要在类中调用本类的属性，如果这个地方必须调用get或set方法，那就必须使用self.name这种方式，如果在get或者set方法中，就必须使用_name的方式，如果不是上述的两种情况，使用哪个都可以
+
+
+
+**“super” 关键字**
+
+在OC面向对象大环境下，不但提供有本类的self，还有父类的super关键字。
+super和self的使用规则一样，不同之处在于：super指父类方法的调用者。而self指当前方法的调用者。
+
+
+
+### @property 的几种常用修饰词
+
+常用的修饰词有：nonatomic、copy、strong、assign、weak、readwrite、readonly等
+
+如果@property后不对属性进行设置，该属性同样有它的默认的一些设置。下面向大家介绍一下几种属性的用法以及默认的情况：
+
+**nonatomic**和atomic
+
+nonatomic：原名：非原子性，它涉及到多线程的相关知识。在这里我们只需要知道有nonatomic声明的属性，任何人任何地点任何时间都可以调用它（就是很多人可以同时使用它），所以它的缺点就是不安全，而优点就是效率高，访问速度快。
+
+atomic(默认)：原子性。和nonatomic正好相反，他对属性的访问进行了限制，保护了声明属性的安全，缺点就是：访问效率低，速度慢。
+
+
+
+**copy**、**strong**和**weak**
+
+copy：一般使用于字符串，它的特点如同它的中文翻译，将内容另外拷贝一份，保存在一个单独的存储空间中。
+
+strong：叫做：强引用。
+
+
+
+**assign**、**readonly**和**readwrite**
+
+assign我认为是其中最简单的，它应用于OC的基础数据类型（NSInteger、BOOL）和C语言中的基本数据类型(int,float,double,char)
+
+readwrite（默认）：它代表这个属性即可以读，也可以写(可以调用它的get和set方法)
+
+readonly：和readwrite不同，它代表这个属性只能读，不能进行写操作(只能调用get方法，不能调用set方法)
+
+
+
+**setter** **和 getter**
+
+getter=method:在声明的这个属性可读的前提下，使用它给这个属性设定get方法
+
+setter=method:同get方法类似，在声明的属性可写的前提下，使用这个设置可以设定这个属性的set方法。
+（这两个设置很少用，因为只是给get和set方法换个名字而已）
+
+在@property的属性中，以上几个属性最常见，实际开发过程中基本上都能囊括。
+
+
+
+对于基本数据类型，例如int，double，float，char，还有OC语言中的BOOL以及NSInteger来说，都用assign。
+例如：@property (nonatomic,assign)int age;
+
+对于OC中特有的字符串类型(NSString)来说，最常用的是copy。
+例如：@property (nonatomic,copy)NSString * name;
+
+对于OC中大量的类对象，一般用strong。
+例如：@property (nonatomic,strong)Person * person;
+
+### OC的潜规则命名
+
+特别提醒，在学习过程中，要养成良好的命名习惯，忌用a、b、c、a1、b1等作为某种对象的名称。在命名时，要尽量赋予对象名由实际意义的英文名。养成良好的编码习惯，在以后找工作过程中也是会加分的。
+
+（提示：在编程过程中，对于命名在初期学习的时候就要养成良好的规范，OC中默认的规范是： (一般是这样，如果公司有自己的要求，则按照公司要求来)：
+
+1. 类名每个单词首字母大写
+2. 类中属性名第一个单词首字母小写，后边每个单词首字母大写
+3. 类中方法名第一个单词首字母小写，后边每个单词首字母大写，参数命名规则和属性相同。
+
+
+同时还要注意的是，类名不能和属性名或者方法名相同。）
+
+
+
+### OC 中的类别
+
+类别，别名：扩展类。意思是在现有类的基础上为该类增加一些新的方法(只能是方法，不能添加属性) 如果类别中的方法和现有类中方法相同，就覆盖原有方法
+
+**类别和类扩展的区别**
+
+同：（类扩展和类别都可以为原有类添加新的方法）。
+异：（通过类扩展添加的方法外界无法调用。而类别可以；类扩展能添加属性，而类别只能添加方法）。
+
+
+
+### OC 中的协议
+
+OC语言是单继承多协议的语言。在学习继承的同时，还需要学会适当的使用协议完成特定的功能。
+
+协议和我们生活中的含义大同小异，例如：有一个孩子，由于年龄很小，无法照顾自己，所以不得不委托他人来照顾他的饮食起居。
+
+从协议的角度分析上面的例子，孩子需要得到照顾，但是他自己办不了，只能让保姆照顾他。所以孩子是协议生成方，保姆是协议实现方。
+     
+从程度的角度上考虑，协议就是某类创建，其他类来帮其实现。
+
+
+
+**使用协议需要注意的点**
+
+1、协议没有父类(协议可以服从多个(>=0) 协议，并不是 NSObject 这个类
+
+2、协议中不能定义变量 (属性) ,只能定义方法
+
+
+
+### OC中的单例
+
+**单例的理解:**
+
+简单的理解，就是在开发过程中，有时会需要在不同的地方对同一块内存的数据进行操作，而对于OC来讲，这块内存往往代表的是一个对象的数据。
+
+**单例的实例:**
+
+这个单例模拟的是两个人张三和李四合租了一辆车，通过记录每个人开车的时间，最后统计出这辆车总共跑的小时数。
+
+创建两个类，一个 Person 类，一个 Car 类；
+
+由于两个人公用一辆车，所以 Car 类中有一个单例，我们先来看 Car 类的代码实现
+
+```objective-c
+@interface Car : NSObject
+
+//定义跑车时间计数
+@property (nonatomic,assign)int driveHours;
+//确定返回的对象
++(instancetype)car;
+
+@end
+```
+
+```objective-c
+#import "Car.h"
+
+//声明一个静态的 car 空对象
+static Car *car = NULL;
+
+@implementation Car
++ (instancetype)car{
+    if (car == NULL) {
+        car = [[Car alloc] init];
+    }
+    return car;
+}
+@end
+```
+
+分解一下 Car 类中的代码:
+
+Car.h 中声明了一个记录总时间和属性和一个类方法。
+
+关键的代码在 Car.m 中，首先我们声明了一个全局本类的对象(这个对象必须赋空值)
+
+staticn 关键字在这里的作用是: 是这个对象只分配一次内存(static 还有很多特性)
+
+在 Car 的类方法中，我们首先判断 car 对象是否是空值，如果是空值，我们才给它初始化。否则，说明它已经被使用过了，就直接返回，不进入 if 
+
+**下面我们来看一下 Person 类中的实现**
+
+```objective-c
+#import <Foundation/Foundation.h>
+#import "Car.h"
+@interface Person : NSObject
+@property (nonatomic,copy)NSString * name;
+@property (nonatomic,strong)Car * car;
+-(void)displayWithDriveHours:(int)hours;
+@end
+```
+
+```objective-c
+#import "Person.h"
+@implementation Person
+-(instancetype)init{
+if (self=[super init]) {
+        self.car=[Car car];//创建对象的car属性实际上就是Car类的那个唯一的实例。
+        self.name=nil;
+    }
+    return self;
+}
+-(void)displayWithDriveHours:(int)hours{
+    self.car.driveHours+=hours;
+}
+@end
+```
+
+Main 中的代码
+
+```objective-c
+import <Foundation/Foundation.h>
+#import "Person.h"
+int main(int argc, const char * argv[]) {
+    Person * ZhangSan=[[Person alloc] init];
+   
+    Person * LiSi=[[Person alloc] init];
+   
+    [LiSi displayWithDriveHours:5];
+   
+    [ZhangSan displayWithDriveHours:10];
+    [LiSi displayWithDriveHours:3];
+    Car * car=[Car car];
+    NSLog(@"The allHours are %d",car.driveHours);
+    return 0;
+}
+```
+
+输出结果：18
+
+在main.m中，无论是哪个对象调用这个类方法，返回的都是相同的对象，对同一块内存数据做操作。这就是单例的实际作用。
+                                                               
+我们已经学习了很多方法传递数据了，每种方式有它特有的优势，这个需要在不断地实践中，体会它们，在适当的地方使用适当的传递方法。
+
+单例，严格来说应该是工程中需要共享数据时才使用，如果用单例只是去传递数据，那就有点大材小用了。
+
+
+
+### Foundation 框架简介
+
+**Foundation****框架涉及的领域**
+
+提供了OC专有基本数据类型，如NSArray、NSString、NSDictionary等，如：
+<Foundation/NSArray.h> <Foundation/NSData.h>
+<Foundation/NSDate.h>
+<Foundation/NSString.h>
+<Foundation/NSDictionary.h>
+
+提供了和网络连接相关功能的接口类，如：
+<Foundation/NSURLConnection.h>
+<Foundation/NSURLRequest.h>
+<Foundation/NSURL.h>
+
+提供了关于本地数据存储相关功能的接口类，如：
+<Foundation/NSUserDefaults.h>
+
+提供了对文件操作相关的接口类，例如移动文件等，如：
+<Foundation/NSFileManager.h>
+
+提供了和多线程相关的接口类，如：
+<Foundation/NSThread.h>
 
 ## 参考
 
