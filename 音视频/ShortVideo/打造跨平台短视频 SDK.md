@@ -17,6 +17,9 @@
 - [Android MediaCodec stuff](http://bigflake.com/mediacodec/)
 - [短视频编辑：基于opengl和mediacodec的视频合成方案](https://www.jianshu.com/p/a56505bfc15a)
 - [[短视频APP架构设计与实现](http://www.music-video.cn/2018/09/13/短视频app架构设计与实现/)](http://www.music-video.cn/author/zhanxiaokai/)
+- [视频云客户端SDK设计与实现](http://www.music-video.cn/2018/05/22/%e8%a7%86%e9%a2%91%e4%ba%91%e5%ae%a2%e6%88%b7%e7%ab%afsdk%e8%ae%be%e8%ae%a1%e4%b8%8e%e5%ae%9e%e7%8e%b0/)
+- [“抖音”式的酷炫短视频开发进阶](http://www.music-video.cn/2018/05/22/228/)
+- [从直播答题看背后的移动音视频开发](http://www.music-video.cn/2018/05/22/%e4%bb%8e%e7%9b%b4%e6%92%ad%e7%ad%94%e9%a2%98%e7%9c%8b%e8%83%8c%e5%90%8e%e7%9a%84%e7%a7%bb%e5%8a%a8%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91/)
 
 ### 播放器原理分析
 
