@@ -4,6 +4,10 @@
 
 > 申明：本教程 IntelliJ IDEA 破解补丁、激活码均收集于网络，请勿商用，仅供个人学习使用，如有侵权，请联系作者删除。
 
+
+
+**2021 版本使用该方法:https://www.studytime.xin/article/jetbrains-active-method.html**
+
 ## 注意
 
 - 本教程适用于 IntelliJ IDEA 所有版本，请放心食用~

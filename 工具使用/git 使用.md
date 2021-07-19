@@ -435,6 +435,12 @@ git checkout message-module-dev   app/src/main/java/com/piaoquantv/piaoquanvideo
 
   删除所有保存的工作进度
 
+### checkout tag
+
+```
+git checkout -b branch_name tag_name
+```
+
 
 
 ## BUG

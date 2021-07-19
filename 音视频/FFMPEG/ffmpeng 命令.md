@@ -25,6 +25,43 @@
 -muxers																											# 显示多路封装器信息
 -devices																										# 显示可用的设备
 -hide_banner																								# 禁止打印横幅
+
+
+通用参数
+-f fmt：指定格式（音频或者视频格式）。
+-i filename：指定输入文件名，在Linux下当然也能指定：0.0（屏幕录制）或摄像头。
+-y：覆盖已有文件。
+-t duration：指定时长。
+-fs limit_size：设置文件大小的上限。
+-ss time_off：从指定的时间（单位为秒）开始，也支持[-]hh：mm：ss[.xxx]的格式。
+-re：代表按照帧率发送，尤其在作为推流工具的时候一定要加入该参数，否则ffmpeg会按照最高速率向流媒体服务器不停地发送数据。
+-map：指定输出文件的流映射关系。例如：“-map 1：0-map 1：1”要求将第二个输入文件的第一个流和第二个流写入输出文件。如果没有-map选项，则ffmpeg采用默认的映射关系。
+视频参数
+-b：指定比特率（bit/s），ffmpeg是自动使用VBR的，若指定了该参数则使用平均比特率。
+-bitexact：使用标准比特率。
+-vb：指定视频比特率（bits/s）。
+-r rate：帧速率（fps）。
+-s size：指定分辨率（320×240）。
+-aspect aspect：设置视频长宽比（4：3，16：9或1.3333，1.7777）。
+-croptop size：设置顶部切除尺寸（in pixels）。
+-cropbottom size：设置底部切除尺寸（in pixels）。
+-cropleft size：设置左切除尺寸（in pixels）。
+-cropright size：设置右切除尺寸（in pixels）。
+-padtop size：设置顶部补齐尺寸（in pixels）。
+-padbottom size：底补齐（in pixels）。
+-padleft size：左补齐（in pixels）。
+-padright size：右补齐（in pixels）。
+-padcolor color：补齐带颜色（000000-FFFFFF）。
+-vn：取消视频的输出。
+-vcodec codec：强制使用codec编解码方式（'copy'代表不进行重新编码）。
+音频参数
+-ab：设置比特率（单位为bit/s，老版的单位可能是Kbit/s），对于MP3格式，若要听到较高品质的声音则建议设置为160Kbit/s（单声道则设置为80Kbit/s）以上。
+-aq quality：设置音频质量（指定编码）。
+-ar rate：设置音频采样率（单位为Hz）。
+-ac channels：设置声道数，1就是单声道，2就是立体声。
+-an：取消音频轨。
+-acodec codec：指定音频编码（'copy'代表不做音频转码，直接复制）。
+-vol volume：设置录制音量大小（默认为256）<百分比>。
 ```
 
 ```
@@ -212,12 +249,22 @@ ffprobe --help
 
 ```
 -show_packets 
+//只显示视频包
+-select_streams v:0
 ```
 
 ### 显示每个关键帧的时间戳
 
 ```
 ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 https://clipres.yishihui.com/test/noBFrame.mp4 
+```
+
+
+
+###以 json 格式输出
+
+```
+ffprobe-debug  -show_streams -of  json -i /Users/devyk/Data/Project/sample/github_code/YKAVStudyPlatform/temp/test.mp4
 ```
 
 
@@ -302,6 +349,21 @@ ffmpeg -i goptest.mp4 -c:v libx264 -preset ultrafast -profile:v baseline -x264-p
 
 
 
+### 速率播放
+
+```
+//音频
+ffmpeg -i input.mkv -filter:a "atempo=2.0" -vn output.mkv
+
+//视频
+ffmpeg -i input.mkv  -filter:v "setpts=0.5*PTS" output.mkv
+
+//音视频
+ffmpeg -i input.mkv -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]" -map "[v]" -map "[a]" output.mkv
+```
+
+
+
 
 
 ###查看视频信息
@@ -327,6 +389,18 @@ ffmpeg -y -i /Users/devyk/Data/Project/piaoquan/文档/1月出行发票/test_mp4
 
 ```
 ffmpeg -i video.mp4 -i audio.mp4 -map 0:v -map 1:a -c:a copu -c:v copy -y output.mp4
+```
+
+```shell
+这种方法成功率很高，也是最好的，但是需要 FFmpeg 1.1 以上版本。先创建一个文本文件filelist.txt：
+
+file 'input1.mkv'
+file 'input2.mkv'
+file 'input3.mkv'
+
+然后：
+ffmpeg -f concat -i filelist.txt -c copy output.mkv
+
 ```
 
 
@@ -631,9 +705,7 @@ ffmpeg -f gif -i animation.gif animation.mpeg
 ffmpeg -f gif -i animation.gif animation.webm
 ```
 
-
-
-## 给视频添加音频
+###给视频添加音频
 
 ```
 去掉原视频音轨
@@ -927,6 +999,36 @@ ffmpeg -t 3 -ss 00:00:02 -i small.webm small-clip.gif
 ffmpeg -i small.mp4 -b 2048k small.gif
 ```
 
+### 抽取IPB帧到jpg图片：
+
+```shell
+# 抽取I帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,I)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+
+# 抽取P帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,P)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+
+# 抽取B帧
+ffmpeg -i 666051400.mp4 -vf "select=eq(pict_type\,B)"  -vsync vfr -qscale:v 2 -f image2 ./%08d.jpg
+```
+
+### 抽取制定时间的帧
+
+```
+# 耗时0.07s
+ffmpeg -ss 00:00:30 -i 666051400.mp4 -vframes 1 0.jpg
+
+# 耗时0.68s
+ffmpeg -i 666051400.mp4 -ss 00:00:30  -vframes 1 0.jpg
+```
+
+### 均匀抽帧
+
+```
+# -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。
+ffmpeg -i 666051400.mp4 -r 1 -q:v 2 -f image2 ./%08d.000000.jpg
+```
+
 
 
 ### 图片压缩
@@ -988,6 +1090,47 @@ ffmpeg -i ../../video/demo.mp4 -i ../../video/new2.mp3 -filter_complex [0:a]afor
 ```
 
 
+
+##质量检查
+
+###黑屏
+
+####blackdetect 滤镜实现对视频黑屏画面时间段的检测
+
+**参数简介**
+
+- blackdetect filter :
+  检查视频中纯黑色画面的时间段。在检查视频中的过渡片段、广告或者非法数据等黑屏画面时很有效。输出数据包含黑屏片段的起始点，以及黑屏时长，单位为秒。
+
+- black_min_duration, d:
+  设置黑场时间阈值，只有黑场的连续时间大于门限值才认为是黑场视频。阈值大于等于0，默认2.0。
+
+- picture_black_ratio_th, pic_th:
+  设置黑场的判断阈值，nb_black_pixels/nb_pixels（黑场像素/总像素），该值为百分比，大于等于此阈值认为此帧图片是黑场. 默认值0.98.
+
+- pixel_black_th, pix_th:
+  设置黑场像素的判断阈值，默认值0.10。根据此阈值计算绝对阈值，低于绝对阈值的像素认为是黑场像素点。
+  绝对阈值计算公式如下：
+  absolute_threshold = luminance_minimum_value + pixel_black_th * luminance_range_size
+  luminance_range_size and luminance_minimum_value 依赖输入视频的格式, 对于YUV full-range 其范围是 [0-255]，对于YUV non full-range 其范围是 [16-235];
+
+- 例子：
+  blackdetect=d=2:pix_th=0.00
+  该命令设置黑色像素判断的阈值为0，检查黑屏时长不小于2s的片段。
+
+**参考命令**
+
+```shell
+ffmpeg -loglevel info  -i ~/test.mp4  -vf blackdetect=d=0.5:pic_th=0.80  -f null -
+ffmpeg -loglevel info  -i ~/test.mp4  -vf blackdetect=d=0.5:pix_th=0.40  -f null -
+```
+
+
+
+### 图像模糊检测
+
+- https://github.com/Leezhen2014/python--/blob/master/BlurDetection.py
+- [无参考图像的清晰度评价方法及实现源码](https://blog.csdn.net/weixin_45250844/article/details/102734991)
 
 
 

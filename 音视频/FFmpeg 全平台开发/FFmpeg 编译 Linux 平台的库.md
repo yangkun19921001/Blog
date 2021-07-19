@@ -15,7 +15,29 @@
 4.测试
 #  ffmpeg
 
+
+比较新的
+yum install yum-utils
+yum install epel-release
+yum install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+yum update
+yum install ffmpeg ffmpeg-devel
+
+//后面关闭自动更新
+yum-config-manager --disable epel rpmfusion-free-updates
+yum update
 ```
+
+Centos 安装最新版本 ffmpeg
+
+```
+https://www.4dmayi.com/3064.html
+https://www.4dmayi.com/3064.html
+```
+
+centos 源码编译 ffmpeg
+
+https://www.jianshu.com/p/94a1759ceb34
 
 
 
@@ -97,6 +119,8 @@ make -j8
 make install
 ./ffmpeg
 ```
+
+
 
 
 
