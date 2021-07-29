@@ -11,6 +11,14 @@
 - [字节流动 OpenGLCamera2](https://github.com/githubhaohao/OpenGLCamera2)
 - [字节流动 NDK_OpenGLES_3_0](https://github.com/githubhaohao/NDK_OpenGLES_3_0)
 
+
+
+## 最佳组合
+
+C、C++ 代码参考 [trinity](https://github.com/wlanjie/trinity) ，滤镜参考 [Android-GPUImage](https://github.com/cats-oss/android-gpuimage) + [android-gpuimage-plus](https://github.com/wysaid/android-gpuimage-plus) , OpenGL ES 操作参考 [Mp4Composer-android](https://github.com/MasayukiSuda/Mp4Composer-android)
+
+
+
 ###文章
 
 - [android-transcoder Japanese blog](http://qiita.com/yuya_presto/items/d48e29c89109b746d000)
@@ -27,6 +35,8 @@
 - [让IjkPlayer支持插入自定义的GPU滤镜](https://cloud.tencent.com/developer/article/1435819)
 - [ijkplayer添加滤镜c版_红色与青色-程序员宅基地_ijkplayer opengl](http://www.cxyzjd.com/article/u010302327/79205429)
 - [那些我磕过的音视频项目总结](https://www.jianshu.com/p/e74970e85aa7)
+- [Java OpenGL ES 学习](https://blog.csdn.net/junzia/category_6462864.html)
+- [滤镜Shader——LookUpTable](https://hello-david.github.io/archives/f116047e.html)
 
 ### 播放器原理分析
 
