@@ -26,10 +26,11 @@
 - [Android 关于美颜/滤镜 从OpenGl录制视频的一种方案](https://www.jianshu.com/p/12f06da0a4ec)
 - [让IjkPlayer支持插入自定义的GPU滤镜](https://cloud.tencent.com/developer/article/1435819)
 - [ijkplayer添加滤镜c版_红色与青色-程序员宅基地_ijkplayer opengl](http://www.cxyzjd.com/article/u010302327/79205429)
-- [ijkplayer源码分析 整体概述](https://bbs.huaweicloud.com/blogs/238919)
 - [那些我磕过的音视频项目总结](https://www.jianshu.com/p/e74970e85aa7)
 
 ### 播放器原理分析
+
+- [推荐 ijkplayer源码分析 整体概述](https://bbs.huaweicloud.com/blogs/238919)
 
 - [ijkplayer 框架深入剖析](https://mp.weixin.qq.com/s/rmED-jawbo_YeoNuE1AYNw)
 
