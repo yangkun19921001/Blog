@@ -10,12 +10,17 @@
 - [android-gpuimage-plus](https://github.com/wysaid/android-gpuimage-plus)
 - [字节流动 OpenGLCamera2](https://github.com/githubhaohao/OpenGLCamera2)
 - [字节流动 NDK_OpenGLES_3_0](https://github.com/githubhaohao/NDK_OpenGLES_3_0)
+- [跨平台 gles - angle](https://github.com/google/angle)
 
 
 
 ## 最佳组合
 
-C、C++ 代码参考 [trinity](https://github.com/wlanjie/trinity) ，滤镜参考 [Android-GPUImage](https://github.com/cats-oss/android-gpuimage) + [android-gpuimage-plus](https://github.com/wysaid/android-gpuimage-plus) , OpenGL ES 操作参考 [Mp4Composer-android](https://github.com/MasayukiSuda/Mp4Composer-android)
+- C、C++ 代码参考 [trinity](https://github.com/wlanjie/trinity) ，[ijkplayer](https://github.com/bilibili/ijkplayer)，
+
+- 滤镜参考 [Android-GPUImage](https://github.com/cats-oss/android-gpuimage) + [android-gpuimage-plus](https://github.com/wysaid/android-gpuimage-plus) , 
+
+- 视频叠加 | OpenGL ES 操作参考 [Mp4Composer-android](https://github.com/MasayukiSuda/Mp4Composer-android)
 
 
 
@@ -37,15 +42,25 @@ C、C++ 代码参考 [trinity](https://github.com/wlanjie/trinity) ，滤镜参�
 - [那些我磕过的音视频项目总结](https://www.jianshu.com/p/e74970e85aa7)
 - [Java OpenGL ES 学习](https://blog.csdn.net/junzia/category_6462864.html)
 - [滤镜Shader——LookUpTable](https://hello-david.github.io/archives/f116047e.html)
+- [移动端播放器 ffplayer 改造](https://oedx.github.io/2020/12/29/FFmpeg-Cocos-Creator/)
+- [ijkplayer系列解析](https://www.jianshu.com/p/a4eea7ea4664)
 
 ### 播放器原理分析
 
 - [推荐 ijkplayer源码分析 整体概述](https://bbs.huaweicloud.com/blogs/238919)
-
+- [解析 ijk](http://www.samirchen.com/ijkplayer/)
 - [ijkplayer 框架深入剖析](https://mp.weixin.qq.com/s/rmED-jawbo_YeoNuE1AYNw)
-
 - [技术解码| 基于ijkplayer的快直播传输层SDK应用实践](https://mp.weixin.qq.com/s/f3ct29ydzAjdJ1fIdOmHmQ)
 - [雷霄骅 ffplay.c](https://blog.csdn.net/leixiaohua1020/article/details/39762143)
+- [Android 系统播放器源码解读](https://blog.csdn.net/achina2011jy)
+- “ffplay源码分析”系列文章如下：
+  [1]. [ffplay源码分析1-概述](https://cloud.tencent.com/developer/article/1409540)
+  [2]. [ffplay源码分析2-数据结构](https://cloud.tencent.com/developer/article/1409508)
+  [3]. [ffplay源码分析3-代码框架](https://cloud.tencent.com/developer/article/1409509)
+  [4]. [ffplay源码分析4-音视频同步](https://cloud.tencent.com/developer/article/1409512)
+  [5]. [ffplay源码分析5-图像格式转换](https://cloud.tencent.com/developer/article/1409514)
+  [6]. [ffplay源码分析6-音频重采样](https://cloud.tencent.com/developer/article/1409515)
+  [7]. [ffplay源码分析7-播放控制](https://cloud.tencent.com/developer/article/1409516)
 
 ## 相机选型
 
@@ -77,4 +92,6 @@ C、C++ 代码参考 [trinity](https://github.com/wlanjie/trinity) ，滤镜参�
 - [5.2k+ 跨平台 olive](https://github.com/olive-editor/olive)
 - [4.6k+ 跨平台 shotcut](https://github.com/mltframework/shotcut)
 - [30+ 使用android原生的MediaExtractor,MediaCodec和OpenGL ES对视频进行编辑, 裁剪,滤镜, 特效等 MediaEditSDK](https://github.com/JeffMony/MediaEditSDK)
+
+
 

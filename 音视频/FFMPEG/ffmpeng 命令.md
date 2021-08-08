@@ -341,6 +341,20 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 
 
+### lut 滤镜
+
+```
+- https://fixthephoto.com/film-luts
+ffmpeg -i "/Users/devyk/Downloads/dog.mp4" -vf lut3d="/Users/devyk/Downloads/chrome-download/TEAL AND ORANGE _ riyazmn.com (RMN) 130 LUTS & PRESETS 2/3D Luts/test.cube"  -c:v libx264 test.mp4
+
+
+
+```
+
+
+
+
+
 ### 关键帧设置
 
 ```
