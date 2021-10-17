@@ -53,6 +53,7 @@
 - [技术解码| 基于ijkplayer的快直播传输层SDK应用实践](https://mp.weixin.qq.com/s/f3ct29ydzAjdJ1fIdOmHmQ)
 - [雷霄骅 ffplay.c](https://blog.csdn.net/leixiaohua1020/article/details/39762143)
 - [Android 系统播放器源码解读](https://blog.csdn.net/achina2011jy)
+- [Android FFmpeg ffplay](https://github.com/CainKernel/CainPlayer)
 - “ffplay源码分析”系列文章如下：
   [1]. [ffplay源码分析1-概述](https://cloud.tencent.com/developer/article/1409540)
   [2]. [ffplay源码分析2-数据结构](https://cloud.tencent.com/developer/article/1409508)

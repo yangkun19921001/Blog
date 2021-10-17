@@ -155,14 +155,11 @@
 ## 算法
 
 - [剑指 Offer 题解](https://github.com/CyC2018/CS-Notes/blob/master/notes/剑指%20Offer%20题解%20-%20目录.md)
-
 - [Leetcode 题解](https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20题解%20-%20目录.md)
-
-- [算法](https://github.com/CyC2018/CS-Notes/blob/master/notes/算法%20-%20目录.md)
-
-- [算法学习平台](https://www.geekxh.com/0.0.%E5%AD%A6%E4%B9%A0%E9%A1%BB%E7%9F%A5/01.html)
-
-  
+- [算法](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E7%AE%97%E6%B3%95%20-%20%E7%9B%AE%E5%BD%95.md)
+- [小浩算法](https://www.geekxh.com/0.0.%E5%AD%A6%E4%B9%A0%E9%A1%BB%E7%9F%A5/01.html)
+- [力扣](https://leetcode-cn.com/leetbook/)
+- [数据结构-视频资源](https://mp.weixin.qq.com/s/DlbRlCT--fmthtyLzwIpUA)
 
 ## 工具
 

@@ -256,7 +256,7 @@ ffprobe --help
 ### 显示每个关键帧的时间戳
 
 ```
-ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 https://clipres.yishihui.com/test/noBFrame.mp4 
+ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 "/Users/devyk/Data/Project/piaoquan/PQMedia/temp/199213.mp4" 
 ```
 
 
@@ -333,6 +333,18 @@ ffplay bunny.sdp -protocol_whitelist file,udp,rtp
 
 
 
+### 视频兼容问题
+
+https://juejin.cn/post/6854573210579501070
+
+```
+ffmpeg -i leon.mp4 -c:v copy -tag:v hvc1 -c:a copy leon-hvc1.mp4
+```
+
+
+
+
+
 ### 获取视频总帧率
 
 ```shell
@@ -353,12 +365,21 @@ ffmpeg -i "/Users/devyk/Downloads/dog.mp4" -vf lut3d="/Users/devyk/Downloads/chr
 
 
 
+### 旋转视频角度
+
+```
+ffmpeg -i /Users/devyk/Downloads/without_audioTtN4DpQrKB1s6IFjvXGqkY7OganHEciC_1pbDc15IEu.mp4  -metadata:s:v rotate="90" -codec copy -y TVq.mp4
+```
+
 
 
 ### 关键帧设置
 
 ```
 ffmpeg -i goptest.mp4 -c:v libx264 -preset ultrafast -profile:v baseline -x264-params keyint=30:scenecut=0 -acodec copy out.mp4
+
+ffmpeg  -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/974f-5.mp4 -c:v libx265 -x265-params "keyint=30:min-keyint=30"   /Users/devyk/Data/Project/piaoquan/PQMedia/temp/974f-5-.mp4
+
 ```
 
 
@@ -374,6 +395,7 @@ ffmpeg -i input.mkv  -filter:v "setpts=0.5*PTS" output.mkv
 
 //音视频
 ffmpeg -i input.mkv -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]" -map "[v]" -map "[a]" output.mkv
+
 ```
 
 
@@ -402,7 +424,7 @@ ffmpeg -y -i /Users/devyk/Data/Project/piaoquan/文档/1月出行发票/test_mp4
 ### 合成
 
 ```
-ffmpeg -i video.mp4 -i audio.mp4 -map 0:v -map 1:a -c:a copu -c:v copy -y output.mp4
+ffmpeg -i video.mp4 -i audio.mp4 -map 0:v -map 1:a -c:a copy -c:v copy -y output.mp4
 ```
 
 ```shell
@@ -524,6 +546,23 @@ output.mp4
 
 
 
+### 苹果 h265 无法播放解决
+
+```
+ffmpeg -i input.mp4 -c:v libx265 -vtag hvc1 output.mp4
+```
+
+代码:
+
+```
+ if (out_stream->codecpar->codec_id == AV_CODEC_ID_HEVC)
+                out_stream->codecpar->codec_tag = MKTAG('h', 'v', 'c', '1');
+            else
+                out_stream->codecpar->codec_tag = 0;
+```
+
+
+
 
 
 
@@ -558,6 +597,15 @@ output.mp4
 
 
 
+### 过滤器控制帧率
+
+```
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/199213.mp4 -filter_complex fps=fps=25 -y test_25fps.mp4
+
+```
+
+
+
 
 
 ###Mp4 to H264
@@ -587,7 +635,13 @@ ffmpeg -i 20130312_133313.mp4 -codec copy -bsf h264_mp4toannexb -f h264 20130312
 ###MP4 to YUV
 
 ```
-ffmpeg -i 123456.mp4 123456.yuv 
+ffmpeg -i xxx.mp4 -pix_format yuv420 -y yuv420.yuv
+```
+
+### YUV to MP4
+
+```
+ffmpeg -s 1080x1920 -i yuv420.yuv  -y yuv420.mp4
 ```
 
 ### Flv_2_MP4
@@ -664,6 +718,45 @@ ffplay -stats -f h264 file.h264
 
 
 
+### 改变音频信息
+
+```
+//ffmpeg -y -i input.mp4 -c:v libx264 -preset veryfast -profile:v baseline -r 30 -b:v 3000K  -ar 44100 -ac 2 output.mp4
+```
+
+
+
+### 视频补黑边
+
+使用FFmpeg给视频增加黑边需要用到 pad 这个滤镜，具体用法如下：
+  -vf pad=1280:720:0:93:black
+
+按照从左到右的顺序依次为:
+​   “宽”、“高”、“X坐标”和“Y坐标”，宽和高指的是输入视频尺寸（包含加黑边的尺寸），XY指的是视频所在位置。
+​
+比如一个输入视频尺寸是1280x534的源，想要加上黑边变成1280x720，那么用上边的语法可以实现，93是这样得来的，（720-534）/2。
+​
+如果视频原始1920x800的话，完整的语法应该是：
+  -vf 'scale=1280:534,pad=1280:720:0:93:black'
+
+先将视频缩小到1280x534，然后在加入黑边变成1280x720，将1280x534的视频放置在x=0，y=93的地方，
+​FFmpeg会自动在上下增加93像素的黑边。
+注：black可以不写，默认是黑色
+
+```
+ffmpeg -i /Users/lieyunye/Downloads/h265tails/hr.mp4 -vf "scale=960:540:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1[out]" -y /data/downloads/video_tails/fadf3013e6f18f72c0d137d92b723943.mp4
+```
+
+```
+ffmpeg -i test222.mp4 -vf "scale=960:540,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1[out]" -y 960_540.mp4
+ffmpeg -i test222.mp4 -filter:v "fps=fps=50,scale=960:540,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1[out]" -y 960_540.mp4
+ffmpeg -i test222.mp4 -filter_complex "scale=960:540,pad=1920:1080:(ow-iw)/2:(oh-ih)/2" -y 960_540.mp4
+```
+
+
+
+
+
 ### YUV2H264
 
 ```
@@ -726,6 +819,13 @@ ffmpeg -f gif -i animation.gif animation.webm
 ffmpeg -i G:\hi.mp4 -c:v copy -an G:\nosound.mp4
 添加背景音乐
 ffmpeg -i G:\nosound.mp4 -i G:\songs.mp3 -t 7.1 -c:v copy -y G:\output.mp4
+```
+
+### 添加静默音
+
+```
+ffmpeg -i addMusic.mp4 -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 \
+-c:v copy -shortest output.mp4
 ```
 
 
@@ -814,6 +914,83 @@ ffmpeg -start_number 00500 -i frame_00500.jpg -c:v h264 test_500.h264
 > ```
 
 上面例子中，`-c copy`表示不改变音频和视频的编码格式，直接拷贝，这样会快很多。
+
+
+
+### 添加水印
+
+>**-filter_complex**: 相比-vf, filter_complex适合开发复杂的滤镜功能，如同时对视频进行裁剪并旋转。参数之间使用逗号（，）隔开即可
+> **main_w**:视频宽度
+> **overlay_w**: 要添加的图片水印宽度
+> **main_h** : 视频高度
+> **overlay_h**:要添加的图片水印宽度
+>
+>
+
+
+
+在视频右下角的添加图片水印
+
+```
+ffmpeg -i input.mp4 -i logo.png -filter_complex 'overlay=main_w-overlay_w-10:main_h-overlay_h-10' output.mp4
+```
+
+在视频左下角添加图片水印
+
+```
+ffmpeg -i input.mp4 -i logo.png -filter_complex 'overlay=x=10:y=main_h-overlay_h-10' output.mp4
+```
+
+
+
+### 添加本地时间水印
+
+```
+ffmpeg  -i src.mp4 -vf "drawtext=fontsize=160:text='%{localtime\:%T}'" -c:v libx264 -an -f mp4 output.mp4 -y
+```
+
+
+
+### 把视频的pts时间戳添加为水印
+
+```
+ffmpeg -t 5 -i src.mp4 -vf "drawtext=fontsize=160:text='%{pts\:hms}'" -c:v libx264 -an -f mp4 output.mp4 -y
+```
+
+### 添加动态水印
+
+```
+./ffmpeg -y -i ~/Desktop/v.mp4 -ignore_loop 0 -i hello.gif -ss 0 -t 9 -filter_complex overlay=main_w-138:0:1 v-3.mp4
+```
+
+
+
+### 添加字幕
+
+**fontfile**:字体类型
+**text**:要添加的文字内容
+**fontsize**:字体大小
+**fontcolor**：字体颜色
+
+```
+ffmpeg -i input.mp4 -vf "drawtext=fontfile=simhei.ttf: text=‘技术是第一生产力’:x=10:y=10:fontsize=24:fontcolor=white:shadowy=2" output.mp4
+```
+
+滚动字幕
+
+```
+ffmpeg -i ~/Desktop/hello.mp4 -b:v 500K -vf drawtext="fontfile=/Library/Fonts/YaHei.Consolas.1.11b.ttf:fontcolor=0xaaff00:fontsize=18:shadowy=0:\x='if(gte(t,2), (main_w-mod(t*50,main_w)), NAN)':y=(main_h-line_h-10):text='关注广州小程，提升专业技能。'" hello.mp4
+```
+
+### 视频旋转
+
+```
+//一度等于π/ 180弧度。因此，如果您想旋转90°：
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/sdk_out_file.mp4 -vf "rotate=90*(PI/180),format=yuv420p
+
+```
+
+
 
 
 
@@ -989,6 +1166,13 @@ ffpmeg -i test.mp3 -ar 16000 test.wav
 ffmpeg -i input.mp3 -ss 0 -t 100 -acodec libmp3lame output.mp3
 ```
 
+### 禁止 B Frame
+
+```
+ffmpeg -i test.mp4 -vcodec libx264 -profile:v baseline -pix_fmt yuv420p -s 640x480 -acodec aac test1.mp4
+
+```
+
 
 
 ## 图片
@@ -1042,6 +1226,16 @@ ffmpeg -i 666051400.mp4 -ss 00:00:30  -vframes 1 0.jpg
 # -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。
 ffmpeg -i 666051400.mp4 -r 1 -q:v 2 -f image2 ./%08d.000000.jpg
 ```
+
+
+
+### 图片转视频
+
+```
+ffmpeg  -i /Users/devyk/Downloads/chrome-download/123.png  -vcodec libx264 -r 10  test.mp4
+```
+
+
 
 
 
