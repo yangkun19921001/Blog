@@ -8,6 +8,8 @@
 
 [官方命令 sample](https://ffmpeg.org/ffmpeg.html#Main-options)
 
+[各平台编译好的 FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases)
+
 ### 基础参数
 
 ```shell
@@ -259,6 +261,16 @@ ffprobe --help
 ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 "/Users/devyk/Data/Project/piaoquan/PQMedia/temp/199213.mp4" 
 ```
 
+### 查看 pts
+
+```
+ffprobe -show_frames -select_streams v /data/test1s.mp4 | grep pkt_dts
+
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/web/demo/123.mp4 -dump -map 0:v -f null -
+```
+
+
+
 
 
 ###以 json 格式输出
@@ -437,6 +449,7 @@ file 'input3.mkv'
 然后：
 ffmpeg -f concat -i filelist.txt -c copy output.mkv
 
+ffmpeg -f concat -safe 0 -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/concat.txt -c copy -y  temp/concat.mp4
 ```
 
 
@@ -821,6 +834,14 @@ ffmpeg -i G:\hi.mp4 -c:v copy -an G:\nosound.mp4
 ffmpeg -i G:\nosound.mp4 -i G:\songs.mp3 -t 7.1 -c:v copy -y G:\output.mp4
 ```
 
+### 添加 bgm
+
+```
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/concat-bgm.mp4  -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/1 -filter_complex '[0:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.5[a0];[1:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.5[a1];[a0][a1]amix=inputs=2:duration=first[aout]' -map '[aout]' -map 0:v:0  -c:v copy -c:a aac  -y temp/contact.mp4
+```
+
+
+
 ### 添加静默音
 
 ```
@@ -981,6 +1002,46 @@ ffmpeg -i input.mp4 -vf "drawtext=fontfile=simhei.ttf: text=‘技术是第一�
 ```
 ffmpeg -i ~/Desktop/hello.mp4 -b:v 500K -vf drawtext="fontfile=/Library/Fonts/YaHei.Consolas.1.11b.ttf:fontcolor=0xaaff00:fontsize=18:shadowy=0:\x='if(gte(t,2), (main_w-mod(t*50,main_w)), NAN)':y=(main_h-line_h-10):text='关注广州小程，提升专业技能。'" hello.mp4
 ```
+
+添加 srt 字幕
+
+https://www.hexianwei.com/2021/08/09/ffmpeg__-subtitles_%E4%B8%AD%E6%96%87/
+
+
+
+```
+01.Name             风格(Style)的名称. 区分大小写. 不能包含逗号.
+02.Fontname         使用的字体名称, 区分大小写.
+03.Fontsize         字体的字号
+04.PrimaryColour    设置主要颜色, 为蓝-绿-红三色的十六进制代码相排列, BBGGRR. 为字幕填充颜色
+05.SecondaryColour  设置次要颜色, 为蓝-绿-红三色的十六进制代码相排列, BBGGRR. 在卡拉OK效果中由次要颜色变为主要颜色.
+06.OutlineColour    设置轮廓颜色, 为蓝-绿-红三色的十六进制代码相排列, BBGGRR.
+07.BackColour       设置阴影颜色, 为蓝-绿-红三色的十六进制代码相排列, BBGGRR. ASS的这些字段还包含了alpha通道信息. (AABBGGRR), 注ASS的颜色代码要在前面加上&H
+08.Bold             -1为粗体, 0为常规
+09.Italic           -1为斜体, 0为常规
+10.Underline       [-1 或者 0] 下划线
+11.Strikeout       [-1 或者 0] 中划线/删除线
+12.ScaleX          修改文字的宽度. 为百分数
+13.ScaleY          修改文字的高度. 为百分数
+14.Spacing         文字间的额外间隙. 为像素数
+15.Angle           按Z轴进行旋转的度数, 原点由alignment进行了定义. 可以为小数
+16.BorderStyle     1=边框+阴影, 3=纯色背景. 当值为3时, 文字下方为轮廓颜色的背景, 最下方为阴影颜色背景.
+17.Outline         当BorderStyle为1时, 该值定义文字轮廓宽度, 为像素数, 常见有0, 1, 2, 3, 4.
+18.Shadow          当BorderStyle为1时, 该值定义阴影的深度, 为像素数, 常见有0, 1, 2, 3, 4.
+19.Alignment       定义字幕的位置. 字幕在下方时, 1=左对齐, 2=居中, 3=右对齐. 1, 2, 3加上4后字幕出现在屏幕上方. 1, 2, 3加上8后字幕出现在屏幕中间. 例: 11=屏幕中间右对齐. Alignment对于ASS字幕而言, 字幕的位置与小键盘数字对应的位置相同.
+20.MarginL         字幕可出现区域与左边缘的距离, 为像素数
+21.MarginR         字幕可出现区域与右边缘的距离, 为像素数
+22.MarginV         垂直距离
+
+```
+
+```
+"subtitles=subs.srt:force_style='Fontname=STSong,Fontsize=24,PrimaryColour=&H0000ff&'"
+
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/sdk_out_file3.mp4 -vf  "subtitles=/Users/devyk/Downloads/chrome-download/test1.srt:force_style='Fontname=STSong'" -r 30 /Users/devyk/Data/Project/piaoquan/PQMedia/temp/output.mp4
+```
+
+
 
 ### 视频旋转
 

@@ -46,6 +46,9 @@
 - [Java 并发 二](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E8%BF%9B%E9%98%B6(%E4%B8%8A).md)
 - [Java 并发 三](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/Java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E8%BF%9B%E9%98%B6(%E4%B8%AD).md)
 - [Java 并发 四](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/Java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E8%BF%9B%E9%98%B6(%E4%B8%8B).md)
+- 线程池
+  - 淘系技术 - [Java线程池面试要点](https://mp.weixin.qq.com/s/Rr9UrsCGSVlXhhGf-xO7Og)
+
 - **JVM**
   - [JVM 基础概念](https://github.com/yangkun19921001/Blog/blob/master/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/Android%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87/Java/JVM.md)
   - [Java内存区域-比较详细](https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F)
@@ -54,6 +57,8 @@
   - [类加载过程](https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B)
   - [类加载器](https://snailclimb.gitee.io/javaguide/#/docs/java/jvm/类加载器)
   - [**大白话带你认识JVM**](https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/jvm/%5B%E5%8A%A0%E9%A4%90%5D%E5%A4%A7%E7%99%BD%E8%AF%9D%E5%B8%A6%E4%BD%A0%E8%AE%A4%E8%AF%86JVM.md)
+  - 京东技术- [Java内存模型(Java Memory Model，JMM)](https://mp.weixin.qq.com/s/VvF6tVjHbLtxQGtofhD5wQ)
+  - 
 - [Java 进阶核心技术面试精讲(一) (ps: 需要购买)](https://time.geekbang.org/column/article/6478)
 - [Java 进阶源码解析专题(二) （ps: 需要购买 ￥49）](http://www.imooc.com/read/47/article/847)
 
