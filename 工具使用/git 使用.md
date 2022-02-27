@@ -294,6 +294,14 @@ git checkout -b release origin/release，作用参见上一步解释
 git checkout dev，切换回dev分支，并开始开发。
 ```
 
+##Git clone tag
+
+```
+git clone -b 4.5.5 https://github.com/opencv/opencv.git
+```
+
+
+
 
 
 ### Git checkout 远端分支
@@ -439,6 +447,14 @@ git checkout message-module-dev   app/src/main/java/com/piaoquantv/piaoquanvideo
 
 ```
 git checkout -b branch_name tag_name
+```
+
+
+
+##git status 乱码
+
+```shell
+git config --global core.quotepath false
 ```
 
 

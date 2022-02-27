@@ -266,7 +266,7 @@ ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries fram
 ```
 ffprobe -show_frames -select_streams v /data/test1s.mp4 | grep pkt_dts
 
-ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/web/demo/123.mp4 -dump -map 0:v -f null -
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/transcode-.m3u8 -dump -map 0:a -f null -
 ```
 
 
@@ -293,6 +293,14 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 ```
 ffprobe -i 666051400.mp4 -v quiet -select_streams v -show_entries frame=pkt_pts_time,pict_type
+```
+
+
+
+### 视频质量对比
+
+```
+ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/1.mp4 -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/1-.mp4 -filter_complex "[1:v]libvmaf" -f null -
 ```
 
 
@@ -606,6 +614,9 @@ ffmpeg \
 -i input.mp4 \
 -minrate 964K -maxrate 3856K -bufsize 2000K \
 output.mp4
+
+//http://blog.danthought.com/programming/2020/11/14/ffmpeg-tools-help-and-fundamental-characteristics/
+-minrate 2.5M -maxrate 3M -bufsize 3M
 ```
 
 
@@ -1233,6 +1244,15 @@ ffmpeg -i input.mp3 -ss 0 -t 100 -acodec libmp3lame output.mp3
 ffmpeg -i test.mp4 -vcodec libx264 -profile:v baseline -pix_fmt yuv420p -s 640x480 -acodec aac test1.mp4
 
 ```
+
+### 音频变速
+
+```
+//原始 10s ，2倍数处理后为  5s
+ffmpeg -i 1.mp3 -vn -af "atempo=2" -y 2tempo.mp3
+```
+
+
 
 
 

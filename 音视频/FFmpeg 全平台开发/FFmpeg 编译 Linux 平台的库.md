@@ -1,6 +1,15 @@
 ### 命令安装
 
 ```shell
+#有效 - centos 7 安装ffmpeg4最新版
+yum-config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
+yum-config-manager --disable epel-multimedia
+yum install --enablerepo=epel-multimedia ffmpeg ffmpeg-devel
+
+File “/bin/yum-config-manager“, line 135 except yum.Errors.RepoError, e:
+到指定文件添加2.7版本的注明,使用旧版本
+vi /usr/bin/yum-config-manager
+
 1.升级yum
 #  sudo yum install epel-release -y
 #  sudo yum update -y
@@ -27,14 +36,7 @@ yum install ffmpeg ffmpeg-devel
 yum-config-manager --disable epel rpmfusion-free-updates
 yum update
 
-centos 7 安装ffmpeg4最新版
-yum-config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
-yum-config-manager --disable epel-multimedia
-yum install --enablerepo=epel-multimedia ffmpeg ffmpeg-devel
 
-File “/bin/yum-config-manager“, line 135 except yum.Errors.RepoError, e:
-到指定文件添加2.7版本的注明,使用旧版本
-vi /usr/bin/yum-config-manager
 ```
 
 Centos 安装最新版本 ffmpeg
