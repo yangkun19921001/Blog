@@ -457,6 +457,13 @@ git checkout -b branch_name tag_name
 git config --global core.quotepath false
 ```
 
+## 解决 GitHub不再支持密码验证解决方案：SSH免密与Token登录配置
+
+```
+git remote rm origin
+git remote add origin [url]
+```
+
 
 
 ## BUG

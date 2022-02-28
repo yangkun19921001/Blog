@@ -301,6 +301,9 @@ ffprobe -i 666051400.mp4 -v quiet -select_streams v -show_entries frame=pkt_pts_
 
 ```
 ffmpeg -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/1.mp4 -i /Users/devyk/Data/Project/piaoquan/PQMedia/temp/1-.mp4 -filter_complex "[1:v]libvmaf" -f null -
+
+
+ffmpeg.exe -i 20210707.mp4 -i test_crf23_6M.mp4 -lavfi libvmaf="model_path=vmaf_v0.6.1.json:log_path=VMAF.txt" -report -f null -
 ```
 
 
