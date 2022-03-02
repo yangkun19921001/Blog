@@ -464,6 +464,12 @@ git remote rm origin
 git remote add origin [url]
 ```
 
+## 获取某个分支目录
+
+```shell
+git checkout dev -- dir2/f2.txt
+```
+
 
 
 ## BUG

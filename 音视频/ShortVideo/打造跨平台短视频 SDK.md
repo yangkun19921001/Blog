@@ -45,6 +45,12 @@
 - [移动端播放器 ffplayer 改造](https://oedx.github.io/2020/12/29/FFmpeg-Cocos-Creator/)
 - [ijkplayer系列解析](https://www.jianshu.com/p/a4eea7ea4664)
 
+
+
+### OpenGL 特效
+
+- [OpenGL 滤镜进阶（缩放+灵魂出窍+抖动+闪白+毛刺+幻觉）](https://mp.weixin.qq.com/s/a5RAVT1gYKy0z1rHIXBelg)
+
 ### 播放器原理分析
 
 - [推荐 ijkplayer源码分析 整体概述](https://bbs.huaweicloud.com/blogs/238919)

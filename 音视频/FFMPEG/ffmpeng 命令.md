@@ -308,6 +308,60 @@ ffmpeg.exe -i 20210707.mp4 -i test_crf23_6M.mp4 -lavfi libvmaf="model_path=vmaf_
 
 
 
+微帧:
+
+⼀、开源计算⽅式 
+
+命令⾏： 
+
+./ffmpeg -i 源视频.mp4 -i 转码后的视频.mp4 -lavfi 
+
+"[0:v]scale=-2:720:flags=bicubic,setpts=PTS-STARTPTS[reference];[1:v]setpts=PTS- 
+
+STARTPTS[distorted];[distorted][reference]libvmaf=model_path=/root/workspace/vmaf/ 
+
+model/vmaf_float_v0.6.1.pkl" -f null - 
+
+说明： 
+
+\1. 模型⽂件对应 
+
+https://github.com/Netflix/vmaf/blob/master/model/vmaf_float_v0.6.1.pkl 
+
+\2. 如果源视频宽⾼⼤于转出视频，通常使⽤下采样⽅式，即将源scale到与转出视频宽⾼⼀致； 
+
+如果宽⾼⼀致，则不⽤scale。 
+
+\3. 若源视频和转出视频帧率不⼀致，开源计算结果⼤概率不准确，会出现分值过低的现象。 
+
+⼆、微帧计算⽅式 
+
+说明： 
+
+\1. 如果源视频宽⾼⼤于转出视频，默认使⽤下采样⽅式，即将源scale到与转出视频宽⾼⼀致 
+
+\2. 在输⼊输出帧率不变及计算⽅式对齐的情况下，微帧计算⽅式计算结果与开源⼀致。 
+
+微帧对⽐开源计算优势： 
+
+\1. 计算速度更快，⽐开源计算⽅式快⼀倍以上 
+
+\2. 微帧计算⼯具内置帧匹配策略。在帧对不齐时，开源计算⽅式结果常有异常（计算分值过低）， 
+
+微帧计算结果相对准确。但如果两个视频帧差异太⼤， 微帧计算也会有问题。 
+
+计算⼯具下载链接： 
+
+https://visionular-cae.oss-cn-zhangjiakou.aliyuncs.com/CAE-RELEASE-FILES/tools/ 
+
+wztool-2022-06-30-e2c37d19.zip 
+
+使⽤⽅式： 
+
+参考calc-vmaf.sh
+
+
+
 ## 推流
 
 ##RTP 推流
