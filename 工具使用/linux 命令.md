@@ -34,3 +34,11 @@ ldd libBitStreamAnalyze.so
 tail -f /datalog/app.log
 ```
 
+
+
+## 查找可执行文件目录
+
+```
+Which
+```
+
