@@ -85,11 +85,11 @@ Git pull的强制覆盖本地文件在自动化部署项目中很有作用，比
 10. 打一个 tag
 
    Git tag [tagname]
-   
+
    //根据描述来打 tag
-   
+
    git tag v10433 -m "修复火警类型转换异常问题" 82d7f7c
-   
+
 11. 删除一个本地分支
 
    git branch -d [name]
@@ -271,7 +271,7 @@ git checkout -b [name]
 
 
 
-### 修改分支名称
+### 修改分支 URL
 
 ```
 git remote set-url origin http://192.168.100.235:9797/john/git_test.git
@@ -357,10 +357,10 @@ git push -f origin master ## 这里假设只有一个master分支
 //1、首先通过rev-list来找到仓库记录中的大文件：
 git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}')"
 
-git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch ffmpeg-mediacodec-test-yuv.yuv'
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch mediasoup-client/deps/webrtc/lib/arm64-v8a/libwebrtc.a'
 
 //2、然后通过filter-branch来重写这些大文件涉及到的所有提交（重写历史记录）：
-git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch your-file-name' --tag-name-filter cat -- --all
+git filter-branch -f --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch examples/android_gradle/mediasoup-client/deps/webrtc/lib/arm64-v8a/libwebrtc.a' --tag-name-filter cat -- --all
 ```
 
 
@@ -470,6 +470,12 @@ git remote add origin [url]
 git checkout dev -- dir2/f2.txt
 ```
 
+## clone 子项目
+
+```
+git clone --recursive https://github.com/Niap/breakpad-cmake.git
+```
+
 
 
 ## BUG
@@ -491,7 +497,54 @@ git checkout dev -- dir2/f2.txt
 
   
 
+### 撤销 git add 文件提交
+
+```
+git reset HEAD <file>
+```
+
+
+
+### 取消当前合并
+
+```
+git merge --abort
+```
+
+
+
+### 合并某个分支的 commits 
+
+在一些特性情况下，合并单个commit并不够，你需要合并一系列相连的commits。这种情况下就不要选择cherry-pick了，rebase 更适合。还以上例为例，假设你需要合并feature分支的commit76cada ~62ecb3 到master分支。
+
+首先需要基于feature创建一个新的分支，并指明新分支的最后一个commit：
+
+```css
+git checkout -b newbranch 62ecb3
+```
+
+然后，rebase这个新分支的commit到master（--ontomaster）。76cada^ 指明你想从哪个特定的commit开始。
+
+```scss
+git rebase --onto master 76cada^
+```
+
+得到的结果就是feature分支的commit 76cada  ~ 62ecb3 都被合并到了master分支。
+
+
+
+### 检出某次提交
+
+```
+git cherry-pick 57e3a8f7dd2fc1ce56211
+```
 
 
 
 
+
+
+
+
+
+​	

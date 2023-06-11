@@ -12,6 +12,8 @@
 - [字节流动 NDK_OpenGLES_3_0](https://github.com/githubhaohao/NDK_OpenGLES_3_0)
 - [跨平台 gles - angle](https://github.com/google/angle)
 - [欢迎来到OpenGL的世界](https://learnopengl-cn.github.io/)
+- [shader 语法](https://learnopengl-cn.github.io/01%20Getting%20started/05%20Shaders/)
+- [ LearnOpenGL-CN](https://learnopengl-cn.readthedocs.io/zh/latest/)
 
 
 

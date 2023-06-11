@@ -470,3 +470,30 @@ int main(int argc, const char * argv[]) {
 
 - [Objective-C基础教程：1天玩转Objective-C语法](http://c.biancheng.net/cpp/objective_c/)
 
+
+
+
+
+
+
+1、掌握基本的测试业务流程，对整体的项目有测试计划，具备独立测试 Web 、移动端项目的能力。
+
+2、熟练掌握 Linux 命令，比如日志查看，日志导出，日志上传，连接数据库等操作。
+
+3、熟练使用 XMind 思维导图工具来对功能模块进行划分及测试用例编写。
+
+4、熟练使用 Jira、禅道等工具对 Bug 进行管理。
+
+5、熟练使用 SQL 语句对数据库的基本操作，比如对数据的增删查改。
+
+6、熟练使用 Fiddler、Charles 抓包工具对 Http/Https 协议抓包，并分析 response 数据的正确性。
+
+7、掌握 Python 语言，能够独立基于 pytest 搭建自动化测试框架，并编写自动化接口测试程序。
+
+8、掌握 Jenkins 工具的环境搭建，并通过 Jenkins 工具持续构建自动化程序。
+
+9、掌握 adb 命令，比如 Crash 、ANR、LogCat 的日志查看和导出。 
+
+10、了解 Jmeter 性能工具对接口的压力和并发测试。
+
+11、了解 Git 命令对代码的管理。

@@ -415,7 +415,7 @@ adb shell dumpsys window w |grep \\/ |grep name=
     data/anr/traces.txt
     
     ```
-    
+
 48. 获取手机 IP 
 
     ```java
@@ -528,6 +528,12 @@ adb shell dumpsys window w |grep \\/ |grep name=
 
     ```
     adb logcat | grep MyApp
+    ```
+
+62. 指定设备
+
+    ```
+    adb -s 设备id shell
     ```
 
     

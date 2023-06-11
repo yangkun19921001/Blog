@@ -95,7 +95,7 @@ cd fonts
 
 同样使用git clone的方式下载源码进行安装：
 
-```
+```shell
 cd ~/Desktop/OpenSource
 git clone https://github.com/altercation/solarized
 cd solarized/iterm2-colors-solarized/
@@ -180,6 +180,12 @@ vi ~/.zshrc
 找到plugins，加上这个插件即可：
 
 ```shell
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
 source ~/.zshrc
 ```
 

@@ -336,4 +336,5 @@ open http://localhost:4000/admin/
 - [Github Pages部署个人博客（Hexo篇）](https://juejin.im/post/5acf02086fb9a028b92d8652)
 - [Hexo+Github博客搭建完全教程 推荐](https://sunhwee.com/posts/6e8839eb.html#toc-heading-23)
 - [hexo 挂件配置]([https://blog.zhangruipeng.me/hexo-theme-icarus/Widgets/icarus%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97-%E6%8C%82%E4%BB%B6/#%E6%9C%80%E6%96%B0%E6%96%87%E7%AB%A0](https://blog.zhangruipeng.me/hexo-theme-icarus/Widgets/icarus用户指南-挂件/#最新文章))
+- https://jishuin.proginn.com/p/763bfbd71894
 

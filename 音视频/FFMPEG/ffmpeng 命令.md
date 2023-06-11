@@ -1,4 +1,4 @@
-## FFMPEG  - ffplay 命令
+FFMPEG  - ffplay 命令
 
 [ffmpeg 示例代码](https://www.ffmpeg.org/doxygen/2.7/examples.html)
 
@@ -446,6 +446,14 @@ ffmpeg -i "/Users/devyk/Downloads/dog.mp4" -vf lut3d="/Users/devyk/Downloads/chr
 
 ```
 ffmpeg -i /Users/devyk/Downloads/without_audioTtN4DpQrKB1s6IFjvXGqkY7OganHEciC_1pbDc15IEu.mp4  -metadata:s:v rotate="90" -codec copy -y TVq.mp4
+```
+
+
+
+### 视频旋转
+
+```
+ffmpeg -i /Users/devyk/Downloads/scale/飞书20221110-120330.mp4  -vf "transpose=2" -y /Users/devyk/Downloads/scale/飞书20221110-120330_1.mp4
 ```
 
 
